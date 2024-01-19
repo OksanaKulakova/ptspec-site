@@ -1,0 +1,248 @@
+---
+interface props {
+    title: string;
+  subtitle: string;
+  imagePath: string;
+  altText: string;
+  href: string;
+  cards: Array<card>;
+}
+
+interface card {
+  title: string;
+  text: string;
+}
+
+const { title, subtitle, imagePath, altText, href, cards } = Astro.props;
+import { Picture } from 'astro:assets';
+
+---
+
+<div class="widget">
+  <h1 set:html={title} class="widget-title"></h1>
+
+  <div class="widget-content">
+    <div class="widget-content-block">
+      <h2 set:html={subtitle} class="widget-subtitle"></h2>
+    </div>
+    <div class="widget-content-block">
+      <a class="widget-link link" href={href}>Подробнее о компании</a>
+    </div>
+  </div>
+
+  <div class="widget-cover">
+    <Picture src={import(/* @vite-ignore */imagePath)} formats={['jpeg', 'webp']} alt={altText} />
+  </div>
+
+  <div class="widget-cards">
+    {cards.map(card =>     
+        <div class="widget-card">
+            <div class="widget-card-title">{card.title}</div>
+            <p set:html={card.text} class="widget-card-text"></p>
+        </div>
+    )}
+  </div>
+</div>
+
+<style>
+.widget {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 48px 16px;
+}
+
+.widget-title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: -2.4px;
+    text-transform: uppercase;
+}
+
+.widget-content-block:first-child {
+    padding: 16px 0px 32px;
+}
+
+.widget-content-block:last-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.widget-subtitle {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+}
+
+.widget-link.link {
+    padding-bottom: 0;
+    height: 40px;
+}
+
+.widget-cards {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.widget-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+}
+
+.widget-card > .widget-card-title {
+    flex: 1 0 0;
+}
+
+.widget-card > .widget-card-text {
+    flex: 1 0 0;
+}
+
+.widget-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+}
+
+.widget-card:first-child {
+    padding-top: 0;
+}
+  
+.widget-card:first-child::before {
+    display: none;
+}
+
+.widget-card-title {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -1.92px;
+    text-transform: uppercase;
+}
+
+.widget-card-text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+}
+
+.widget-cover img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    vertical-align: top;
+}
+
+@media screen and (min-width: 1024px) {
+    .widget {
+        gap: 32px;
+        padding: 96px 32px;
+    }
+
+    .widget-title {
+        font-size: 96px;
+        line-height: 104px; 
+        letter-spacing: -7.68px;
+    }
+
+    .widget-content {
+        display: flex;
+        gap: 16px;
+        position: relative;
+      }
+      
+    .widget-content::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #161619;
+    }
+      
+    .widget-content-block {
+        flex: 1 0 0;
+    }
+      
+    .widget-content-block:first-child {
+        position: relative;
+        padding: 16px 16px 64px 0px;
+    }
+    
+    .widget-content-block:first-child::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #161619;
+    }
+
+    .widget-subtitle {
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: -1.44px;
+    }
+
+    .widget-link.link {
+        padding-bottom: 16px;
+        height: 56px;
+    }
+
+    .widget-cards {
+        flex-direction: row;
+    }
+      
+    .widget-card {
+        position: relative;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1 0 0;
+        padding-top: 0;
+    }
+      
+    .widget-card:first-child {
+        flex: 2 0 0;
+    }
+      
+    .widget-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #161619;
+    }
+      
+    .widget-card:last-child::after {
+        display: none;
+    }
+
+    .widget-card::before {
+        display: none;
+    }
+      
+    .widget-card-title {
+        font-size: 64px;
+        line-height: 72px;
+        letter-spacing: -4.48px;
+    }
+
+    .widget-cover img {
+        height: 960px;
+    }
+}
+</style>

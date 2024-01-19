@@ -1,0 +1,138 @@
+@font-face {
+  font-family: Roboto_Condensed;
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/RobotoCondensed-VariableFont_wght.ttf');
+  font-display: swap;
+}
+
+:root {
+  font-family: Roboto_Condensed, sans-serif; 
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+  text-transform: uppercase;
+  color: #161619;
+  background-color: #FAF8F8;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  /* margin-right: calc(-1 * (100vw - 100%)); */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* body::-webkit-scrollbar {
+  display: none;
+} */
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #D0D4E3;
+  border: 4px transparent solid;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border: 4px transparent solid;
+  background: #8D919D;
+  background-clip: padding-box;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 16px 0;
+  color: #161619;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+  text-transform: uppercase;
+  transition: all .25s ease;
+}
+
+.link:hover {
+  color: #FE5639;
+}
+
+.link--active {
+  color: #FE5639;
+  text-decoration-line: none;
+}
+
+.link--disabled {
+  opacity: 0.25;
+}
+
+.link svg path {
+  fill:#161619;
+  stroke:inherit;
+  stroke-width:inherit;
+}
+
+.link:hover svg path {
+  fill:#FE5639;
+}
+
+.link--active svg path {
+  fill:#FE5639;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 48px 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: -1.92px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 1024px) {
+  .section {
+    gap: 32px;
+    padding: 96px 32px;
+  }
+
+  .title {
+    font-size: 64px;
+    line-height: 72px;
+    letter-spacing: -4.48px;
+  }
+}
