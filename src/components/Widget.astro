@@ -15,6 +15,7 @@ interface card {
 
 const { title, subtitle, imagePath, altText, href, cards } = Astro.props;
 import { Picture } from 'astro:assets';
+import localBirdImage from '../assets/images/cover1.jpg';
 
 ---
 
@@ -31,7 +32,8 @@ import { Picture } from 'astro:assets';
   </div>
 
   <div class="widget-cover">
-    <Picture src={import(/* @vite-ignore */imagePath)} formats={['jpeg', 'webp']} alt={altText} />
+    <!-- <Picture src={import(/* @vite-ignore */imagePath)} formats={['jpeg', 'webp']} alt={altText} /> -->
+    <Picture src={localBirdImage} formats={['jpeg', 'webp']} alt={altText} />
   </div>
 
   <div class="widget-cards">
