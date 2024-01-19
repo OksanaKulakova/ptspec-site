@@ -65,6 +65,19 @@ body {
   background-clip: padding-box;
 }
 
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FAF8F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
 .link {
   display: flex;
   align-items: center;

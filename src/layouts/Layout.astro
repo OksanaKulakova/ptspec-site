@@ -1,6 +1,8 @@
 ---
 import "/src/global.css";
 import Header from '../components/Header.astro';
+import { Image } from 'astro:assets';
+import PreloaderImage from '../../public/preloader.gif';
 
 interface Props {
 	title: string;
@@ -10,7 +12,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -20,9 +22,19 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<div id="preloader">
+			<Image src={PreloaderImage} alt="Загрузка..." width="120" height="40" />
+		</div>
 		<Header />
 		<main>
 			<slot />
 		</main>
 	</body>
 </html>
+
+<script>
+	window.addEventListener('load', function () {
+		var preloader = document.getElementById('preloader');
+		preloader.style.display = 'none';
+	});
+</script>
