@@ -37,7 +37,7 @@ import localBirdImage from '../assets/images/cover1.jpg';
   </div>
 
   <div class="widget-cards">
-    {cards.map(card =>     
+    {cards.map((card: card) =>     
         <div class="widget-card">
             <div class="widget-card-title">{card.title}</div>
             <p set:html={card.text} class="widget-card-text"></p>
