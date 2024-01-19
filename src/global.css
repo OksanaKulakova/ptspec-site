@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 500;
   src: url('/fonts/RobotoCondensed-VariableFont_wght.ttf');
-  font-display: swap;
+  /* font-display: swap; */
 }
 
 :root {
