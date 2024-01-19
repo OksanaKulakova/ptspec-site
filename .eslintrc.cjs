@@ -16,6 +16,7 @@ module.exports = {
       parserOptions: {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
+        project: "tsconfig.json",
       },
       rules: {
         // override/add rules settings here, such as:
