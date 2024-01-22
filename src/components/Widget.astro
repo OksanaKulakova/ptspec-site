@@ -1,14 +1,14 @@
 ---
-interface props {
+interface Props {
     title: string;
   subtitle: string;
   imagePath: string;
   altText: string;
   href: string;
-  cards: Array<card>;
+  cards: Array<Card>;
 }
 
-interface card {
+interface Card {
   title: string;
   text: string;
 }
@@ -37,7 +37,7 @@ import localBirdImage from '../assets/images/cover1.jpg';
   </div>
 
   <div class="widget-cards">
-    {cards.map((card: card) =>     
+    {cards.map((card: Card) =>     
         <div class="widget-card">
             <div class="widget-card-title">{card.title}</div>
             <p set:html={card.text} class="widget-card-text"></p>
