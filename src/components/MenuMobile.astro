@@ -1,3 +1,7 @@
+---
+import Social from "@components/Social.astro";
+---
+
 <script>
   document.querySelector('.menu-close').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('menu--active');
@@ -19,15 +23,22 @@
     </button>
   </div>
 
-  <nav class="nav">
-    <a class="nav-link link" href="/services/">Услуги</a>
-    <a class="nav-link link" href="/projects/">Проекты</a>
-    <a class="nav-link link" href="/company/">Компания</a>
-    <a class="nav-link link" href="/career/">Карьера</a>
-    <a class="nav-link link" href="/news/">Журнал</a>
-    <a class="nav-link link" href="/contacts/">Контакты</a>
-    <a class="nav-link link" href="#">Заказать услугу</a>
-  </nav>
+  <div class="menu-body">
+    <nav class="nav">
+      <a class="nav-link link" href="/services/">Услуги</a>
+      <a class="nav-link link" href="/projects/">Проекты</a>
+      <a class="nav-link link" href="/company/">Компания</a>
+      <a class="nav-link link" href="/career/">Карьера</a>
+      <a class="nav-link link" href="/news/">Журнал</a>
+      <a class="nav-link link" href="/contacts/">Контакты</a>
+      <a class="nav-link link" href="#">Заказать услугу</a>
+    </nav>
+  </div>
+
+  <div class="menu-footer">
+    <Social />
+    <a class="link" href="#">english version</a>
+  </div>
 </div>
 
 <style>
@@ -65,8 +76,22 @@
   cursor: pointer;
 }
 
-.nav {
+.menu-body {
+  height: calc(100vh - 112px);
   padding: 48px 16px 0px 16px;
+  overflow-y: auto;
+}
+
+.menu-footer {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color:#FAF8F8;
+}
+
+.nav {
+  /* padding: 48px 16px 0px 16px; */
 }
 
 .nav-link {
