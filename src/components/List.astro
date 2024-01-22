@@ -91,24 +91,6 @@ const { title, list } = Astro.props;
     color: #FAF8F8;
   }
   
-  .list-item:hover::before {
-    left: -32px;
-    width: calc(100% + 64px);
-    height: calc(100% + 1px);
-    background-color: #FE5639;
-    z-index: -1;
-  }
-  
-  .list-item:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    width: 100%;
-    height: 1px;
-    background-color: #FE5639;
-    z-index: 2;
-  }
-
   @media screen and (min-width: 1024px) {
     .list-item-name {
       max-width: 920px;
@@ -130,6 +112,24 @@ const { title, list } = Astro.props;
   
     .list-item:hover .list-item-icon::before {
       content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 26L26 6M26 6H6M26 6V26" stroke="%23FAF8F8" stroke-width="2" stroke-linecap="square"/></svg>');
+    }
+
+    .list-item:hover::before {
+      left: -32px;
+      width: calc(100% + 64px);
+      height: calc(100% + 1px);
+      background-color: #FE5639;
+      z-index: -1;
+    }
+    
+    .list-item:hover::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background-color: #FE5639;
+      z-index: 2;
     }
   }
 </style>
