@@ -3,6 +3,11 @@ import Social from "@components/Social.astro";
 ---
 
 <script>
+  window.addEventListener('resize',(e) => {
+    const height = document.documentElement.clientHeight;
+    alert(height); 
+});
+  // console.log(document.documentElement.clientHeight);
   document.querySelector('.menu-close').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('menu--active');
     document.documentElement.style.setProperty('overflow-y', 'auto');
@@ -45,13 +50,17 @@ import Social from "@components/Social.astro";
 .menu {
   display: none;
   position: fixed;
-  top: 0;
+  /* top: 0; */
   right: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color:#FAF8F8;  
+  background-color:#FAF8F8; 
+  overflow: hidden; 
   z-index: 30;
+  top: -44px;
+	padding-bottom: 44px;
+	transform: translateY(44px);
 }
 
 .menu--active {
