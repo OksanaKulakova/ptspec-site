@@ -1,0 +1,94 @@
+<script>
+  document.querySelector('.menu-close').addEventListener('click', () => {
+    document.querySelector('.menu').classList.toggle('menu--active');
+    document.documentElement.style.setProperty('overflow-y', 'auto');
+  });
+</script>
+
+<div class="menu">
+  <div class="menu-header">
+    <a class="link" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" width="75" height="56" viewBox="0 0 75 56" fill="none">
+        <path d="M22.5 15C23.8807 15 25 16.1193 25 17.5C25 16.1193 26.1193 15 27.5 15H47.5C48.8807 15 50 16.1193 50 17.5C50 16.1193 51.1193 15 52.5 15H72.5C73.8807 15 75 16.1193 75 17.5V20L55 20V35L75 35V37.5C75 38.8807 73.8807 40 72.5 40H52.5C51.1193 40 50 38.8807 50 37.5V20L40 20V40H35V20L25 20V40H20V20H5V40H0V17.5C0 16.1193 1.11929 15 2.5 15H22.5Z" fill="#161619"/>
+      </svg>
+    </a>
+    <button class="menu-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="56" viewBox="0 0 48 56" fill="none">
+        <path d="M24 28L36 16M24 28L12 16M24 28L36 40M24 28L12 40" stroke="#161619" stroke-width="2"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="nav">
+    <a class="nav-link link" href="/services/">Услуги</a>
+    <a class="nav-link link" href="/projects/">Проекты</a>
+    <a class="nav-link link" href="/company/">Компания</a>
+    <a class="nav-link link" href="/career/">Карьера</a>
+    <a class="nav-link link" href="/news/">Журнал</a>
+    <a class="nav-link link" href="/contacts/">Контакты</a>
+    <a class="nav-link link" href="#">Заказать услугу</a>
+  </nav>
+</div>
+
+<style>
+.menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color:#FAF8F8;  
+  z-index: 30;
+}
+
+.menu--active {
+  display: block;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 16px;
+}
+
+.menu-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 56px;
+  background-color: #FAF8F8;
+  border: none;
+  cursor: pointer;
+}
+
+.nav {
+  padding: 48px 16px 0px 16px;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #161619;
+}
+
+.nav-link:last-child.link {
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1024px) {
+  .menu--active {
+    display: none;
+  }
+}
+</style>
