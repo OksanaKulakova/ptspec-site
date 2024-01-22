@@ -3,18 +3,19 @@ import Social from "@components/Social.astro";
 ---
 
 <script>
+  let height = document.documentElement.clientHeight;
+
   window.addEventListener('resize',(e) => {
-    const height = document.documentElement.clientHeight;
-    alert(height); 
-});
-  // console.log(document.documentElement.clientHeight);
+    height = document.documentElement.clientHeight;
+  });
+
   document.querySelector('.menu-close').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('menu--active');
     document.documentElement.style.setProperty('overflow-y', 'auto');
   });
 </script>
 
-<div class="menu">
+<div class="menu" style={{ height: `${height}px` }}>
   <div class="menu-header">
     <a class="link" href="/">
       <svg xmlns="http://www.w3.org/2000/svg" width="75" height="56" viewBox="0 0 75 56" fill="none">
@@ -54,7 +55,7 @@ import Social from "@components/Social.astro";
   right: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   background-color:#FAF8F8; 
   overflow: hidden; 
   z-index: 30;
