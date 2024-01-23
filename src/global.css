@@ -31,7 +31,7 @@
 html {
   overflow-x: hidden;
   overflow-y: auto;
-  margin-right: calc(-1 * (100vw - 100%));
+  /* margin-right: calc(-1 * (100vw - 100%)); */
 }
 
 body {
@@ -43,27 +43,41 @@ body {
   display: none;
 } */
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 16px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
-}
+} */
 
-/* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: #D0D4E3;
   border: 4px transparent solid;
   border-radius: 8px;
   background-clip: padding-box;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   border: 4px transparent solid;
   background: #8D919D;
   background-clip: padding-box;
+} */
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgb(208, 212, 227, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D0D4E3;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8D919D;
 }
 
 #preloader {
