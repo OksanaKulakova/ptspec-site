@@ -1,0 +1,162 @@
+---
+import Social from "@components/Social.astro";
+---
+
+<footer class="footer">
+  <div class="footer-block">
+    <div class="footer-switch">
+      <a class="footer-link" href="#">english version</a>
+    </div>
+    <div class="contacts">
+      <div class="contact">
+        <div class="contact-title">Контакты</div>
+        <div class="contact-text">
+          <a class="contact-link footer-link" href="mailto:info@ptspec.ru">info@ptspec.ru</a>
+          <a class="contact-link footer-link" href="tel:+73422700028">+7 342 270 0028</a>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="contact-title">Адрес</div>
+        <div class="contact-text">
+          <span>Пермь</span><br>
+          <span>Мира 45а, Офис 201</span><br>
+          <span>9:00 – 18:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-block footer-action">
+    <div class="footer-button">
+      <button class="btn">Заказать услугу</button>
+    </div>
+    <div class="footer-sign">Свяжемся с вами в течение рабочего дня</div>
+  </div>
+  <div class="footer-block">
+    <div class="footer-social">
+      <Social size={48} />
+    </div>
+    <div class="footer-info">
+      <div class="footer-org">© ООО «пермьтехспец» 2024</div>
+      <div>
+        <a class="footer-link" href="">mirodanko</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 16px 16px;
+    gap: 96px;
+  }
+
+  .footer-block {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+
+  .footer-block > * {
+    flex: 1 1 0;
+  }
+
+  .footer-switch {
+    display: none;
+  }
+
+  .footer-link {
+    color: #161619;
+    transition: all .25s linear;
+  }
+
+  .footer-link:hover {
+    color: #FE5639;
+  }
+
+  .footer-action {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding-bottom: 48px;
+  }
+
+  .footer-sign {
+    color: rgba(22, 22, 25, 0.50);
+    text-align: center;
+  }
+
+  .footer-social {
+    display: none;
+  }
+
+  .footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .footer-org {
+    color: rgba(22, 22, 25, 0.50);
+  }
+
+  .contacts {
+    display: flex;
+    gap: 16px;
+  }
+
+  .contact {
+    flex: 1 1 0;
+  }
+
+  .contact-title {
+    margin-bottom: 8px;
+    color: rgba(22, 22, 25, 0.50);
+  }
+
+  .contact-link {
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .footer {
+      padding: 96px 32px 32px 32px;
+      gap: 192px;
+    }
+
+    .footer-switch {
+      display: block;
+    }
+
+    .footer-action {
+      max-width: 560px;
+      margin: auto;
+      padding-bottom: 56px;
+    }
+
+    .footer-sign {
+      width: calc(50% - 16px);
+      margin-left: auto;
+      text-align: left;
+    }
+
+    .footer-social {
+      display: block;
+      height: 48px;
+    }
+
+    .footer-org {
+      padding-top: 16px;
+    }
+
+    .footer-info .footer-link {
+      padding-top: 16px;
+    }
+}
+</style>

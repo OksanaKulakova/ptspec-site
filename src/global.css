@@ -31,7 +31,7 @@
 html {
   overflow-x: hidden;
   overflow-y: auto;
-  /* margin-right: calc(-1 * (100vw - 100%)); */
+  margin-right: calc(-1 * (100vw - 100%));
 }
 
 body {
@@ -150,6 +150,34 @@ body {
   line-height: 40px;
   letter-spacing: -1.92px;
   text-transform: uppercase;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.btn {
+  display: flex;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #161619;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+  text-transform: uppercase;
+  color: #FAF8F8;
+  transition: all .2s linear;
+}
+
+.btn:hover {
+  background-color: #FE5639;
+}
+
+.btn--disabled {
+  opacity: 0.25;
 }
 
 @media screen and (min-width: 1024px) {
