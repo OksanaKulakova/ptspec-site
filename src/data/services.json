@@ -1,52 +1,42 @@
 [
   {
     "title": "Технический заказчик",
-    "folder": "services",
     "slug": "technical-customer"
   },
   {
     "title": "Строительный контроль",
-    "folder": "services",
     "slug": "construction-control"
   },
   {
     "title": "Исполнительная документация",
-    "folder": "services",
     "slug": "as-built-documentation"
   },
   {
     "title": "Геодезическое сопровождение строительства",
-    "folder": "services",
     "slug": "geodetic-support-construction"
   },
   {
     "title": "Проект производства работ",
-    "folder": "services",
     "slug": "project-work-production"
   },
   {
     "title": "Строительно–монтажные работы",
-    "folder": "services",
     "slug": "construction-installation-works"
   },
   {
     "title": "Разработка сметной документации",
-    "folder": "services",
     "slug": "development-estimate-documentation"
   },
   {
     "title": "Календарно–сетевое планирование",
-    "folder": "services",
     "slug": "schedule-network-planning"
   },
   {
     "title": "Разработка технологических карт",
-    "folder": "services",
     "slug": "development-technological-maps"
   },
   {
     "title": "Финансово–технический контроль",
-    "folder": "services",
     "slug": "financial-technical-control"
   }
 ]

@@ -24,6 +24,8 @@ const cards: card[]  = [
 	}
 ];
 
+const list = services.map(item => ({ ...item, href: `/services/${item.slug}/` }));
+
 ---
 <Layout title="ГЛАВНАЯ">
 	<Widget title="Входим в Топ-20 <br> инжиниринговых <br> компаний России"
@@ -35,6 +37,6 @@ const cards: card[]  = [
 	/>
 
 	<List title="Эффективно решаем <br> поставленные задачи"
-		list={services}
+		list={list}
 	/>
 </Layout>
