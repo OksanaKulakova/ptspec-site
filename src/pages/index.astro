@@ -36,6 +36,8 @@ type card = {
   caption?: string;
   link?: string;
   href?: string;
+  imagePath?: string;
+  altText?: string;
 };
 
 const cards1: card[] = [
@@ -54,6 +56,21 @@ const cards1: card[] = [
     href: "#",
   },
 ];
+
+const cards2: card[] = [
+  {
+    classList: "card--image",
+    imagePath: "/src/assets/images/cover2.jpg",
+    altText: "Картинка",
+  },
+  {
+    classList: "card--white",
+    title: "карьера",
+    caption: "Активно развиваемся <br> и ищем таланты",
+    link: "Карьера в компании",
+    href: "/career/",
+  },
+];
 ---
 
 <Layout title="ГЛАВНАЯ">
@@ -69,4 +86,6 @@ const cards1: card[] = [
   <List title="Эффективно решаем <br> поставленные задачи" list={list} />
 
   <Cards cards={cards1} />
+
+  <Cards cards={cards2} />
 </Layout>
