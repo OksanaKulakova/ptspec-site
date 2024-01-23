@@ -14,32 +14,29 @@ interface Card {
 const { cards } = Astro.props;
 ---
 
-<section class="section">
-  <div class="cards">
-    {
-      cards.map((card: Card) => (
-        <div class="card" class:list={[card.classList]}>
-          <div class="card-block">
-            <div set:html={card.caption} class="card-caption" />
-          </div>
-          <h2 class="card-title title">{card.title}</h2>
-          <div class="card-block">
-            <a class="card-link link" href={card.href}>
-              {card.link}
-            </a>
-          </div>
-        </div>
-      ))
-    }
-  </div>
+<section class="cards">
+  {
+    cards.map((card: Card) => (
+      <div class="card" class:list={[card.classList]}>
+        {card.caption && <div class="card-block">
+          <div set:html={card.caption} class="card-caption" />
+        </div>}
+        {card.title && <h2 class="card-title title">{card.title}</h2>}
+        {card.href && <div class="card-block">
+          <a class="card-link link" href={card.href}>
+            {card.link}
+          </a>
+        </div>}
+      </div>
+    ))
+  }
 </section>
 
 <style>
   .cards {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    padding: 48px 0;
   }
 
   .card {
@@ -52,6 +49,12 @@ const { cards } = Astro.props;
     min-height: 320px;
   }
 
+  .card--white {
+    width: calc(100% - 32px);
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
   .card--white::after {
     content: "";
     position: absolute;
@@ -61,13 +64,28 @@ const { cards } = Astro.props;
     background-color: #161619;
   }
 
+  .card--black {
+    padding: 0 16px;
+    background-color: #161619;
+    color: #faf8f8;
+  }
+
+  .card--black .card-link {
+    color: #faf8f8;
+  }
+
   .card-block {
+    display: flex;
     width: 100%;
     min-height: 140px;
   }
 
+  .card-block:last-child {
+    align-items: flex-end;
+  }
+
   .card-caption {
-    max-width: 452px;
+    max-width: 50%;
     padding-top: 16px;
     font-size: 16px;
     line-height: 24px;
@@ -80,50 +98,24 @@ const { cards } = Astro.props;
     text-align: center;
   }
 
-  .card-link {
-    margin-top: 84px;
-  }
-
-  .card--black {
-    background-color: #161619;
-    color: #faf8f8;
-  }
-
-  .card--black .card-link {
-    color: #faf8f8;
-  }
-
-  .card--black::after {
-    content: "";
-    position: absolute;
-    left: -16px;
-    width: 16px;
-    height: 100%;
-    background-color: #161619;
-  }
-
-  .card--black::before {
-    content: "";
-    position: absolute;
-    right: -16px;
-    width: 16px;
-    height: 100%;
-    background-color: #161619;
-  }
-
   @media screen and (min-width: 1024px) {
     .cards {
       flex-direction: row;
-      gap: 16px;
+      padding: 96px 0;
     }
 
     .card {
       min-height: 560px;
-      flex: 1 0 0;
     }
 
     .card-block {
-      min-height: 140px;
+      min-height: 244px;
+    }
+
+    .card--white {
+      width: calc(100% - 64px);
+      margin-left: 32px;
+      margin-right: 0;
     }
 
     .card--white::before {
@@ -133,10 +125,6 @@ const { cards } = Astro.props;
       width: 100%;
       height: 1px;
       background-color: #161619;
-    }
-
-    .card--black::before {
-      display: none;
     }
   }
 </style>
