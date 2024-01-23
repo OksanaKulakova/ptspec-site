@@ -1,0 +1,138 @@
+---
+interface Props {
+  cards: Array<Card>;
+}
+
+interface Card {
+  classList?: string;
+  title?: string;
+  caption?: string;
+  link?: string;
+  href?: string;
+}
+
+const { cards } = Astro.props;
+---
+
+<section class="section">
+  <div class="cards">
+    {cards.map((card: Card) =>     
+      <div class="card" class:list={[card.classList]}>
+        <div class="card-block">
+          <div set:html={card.caption} class="card-caption"></div>
+        </div>
+        <h2 class="card-title title">{card.title}</h2>
+        <div class="card-block">
+          <a class="card-link link" href={card.href}>{card.link}</a>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 320px;
+}
+
+.card--white::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+}
+
+.card-block {
+    width: 100%;
+    min-height: 140px;
+}
+
+.card-caption {
+    max-width: 452px;
+    padding-top: 16px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+}
+
+.card-title {
+    margin: auto;
+    text-align: center;
+}
+
+.card-link {
+    margin-top: 84px;
+}
+
+.card--black {
+    background-color: #161619;
+    color: #FAF8F8;
+}
+
+.card--black .card-link {
+    color: #FAF8F8;
+}
+
+.card--black::after{
+    content: '';
+    position: absolute;
+    left: -16px;
+    width: 16px;
+    height: 100%;
+    background-color: #161619;
+}
+
+.card--black::before{
+    content: '';
+    position: absolute;
+    right: -16px;
+    width: 16px;
+    height: 100%;
+    background-color: #161619;
+}
+
+@media screen and (min-width: 1024px) {
+    .cards {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .card {
+        min-height: 560px;
+        flex: 1 0 0;
+    }
+
+    .card-block {
+        min-height: 140px;
+    }
+
+    .card--white::before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #161619;
+    }
+
+    .card--black::before {
+      display: none;
+    }
+}
+</style>
