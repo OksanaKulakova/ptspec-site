@@ -80,6 +80,7 @@ const { title, list } = Astro.props;
     width: 24px;
     height: 24px;
     flex-shrink: 0;
+    rotate: -90deg;
   }
 
   .list-item-icon svg {
@@ -112,10 +113,6 @@ const { title, list } = Astro.props;
     z-index: 2;
   }
 
-  .list-item:hover .list-item-icon {
-    rotate: -90deg;
-  }
-
   .list-item:hover .list-item-icon svg path {
     stroke: #FAF8F8;
   }
@@ -131,11 +128,16 @@ const { title, list } = Astro.props;
     .list-item-icon {
       width: 32px;
       height: 32px;
+      rotate: none;
     }
 
     .list-item:hover::before {
       left: -32px;
       width: calc(100% + 64px);
+    }
+
+    .list-item:hover .list-item-icon {
+      rotate: -90deg;
     }
   }
 </style>
