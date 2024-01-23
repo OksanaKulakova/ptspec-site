@@ -2,12 +2,12 @@
   font-family: Roboto_Condensed;
   font-style: normal;
   font-weight: 500;
-  src: url('/fonts/RobotoCondensed-VariableFont_wght.ttf');
+  src: url("/fonts/RobotoCondensed-VariableFont_wght.ttf");
   /* font-display: swap; */
 }
 
 :root {
-  font-family: Roboto_Condensed, sans-serif; 
+  font-family: Roboto_Condensed, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -15,7 +15,7 @@
   letter-spacing: -0.48px;
   text-transform: uppercase;
   color: #161619;
-  background-color: #FAF8F8;
+  background-color: #faf8f8;
   font-variant-numeric: lining-nums proportional-nums;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -65,19 +65,18 @@ body {
   background-clip: padding-box;
 } */
 
-
 ::-webkit-scrollbar {
   width: 8px;
   background-color: rgb(208, 212, 227, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #D0D4E3;
+  background-color: #d0d4e3;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8D919D;
+  background: #8d919d;
 }
 
 #preloader {
@@ -86,7 +85,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #FAF8F8;
+  background-color: #faf8f8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,15 +106,15 @@ body {
   text-decoration-line: underline;
   text-decoration-skip-ink: none;
   text-transform: uppercase;
-  transition: all .25s ease;
+  transition: all 0.25s ease;
 }
 
 .link:hover {
-  color: #FE5639;
+  color: #fe5639;
 }
 
 .link--active {
-  color: #FE5639;
+  color: #fe5639;
   text-decoration-line: none;
 }
 
@@ -124,17 +123,17 @@ body {
 }
 
 .link svg path {
-  fill:#161619;
-  stroke:inherit;
-  stroke-width:inherit;
+  fill: #161619;
+  stroke: inherit;
+  stroke-width: inherit;
 }
 
 .link:hover svg path {
-  fill:#FE5639;
+  fill: #fe5639;
 }
 
 .link--active svg path {
-  fill:#FE5639;
+  fill: #fe5639;
 }
 
 .section {
@@ -168,12 +167,12 @@ button {
   line-height: 24px;
   letter-spacing: -0.48px;
   text-transform: uppercase;
-  color: #FAF8F8;
-  transition: all .2s linear;
+  color: #faf8f8;
+  transition: all 0.2s linear;
 }
 
 .btn:hover {
-  background-color: #FE5639;
+  background-color: #fe5639;
 }
 
 .btn--disabled {

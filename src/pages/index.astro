@@ -1,70 +1,72 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Widget from '@components/Widget.astro';
-import List from '@components/List.astro';
-import Cards from '@components/Cards.astro';
+import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+import List from "@components/List.astro";
+import Cards from "@components/Cards.astro";
 import services from "@data/services.json";
 
 type cardWidget = {
-  title: string,
-	text: string,
+  title: string;
+  text: string;
 };
 
-const cardsForWidget: cardWidget[]  = [
-	{
-		title: '2015',
-		text: 'С 2015 года <br> копим опыт и экспертизу <br> в строительстве',
-	},
-	{
-		title: '100+',
-		text: 'Более 100 <br> реализованных <br> проектов',
-	},
-	{
-		title: '30+',
-		text: 'Более 30 <br> регионов <br> присутствия',
-	}
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "2015",
+    text: "С 2015 года <br> копим опыт и экспертизу <br> в строительстве",
+  },
+  {
+    title: "100+",
+    text: "Более 100 <br> реализованных <br> проектов",
+  },
+  {
+    title: "30+",
+    text: "Более 30 <br> регионов <br> присутствия",
+  },
 ];
 
-const list = services.map(item => ({ ...item, href: `/services/${item.slug}/` }));
+const list = services.map((item) => ({
+  ...item,
+  href: `/services/${item.slug}/`,
+}));
 
 type card = {
-	classList?: string
+  classList?: string;
   title?: string;
   caption?: string;
-	link?: string;
+  link?: string;
   href?: string;
-}
+};
 
 const cards1: card[] = [
-	{
-		classList: 'card--white',
-		title: 'Проекты',
-		caption: 'гордимся каждым <br> проектом',
-		link: 'Смотреть проекты',
-		href: '/projects/',
-	},
-	{
-		classList: 'card--black card--left',
-		title: 'заявка',
-		caption: 'Поможем с выбором <br> услуги',
-		link: 'оставить заявку',
-		href: '#',
-	},
+  {
+    classList: "card--white",
+    title: "Проекты",
+    caption: "гордимся каждым <br> проектом",
+    link: "Смотреть проекты",
+    href: "/projects/",
+  },
+  {
+    classList: "card--black card--left",
+    title: "заявка",
+    caption: "Поможем с выбором <br> услуги",
+    link: "оставить заявку",
+    href: "#",
+  },
 ];
-
 ---
+
 <Layout title="ГЛАВНАЯ">
-	<Widget title="Входим в Топ-20 <br> инжиниринговых <br> компаний России"
-		subtitle="Предоставляем полный спектр <br> инжиниринговых услуг <br> в промышленном и гражданском <br> строительстве"
-		imagePath="../assets/images/cover1.jpg"
-		altText="Картинка для баннера"
-		href="/company/"
-		cards={cardsForWidget} 
-	/>
+  <Widget
+    title="Входим в Топ-20 <br> инжиниринговых <br> компаний России"
+    subtitle="Предоставляем полный спектр <br> инжиниринговых услуг <br> в промышленном и гражданском <br> строительстве"
+    imagePath="../assets/images/cover1.jpg"
+    altText="Картинка для баннера"
+    href="/company/"
+    cards={cardsForWidget}
+  />
 
-	<List title="Эффективно решаем <br> поставленные задачи"
-		list={list}
-	/>
+  <List title="Эффективно решаем <br> поставленные задачи" list={list} />
 
-	<Cards cards={cards1}  />
+  <Cards cards={cards1} />
 </Layout>
