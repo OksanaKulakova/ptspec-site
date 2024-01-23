@@ -177,6 +177,14 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       padding-left: 16px;
     }
 
+    .card:last-child.card--white::before {
+      display: block;
+    }
+
+    .card:first-child.card--white::after {
+      display: block;
+    }
+
     .card:first-child.card--image {
       width: calc(100% - 64px);
       margin-left: 32px;
