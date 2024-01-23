@@ -1,5 +1,7 @@
 ---
 import Social from "@components/Social.astro";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer">
@@ -40,7 +42,7 @@ import Social from "@components/Social.astro";
       <Social size={48} />
     </div>
     <div class="footer-info">
-      <div class="footer-org">© ООО «пермьтехспец» 2024</div>
+      <div class="footer-org">© ООО «пермьтехспец» {currentYear}</div>
       <div>
         <a class="footer-link" href="">mirodanko</a>
       </div>
