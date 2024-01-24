@@ -1,6 +1,5 @@
 ---
 interface Props {
-  title: string;
   list: Array<List>;
 }
 
@@ -10,39 +9,36 @@ interface List {
   slug?: string;
 }
 
-const { title, list } = Astro.props;
+const { list } = Astro.props;
 ---
 
-<section class="section">
-  <h2 set:html={title} class="title" />
-  <div class="list">
-    {
-      list.map((item: List) => (
-        <a href={item.href} class="list-item">
-          <div class="list-item-content">
-            <div class="list-item-name">{item.title}</div>
-          </div>
-          <div class="list-item-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-            >
-              <path
-                d="M6 6L26 26M26 26L26 6M26 26L6 26"
-                stroke="#161619"
-                stroke-width="2"
-                stroke-linecap="square"
-              />
-            </svg>
-          </div>
-        </a>
-      ))
-    }
-  </div>
-</section>
+<div class="list">
+  {
+    list.map((item: List) => (
+      <a href={item.href} class="list-item">
+        <div class="list-item-content">
+          <div class="list-item-name">{item.title}</div>
+        </div>
+        <div class="list-item-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <path
+              d="M6 6L26 26M26 26L26 6M26 26L6 26"
+              stroke="#161619"
+              stroke-width="2"
+              stroke-linecap="square"
+            />
+          </svg>
+        </div>
+      </a>
+    ))
+  }
+</div>
 
 <style>
   .list {
