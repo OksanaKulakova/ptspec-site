@@ -10,11 +10,14 @@
     document.documentElement.style.setProperty("overflow-y", "auto");
   }
 
-  document.querySelector(".show-modal")?.addEventListener("click", () => {
-    modal?.classList.add("modal--open");
-    modal?.classList.remove("modal--hide");
+  const cbox: NodeListOf<Element> = document.querySelectorAll(".show-modal");
+  cbox.forEach((box: Element) => {
+    box.addEventListener("click", () => {
+      modal?.classList.add("modal--open");
+      modal?.classList.remove("modal--hide");
 
-    hideScroll();
+      setTimeout(hideScroll, 1000);
+    });
   });
 
   document.querySelector(".hide-modal")?.addEventListener("click", () => {

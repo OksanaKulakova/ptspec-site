@@ -9,6 +9,7 @@ interface Card {
   caption?: string;
   link?: string;
   href?: string;
+  classLink?: string;
   imagePath?: string;
   altText?: string;
 }
@@ -32,9 +33,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
           </div>
         )}
         {card.title && <h2 class="card-title title">{card.title}</h2>}
-        {card.href && (
+        {(card.href || card.classLink) && (
           <div class="card-block">
-            <a class="card-link link" href={card.href}>
+            <a
+              class="card-link link"
+              class:list={[card.classLink]}
+              href={card.href}
+            >
               {card.link}
             </a>
           </div>
