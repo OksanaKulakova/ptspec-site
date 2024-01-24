@@ -12,33 +12,80 @@ interface List {
 const { list } = Astro.props;
 ---
 
-<div class="list">
-  {
-    list.map((item: List) => (
-      <a href={item.href} class="list-item">
-        <div class="list-item-content">
-          <div class="list-item-name">{item.title}</div>
-        </div>
-        <div class="list-item-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-          >
-            <path
-              d="M6 6L26 26M26 26L26 6M26 26L6 26"
-              stroke="#161619"
-              stroke-width="2"
-              stroke-linecap="square"
-            />
-          </svg>
-        </div>
-      </a>
-    ))
+<script>
+  class AstroList extends HTMLElement {
+    constructor() {
+      super();
+
+      let count: number = 10;
+      const elements: NodeListOf<Element> = this.querySelectorAll(".list-item");
+
+      const moreButton = this.querySelector('.list-buttom-more');
+
+      function hideElements(a: number): void {
+        for (let i: number = a; i < elements.length; i++) {
+          elements[i].classList.add("list-item--hide");
+        }
+      }
+
+      function showElements(a: number): void {
+        for (let i: number = 0; i < a; i++) {
+          elements[i].classList.remove("list-item--hide");
+        }
+      }
+
+      function showButton(): void {
+        if (elements.length > 10 && count < elements.length) {
+          moreButton.classList.remove("list-buttom-more--hide");
+        } else {
+          moreButton.classList.add("list-buttom-more--hide");
+        }
+      }
+
+      hideElements(count);
+      showButton();
+
+      moreButton.addEventListener('click', () => {
+        count+=10;
+        showElements(count);
+        showButton();
+      });
+    }
   }
-</div>
+
+  customElements.define('astro-list', AstroList);
+</script>
+
+<astro-list>
+  <div class="list">
+    {
+      list.map((item: List) => (
+        <a href={item.href} class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-name">{item.title}</div>
+          </div>
+          <div class="list-item-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <path
+                d="M6 6L26 26M26 26L26 6M26 26L6 26"
+                stroke="#161619"
+                stroke-width="2"
+                stroke-linecap="square"
+              />
+            </svg>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+  <button class="list-buttom-more">Показать еще</button>
+</astro-list>
 
 <style>
   .list {
@@ -58,6 +105,10 @@ const { list } = Astro.props;
     background-color: #faf8f8;
     color: #161619;
     text-decoration: none;
+  }
+
+  .list-item--hide {
+    display: none;
   }
 
   .list-item-content {
@@ -124,6 +175,43 @@ const { list } = Astro.props;
 
   .list-item:hover .list-item-icon svg path {
     stroke: #faf8f8;
+  }
+
+  .list-buttom-more {
+    position: relative;
+    display: flex;
+    padding: 16px 0px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #FAF8F8;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -1.44px;
+    text-transform: uppercase;
+    color: #161619;
+  }
+
+  .list-buttom-more::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  .list-buttom-more:hover {
+    background-color: #fe5639;
+    color:#FAF8F8;
+  }
+
+  .list-buttom-more:hover::before{
+    background-color: #fe5639;
+  }
+
+  .list-buttom-more--hide {
+    display: none;
   }
 
   @media screen and (min-width: 1024px) {
