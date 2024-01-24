@@ -1,5 +1,25 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import List from "@components/List.astro";
+import services from "@data/services.json";
+import gratitudes from "@data/gratitudes.json";
+
+const list = services.map((item) => ({
+  ...item,
+  href: `/services/${item.slug}/`,
+}));
+
+const count = services.length;
 ---
 
-<Layout title="УСЛУГИ"> услуги </Layout>
+<Layout title="УСЛУГИ">
+  <section class="section">
+    <h2 class="title">УСЛУГИ / {count}</h2>
+    <List list={list} />
+  </section>
+
+  <section class="section">
+    <h2 class="title">Отзывы <br> и благодарности</h2>
+    <List list={gratitudes} />
+  </section>
+</Layout>
