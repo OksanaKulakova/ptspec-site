@@ -48,6 +48,7 @@
     z-index: 50;
 
     overflow-y: auto;
+    background-color: #faf8f8;
 
     animation: hide 1s linear;
   }
@@ -97,7 +98,8 @@
     gap: 16px;
     padding: 48px 16px;
     background-color: #faf8f8;
-    height: calc(100% - 56px);
+    height: calc(100vh - 56px);
+    overflow-y: auto;
   }
 
   .modal-title {
@@ -106,6 +108,10 @@
     line-height: 48px; 
     letter-spacing: -2.4px;
     text-transform: uppercase;
+  }
+
+  .modal-content {
+    width: 100%;
   }
 
   @media screen and (width >= 1024px) {
