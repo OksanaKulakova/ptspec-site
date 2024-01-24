@@ -20,7 +20,7 @@ const { list } = Astro.props;
       let count: number = 10;
       const elements: NodeListOf<Element> = this.querySelectorAll(".list-item");
 
-      const moreButton = this.querySelector('.list-buttom-more');
+      const moreButton = this.querySelector('.list-button-more');
 
       function hideElements(a: number): void {
         for (let i: number = a; i < elements.length; i++) {
@@ -36,9 +36,9 @@ const { list } = Astro.props;
 
       function showButton(): void {
         if (elements.length > 10 && count < elements.length) {
-          moreButton.classList.remove("list-buttom-more--hide");
+          moreButton.classList.remove("list-button-more--hide");
         } else {
-          moreButton.classList.add("list-buttom-more--hide");
+          moreButton.classList.add("list-button-more--hide");
         }
       }
 
@@ -84,7 +84,7 @@ const { list } = Astro.props;
       ))
     }
   </div>
-  <button class="list-buttom-more">Показать еще</button>
+  <button class="list-button-more">Показать еще</button>
 </astro-list>
 
 <style>
@@ -177,7 +177,7 @@ const { list } = Astro.props;
     stroke: #faf8f8;
   }
 
-  .list-buttom-more {
+  .list-button-more {
     position: relative;
     display: flex;
     padding: 16px 0px;
@@ -185,14 +185,14 @@ const { list } = Astro.props;
     align-items: center;
     width: 100%;
     background-color: #FAF8F8;
-    font-size: 24px;
-    line-height: 32px;
-    letter-spacing: -1.44px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
     text-transform: uppercase;
     color: #161619;
   }
 
-  .list-buttom-more::before {
+  .list-button-more::before {
     content: "";
     position: absolute;
     top: 0;
@@ -201,16 +201,20 @@ const { list } = Astro.props;
     background-color: #161619;
   }
 
-  .list-buttom-more:hover {
+  .list-button-more:hover {
     background-color: #fe5639;
     color:#FAF8F8;
   }
 
-  .list-buttom-more:hover::before{
+  .list-button-more:hover::before {
+    left: -16px;
+    width: calc(100% + 32px);
+    height: calc(100% + 1px);
     background-color: #fe5639;
+    z-index: -1;
   }
 
-  .list-buttom-more--hide {
+  .list-button-more--hide {
     display: none;
   }
 
@@ -235,6 +239,17 @@ const { list } = Astro.props;
 
     .list-item:hover .list-item-icon {
       rotate: -90deg;
+    }
+
+    .list-button-more {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -1.44px;
+    }
+
+    .list-button-more:hover::before {
+      left: -32px;
+      width: calc(100% + 64px);
     }
   }
 </style>
