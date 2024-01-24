@@ -1,0 +1,104 @@
+<script>
+  const modal =  document.querySelector(".modal");
+  modal.classList.toggle("modal--hide");
+
+  function hideScroll() {
+    document.documentElement.style.setProperty("overflow-y", "hidden");
+  }
+
+  function showScroll() {
+    document.documentElement.style.setProperty("overflow-y", "auto");
+  }
+
+  document.querySelector(".show-modal").addEventListener("click", () => {
+    modal.classList.add("modal--open");
+    modal.classList.remove("modal--hide");
+
+    hideScroll();
+  });
+
+  document.querySelector(".hide-modal").addEventListener("click", () => {
+    modal.classList.remove("modal--open");
+
+    showScroll();
+  });
+</script>
+
+<div class="modal">
+  <div class="modal-header">
+    <a class="link hide-modal">Закрыть</a>
+  </div>
+  <div class="modal-body">
+    <h2>Оставьте заявку и мы свяжемся с вами в течение рабочего дня</h2>
+  </div>
+</div>
+
+<style>
+  .modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+
+    overflow-y: auto;
+
+    animation: hide 1s linear;
+  }
+
+  .modal--hide {
+    display: none;
+  }
+
+  .modal--open {
+    display: block;
+    top: 0;
+    animation: move 1s linear;
+  }
+
+  @keyframes move {
+    0% {
+        top: 100vh;
+    }
+    100% {
+        top: 0px;
+    }
+  }
+
+  @keyframes hide {
+    0% {
+        top: 0px;
+    }
+    100% {
+        top: 100vh;
+    }
+  }
+
+  .modal-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAF8F8;
+    padding: 0px 32px;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 48px 16px;
+    background-color: #faf8f8;
+    height: calc(100% - 56px);
+  }
+
+  @media screen and (width >= 1024px) {
+    .modal-body {
+      gap: 64px;
+      padding: 96px 32px;
+    }
+  }
+</style>
