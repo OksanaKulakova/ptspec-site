@@ -33,8 +33,8 @@
     <a class="link hide-modal">Закрыть</a>
   </div>
   <div class="modal-body">
-    <slot name="title" />
-    <slot name="content" />
+    <div class="modal-title"><slot name="title" /></div>
+    <div class="modal-content"><slot name="content" /></div>
   </div>
 </div>
 
@@ -100,10 +100,25 @@
     height: calc(100% - 56px);
   }
 
+  .modal-title {
+    width: 100%;
+    font-size: 40px;
+    line-height: 48px; 
+    letter-spacing: -2.4px;
+    text-transform: uppercase;
+  }
+
   @media screen and (width >= 1024px) {
     .modal-body {
       gap: 64px;
       padding: 96px 32px;
+    }
+
+    .modal-title {
+      font-size: 96px;
+      line-height: 104px;
+      letter-spacing: -7.68px;
+      text-transform: uppercase;
     }
   }
 </style>
