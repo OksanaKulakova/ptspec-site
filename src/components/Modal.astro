@@ -1,24 +1,24 @@
 <script>
-  const modal =  document.querySelector(".modal");
-  modal.classList.toggle("modal--hide");
+  const modal: HTMLElement | null = document.querySelector(".modal");
+  modal?.classList.toggle("modal--hide");
 
-  function hideScroll() {
+  function hideScroll(): void {
     document.documentElement.style.setProperty("overflow-y", "hidden");
   }
 
-  function showScroll() {
+  function showScroll(): void {
     document.documentElement.style.setProperty("overflow-y", "auto");
   }
 
-  document.querySelector(".show-modal").addEventListener("click", () => {
-    modal.classList.add("modal--open");
-    modal.classList.remove("modal--hide");
+  document.querySelector(".show-modal")?.addEventListener("click", () => {
+    modal?.classList.add("modal--open");
+    modal?.classList.remove("modal--hide");
 
     hideScroll();
   });
 
-  document.querySelector(".hide-modal").addEventListener("click", () => {
-    modal.classList.remove("modal--open");
+  document.querySelector(".hide-modal")?.addEventListener("click", () => {
+    modal?.classList.remove("modal--open");
 
     showScroll();
   });
@@ -29,13 +29,14 @@
     <a class="link hide-modal">Закрыть</a>
   </div>
   <div class="modal-body">
-    <h2>Оставьте заявку и мы свяжемся с вами в течение рабочего дня</h2>
+    <slot name="title" />
+    <slot name="content" />
   </div>
 </div>
 
 <style>
   .modal {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     width: 100vw;
@@ -59,19 +60,19 @@
 
   @keyframes move {
     0% {
-        top: 100vh;
+      top: 100vh;
     }
     100% {
-        top: 0px;
+      top: 0px;
     }
   }
 
   @keyframes hide {
     0% {
-        top: 0px;
+      top: 0px;
     }
     100% {
-        top: 100vh;
+      top: 100vh;
     }
   }
 
@@ -81,7 +82,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FAF8F8;
+    background-color: #faf8f8;
     padding: 0px 32px;
   }
 
