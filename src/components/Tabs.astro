@@ -27,6 +27,17 @@ const { title, tab1, tab2 } = Astro.props;
     }
   }
 
+  function toggleTab(b: number): void {
+    for (let i: number = 0; i < tab.length; i++) {
+      if (i === b) {
+        tab[i].classList.add("header-tab--active");
+      } else {
+        tab[i].classList.remove("header-tab--active");
+      }
+    }
+  }
+
+  toggleTab(0);
   hideTabContent(1);
 
   document.querySelector(".tab").addEventListener("click", (event: Event) => {
@@ -37,6 +48,7 @@ const { title, tab1, tab2 } = Astro.props;
         if (target == tab[i]) {
           hideTabContent(0);
           showTabContent(i);
+          toggleTab(i);
           break;
         }
       }
@@ -53,23 +65,64 @@ const { title, tab1, tab2 } = Astro.props;
       <div class="header-tab">{tab2}</div>
     </div>
     <div class="tabcontent">
-      <slot name="tabcontent-1"/>
+      <slot name="tabcontent-1" />
     </div>
     <div class="tabcontent">
-      <slot name="tabcontent-2"/>
+      <slot name="tabcontent-2" />
     </div>
   </div>
 </section>
 
 <style>
+  .header {
+    position: relative;
+  }
+
+  .header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  .header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
   .header-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 56px;
+    background-color: #faf8f8;
     cursor: pointer;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+    color: #161619;
   }
+
+  .header-tab--active {
+    background-color: #161619;
+    color: #faf8f8;
+  }
+
   .tabcontent.hide {
     display: none;
   }
+
   .tabcontent.show {
     display: block;
   }
