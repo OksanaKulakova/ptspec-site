@@ -12,7 +12,8 @@
 
   const cbox: NodeListOf<Element> = document.querySelectorAll(".show-modal");
   cbox.forEach((box: Element) => {
-    box.addEventListener("click", () => {
+    box.addEventListener("click", (event) => {
+      event.preventDefault();
       modal?.classList.add("modal--open");
       modal?.classList.remove("modal--hide");
 
