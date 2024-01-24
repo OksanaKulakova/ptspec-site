@@ -20,7 +20,8 @@ const { list } = Astro.props;
       let count: number = 10;
       const elements: NodeListOf<Element> = this.querySelectorAll(".list-item");
 
-      const moreButton = this.querySelector('.list-button-more');
+      const moreButton: Element | null =
+        this.querySelector(".list-button-more");
 
       function hideElements(a: number): void {
         for (let i: number = a; i < elements.length; i++) {
@@ -29,7 +30,9 @@ const { list } = Astro.props;
       }
 
       function showElements(a: number): void {
-        for (let i: number = 0; i < a; i++) {
+        const c = a < elements.length ? a : elements.length;
+
+        for (let i: number = 0; i < c; i++) {
           elements[i].classList.remove("list-item--hide");
         }
       }
@@ -45,15 +48,15 @@ const { list } = Astro.props;
       hideElements(count);
       showButton();
 
-      moreButton.addEventListener('click', () => {
-        count+=10;
+      moreButton.addEventListener("click", () => {
+        count += 10;
         showElements(count);
         showButton();
       });
     }
   }
 
-  customElements.define('astro-list', AstroList);
+  customElements.define("astro-list", AstroList);
 </script>
 
 <astro-list>
@@ -184,7 +187,7 @@ const { list } = Astro.props;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #FAF8F8;
+    background-color: #faf8f8;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.48px;
@@ -203,7 +206,7 @@ const { list } = Astro.props;
 
   .list-button-more:hover {
     background-color: #fe5639;
-    color:#FAF8F8;
+    color: #faf8f8;
   }
 
   .list-button-more:hover::before {
