@@ -49,13 +49,14 @@ if (!images[imagePath])
   </div>
 
   <div class="widget-cards">
-    { cards && 
-      cards.map((card: Card) => (
-        <div class="widget-card">
-          <div class="widget-card-title">{card.title}</div>
-          <p set:html={card.text} class="widget-card-text" />
-        </div>
-      ))
+    {
+      cards &&
+        cards.map((card: Card) => (
+          <div class="widget-card">
+            <div class="widget-card-title">{card.title}</div>
+            <p set:html={card.text} class="widget-card-text" />
+          </div>
+        ))
     }
   </div>
 </div>

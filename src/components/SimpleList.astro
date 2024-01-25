@@ -1,0 +1,96 @@
+---
+interface Props {
+  list: Array<ListItem>;
+}
+
+interface ListItem {
+  title: string;
+  text: string;
+}
+
+const { list } = Astro.props;
+---
+
+<div class="simple-list">
+  {
+    list.map((item: ListItem) => (
+      <dv class="simple-item">
+        <div class="simple-item-title">{item.title}</div>
+        <div class="simple-item-content">
+          <div class="simple-item-text">
+            {item.text}
+          </div>
+        </div>
+      </dv>
+    ))
+  }
+</div>
+
+<style>
+  .simple-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .simple-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding-top: 16px;
+  }
+
+  .simple-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  .simple-item-title {
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+  }
+
+  .simple-item-content {
+    width: 100%;
+  }
+
+  .simple-item-text {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.7px;
+    text-transform: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .simple-list {
+      gap: 64px;
+    }
+
+    .simple-item {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .simple-item-title {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -1.44px;
+      text-transform: uppercase;
+    }
+
+    .simple-item-text {
+      width: 50%;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.8px;
+    }
+  }
+</style>
