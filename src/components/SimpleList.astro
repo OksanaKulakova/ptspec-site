@@ -11,20 +11,112 @@ interface ListItem {
 const { list } = Astro.props;
 ---
 
-<div class="simple-list">
-  {
-    list.map((item: ListItem) => (
-      <dv class="simple-item">
-        <div class="simple-item-title">{item.title}</div>
-        <div class="simple-item-content">
-          <div class="simple-item-text">
-            {item.text}
-          </div>
-        </div>
-      </dv>
-    ))
+<script>
+  class AstroSimpleList extends HTMLElement {
+    constructor() {
+      super();
+
+      const box: NodeListOf<Element> = document.querySelectorAll(
+        ".simple-item-content",
+      );
+
+      const buttonOpen: NodeListOf<Element> =
+        document.querySelectorAll(".simple-item--open");
+      const buttonClose: NodeListOf<Element> = document.querySelectorAll(
+        ".simple-item--close",
+      );
+
+      function hideContent(): void {
+        for (let i: number = 0; i < box.length; i++) {
+          (box[i] as HTMLElement).style.display = "none";
+        }
+
+        buttonClose.forEach((button: HTMLElement) => {
+          button.style.display = "none";
+        });
+
+        buttonOpen.forEach((button: HTMLElement) => {
+          button.style.display = "block";
+        });
+      }
+
+      buttonOpen.forEach((button: Element) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          let target: Element = event.target as Element;
+
+          if (target && target.classList.contains("simple-item--open")) {
+            for (let i: number = 0; i < buttonOpen.length; i++) {
+              if (target == buttonOpen[i]) {
+                hideContent();
+                (buttonOpen[i] as HTMLElement).style.display = "none";
+                (buttonClose[i] as HTMLElement).style.display = "block";
+                (box[i] as HTMLElement).style.display = "block";
+                break;
+              }
+            }
+          }
+        });
+      });
+
+      buttonClose.forEach((button: Element) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          hideContent();
+        });
+      });
+    }
   }
-</div>
+
+  customElements.define("astro-simple-list", AstroSimpleList);
+</script>
+
+<astro-simple-list>
+  <div class="simple-list">
+    {
+      list.map((item: ListItem) => (
+        <dv class="simple-item">
+          <div class="simple-item-title">
+            <div>{item.title}</div>
+            <button class="simple-item-button simple-item--open">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 12V3M12 12V21M12 12H3M12 12H21"
+                  stroke="#161619"
+                  stroke-width="1.4"
+                />
+              </svg>
+            </button>
+            <button class="simple-item-button simple-item--close">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 12L5 5M12 12L19 5M12 12L5 19M12 12L19 19"
+                  stroke="#161619"
+                  stroke-width="1.4"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="simple-item-content">
+            <div class="simple-item-text">{item.text}</div>
+          </div>
+        </dv>
+      ))
+    }
+  </div>
+</astro-simple-list>
 
 <style>
   .simple-list {
@@ -51,6 +143,9 @@ const { list } = Astro.props;
   }
 
   .simple-item-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     width: 100%;
     font-size: 16px;
     line-height: 24px;
@@ -59,6 +154,7 @@ const { list } = Astro.props;
   }
 
   .simple-item-content {
+    display: none;
     width: 100%;
   }
 
@@ -68,6 +164,23 @@ const { list } = Astro.props;
     line-height: 22px;
     letter-spacing: -0.7px;
     text-transform: none;
+  }
+
+  .simple-item-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: #faf8f8;
+  }
+
+  .simple-item-button svg {
+    pointer-events: none;
+  }
+
+  .simple-item--close {
+    display: none;
   }
 
   @media screen and (min-width: 1024px) {
@@ -87,11 +200,19 @@ const { list } = Astro.props;
       text-transform: uppercase;
     }
 
+    .simple-item-content {
+      display: block;
+    }
+
     .simple-item-text {
       width: 50%;
       font-size: 16px;
       line-height: 24px;
       letter-spacing: -0.8px;
+    }
+
+    .simple-item-button {
+      display: none;
     }
   }
 </style>
