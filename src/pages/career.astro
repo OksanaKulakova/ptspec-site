@@ -1,5 +1,36 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+
+type cardWidget = {
+  title: string;
+  text: string;
+};
+
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "Топ–10",
+    text: "Входим в Топ–10 <br> работодателей Пермского края <br> по версии портала 59.ru",
+  },
+  {
+    title: "40+",
+    text: "Более 40 <br> сотрудников выросли <br> до руководителей",
+  },
+  {
+    title: "75+",
+    text: "Более 75 <br> сотрудников продолжили <br> карьеру в крупных компаниях",
+  },
+];
 ---
 
-<Layout title="КАРЬЕРА"> КАРЬЕРА </Layout>
+<Layout title="КАРЬЕРА">
+  <Widget
+    title="Карьера"
+    subtitle="Приглашаем в <br> команду <br> специалистов, готовых расти <br> и вносить вклад в развитие <br>строительной отрасли"
+    imagePath="/src/assets/images/cover2.jpg"
+    altText="Картинка для баннера"
+    link="Заполнить анкету"
+    href="/"
+    cards={cardsForWidget}
+  />
+</Layout>
