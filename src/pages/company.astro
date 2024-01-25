@@ -1,5 +1,35 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+
+type cardWidget = {
+  title: string;
+  text: string;
+};
+
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "Топ–20",
+    text: "Входим в Топ–20 <br> инжиниринговых <br> компаний России",
+  },
+  {
+    title: "300+",
+    text: "Более 300 <br> специалистов <br> в штате",
+  },
+  {
+    title: "9+",
+    text: "Более 9 <br> лет опыта и экспертизы <br> в строительстве",
+  },
+];
 ---
 
-<Layout title="КОМПАНИЯ"> КОМПАНИЯ </Layout>
+<Layout title="КОМПАНИЯ">
+  <Widget
+    title="Компания"
+    subtitle="ответственно подходим <br> к решению задач <br> и имеем большой опыт <br> реализации крупных проектов"
+    imagePath="/src/assets/images/cover3.jpg"
+    altText="Картинка для баннера"
+    href="/services/"
+    cards={cardsForWidget}
+  />
+</Layout>
