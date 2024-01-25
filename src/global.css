@@ -3,7 +3,13 @@
   font-style: normal;
   font-weight: 500;
   src: url("/fonts/RobotoCondensed-VariableFont_wght.ttf");
-  /* font-display: swap; */
+}
+
+@font-face {
+  font-family: Roboto Mono;
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/RobotoMono-VariableFont_wght.ttf");
 }
 
 :root {
