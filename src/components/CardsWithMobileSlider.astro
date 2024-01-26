@@ -30,7 +30,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     }
   }
 
-  customElements.define("astro-swiper", AstroSwiper);
+  customElements.define("astro-swiper2", AstroSwiper);
 </script>
 
 <section class="cards-wms-section section">
@@ -59,7 +59,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     }
   </div>
 
-  <astro-swiper>
+  <astro-swiper2>
     <swiper-container speed="500" slides-per-view="1.1">
       {
         cards.map((card: Card) => (
@@ -84,7 +84,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
         ))
       }
     </swiper-container>
-  </astro-swiper>
+  </astro-swiper2>
 </section>
 
 <style>
@@ -180,7 +180,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     vertical-align: top;
   }
 
-  astro-swiper {
+  astro-swiper2 {
     display: block;
     margin-left: 16px;
   }
@@ -261,7 +261,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       width: calc(50% - 16px);
     }
 
-    astro-swiper {
+    astro-swiper2 {
       display: none;
     }
   }
