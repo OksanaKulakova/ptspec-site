@@ -77,7 +77,7 @@ const { list } = Astro.props;
       list.map((item: ListItem) => (
         <dv class="simple-item">
           <div class="simple-item-title">
-            <div>{item.title}</div>
+            <Fragment set:html={item.title}></Fragment>
             <button class="simple-item-button simple-item--open">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
