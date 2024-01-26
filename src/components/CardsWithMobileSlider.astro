@@ -1,0 +1,268 @@
+---
+interface Props {
+  title: string;
+  cards: Array<Card>;
+}
+
+interface Card {
+  title: string;
+  caption: string;
+  imagePath: string;
+  altText: string;
+}
+
+const { title, cards } = Astro.props;
+
+import type { ImageMetadata } from "astro";
+import { Picture } from "astro:assets";
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpeg,jpg,png,gif}",
+);
+---
+
+<script>
+  import { register } from "swiper/element/bundle";
+  register();
+
+  class AstroSwiper extends HTMLElement {
+    constructor() {
+      super();
+    }
+  }
+
+  customElements.define("astro-swiper", AstroSwiper);
+</script>
+
+<section class="cards-wms-section section">
+  <h2 set:html={title} class="cards-wms-title title" />
+
+  <div class="cards-wms">
+    {
+      cards.map((card: Card) => (
+        <div class="card-wms">
+          <div class="card-wms-text">
+            <div class="card-wms-title">{card.title}</div>
+            <div class="card-wms-caption">{card.caption}</div>
+          </div>
+
+          {card.imagePath && (
+            <div class="card-wms-img">
+              <Picture
+                src={images[card.imagePath]()}
+                formats={["jpeg", "webp"]}
+                alt={card.altText}
+              />
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+
+  <astro-swiper>
+    <swiper-container speed="500" slides-per-view="1.1">
+      {
+        cards.map((card: Card) => (
+          <swiper-slide>
+            <div class="card-wms">
+              <div class="card-wms-text">
+                <div class="card-wms-title">{card.title}</div>
+                <div class="card-wms-caption">{card.caption}</div>
+              </div>
+
+              {card.imagePath && (
+                <div class="card-wms-img">
+                  <Picture
+                    src={images[card.imagePath]()}
+                    formats={["jpeg", "webp"]}
+                    alt={card.altText}
+                  />
+                </div>
+              )}
+            </div>
+          </swiper-slide>
+        ))
+      }
+    </swiper-container>
+  </astro-swiper>
+</section>
+
+<style>
+  .cards-wms-section {
+    padding: 48px 0;
+  }
+
+  .cards-wms-title {
+    padding: 0 16px;
+  }
+
+  .cards-wms {
+    display: none;
+  }
+
+  .card-wms {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px;
+    padding: 16px;
+  }
+
+  swiper-slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  swiper-slide::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  swiper-slide:first-child .card-wms::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #161619;
+  }
+
+  swiper-slide:first-child .card-wms {
+    padding-left: 0;
+  }
+
+  swiper-slide:last-child .card-wms {
+    padding-right: 0;
+  }
+
+  .card-wms-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card-wms-title {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+  }
+
+  .card-wms-caption {
+    font-family: "Roboto Mono";
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.7px;
+    text-transform: none;
+  }
+
+  .card-wms-img {
+    height: 160px;
+  }
+
+  .card-wms-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: top;
+  }
+
+  astro-swiper {
+    display: block;
+    margin-left: 16px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .cards-wms-section {
+      padding: 96px 0;
+    }
+
+    .cards-wms-title {
+      padding: 0 32px;
+    }
+
+    .cards-wms {
+      display: flex;
+      padding: 0 32px;
+    }
+
+    .card-wms {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      min-height: 560px;
+    }
+
+    .card-wms::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #161619;
+    }
+
+    .card-wms:first-child::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background-color: #161619;
+    }
+
+    .card-wms:first-child {
+      width: calc(50% - 16px);
+    }
+
+    .card-wms:last-child {
+      width: calc(50% + 16px);
+    }
+
+    .card-wms-text > div {
+      width: 50%;
+    }
+
+    .card-wms-title {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -1.44px;
+    }
+
+    .card-wms-caption {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.8px;
+    }
+
+    .card-wms-img {
+      height: 240px;
+      text-align: right;
+    }
+
+    .card-wms-img img {
+      width: calc(50% - 16px);
+    }
+
+    astro-swiper {
+      display: none;
+    }
+  }
+</style>

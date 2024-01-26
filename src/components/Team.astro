@@ -33,7 +33,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 </script>
 
 <section class="team">
-  <h2 set:html={title} class="team-title" />
+  <h2 set:html={title} class="team-title title" />
 
   <div class="team-cards">
     {
@@ -61,7 +61,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   <astro-swiper>
     <swiper-container
       speed="500"
-      loop="true"
       space-between="16"
       slides-per-view="1.1"
     >
@@ -101,11 +100,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
   .team-title {
     padding: 0 16px;
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 48px;
-    letter-spacing: -2.4px;
-    text-transform: uppercase;
   }
 
   .team-cards {
@@ -138,14 +132,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     margin-left: 16px;
   }
 
-  /* swiper-container {
-    width: calc(100% - 32px);
-  } */
-
-  /* swiper-slide {
-    width: calc(100% - 32px)!important;
-  } */
-
   @media screen and (min-width: 1024px) {
     .team {
       gap: 32px;
@@ -154,9 +140,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
     .team-title {
       padding: 0;
-      font-size: 96px;
-      line-height: 104px;
-      letter-spacing: -7.68px;
     }
 
     .team-cards {

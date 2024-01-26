@@ -4,6 +4,7 @@ import Widget from "@components/Widget.astro";
 import SimpleList from "@components/SimpleList.astro";
 import Team from "@components/Team.astro";
 import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
+import CardsWithMobileSlider from "@components/CardsWithMobileSlider.astro";
 
 type cardWidget = {
   title: string;
@@ -49,13 +50,13 @@ const list: ListItem[] = [
   },
 ];
 
-type cardsForTeam = {
+type cardForTeam = {
   name: string;
   position: string;
   imagePath: string;
 };
 
-const team: cardsForTeam[] = [
+const team: cardForTeam[] = [
   {
     name: "Михаил Харасов",
     position: "Директор",
@@ -92,6 +93,31 @@ const team: cardsForTeam[] = [
     imagePath: "/src/assets/team/7.jpg",
   },
 ];
+
+type cardWMS = {
+  title: string;
+  caption: string;
+  imagePath: string;
+  altText: string;
+};
+
+const cardsWMS: cardWMS[] = [
+  {
+    title:
+      "Являемся действующим партнером детского фонда РООС «Подари надежду»",
+    caption:
+      "Ежегодно участвуем в организации праздников, поддерживаем школы и интернаты из отдалённых районов Пермского края",
+    imagePath: "/src/assets/images/card1.jpg",
+    altText: "Фото",
+  },
+  {
+    title: "Способствуем развитию здорового образа жизни и детского спорта",
+    caption:
+      "Ежегодно принимаем участие в забегах «Зелёный марафон» и «Стальной характер», а также оказываем посильную помощь детскому спорту",
+    imagePath: "/src/assets/images/card2.jpg",
+    altText: "Фото",
+  },
+];
 ---
 
 <Layout title="КОМПАНИЯ">
@@ -113,4 +139,9 @@ const team: cardsForTeam[] = [
   <Team title="Команда <br> профессионалов" cards={team} />
 
   <CustomersAndGratitude />
+
+  <CardsWithMobileSlider
+    title="социальная <br> ответственность"
+    cards={cardsWMS}
+  />
 </Layout>
