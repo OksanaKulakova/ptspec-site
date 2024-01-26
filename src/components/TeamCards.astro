@@ -19,6 +19,19 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
+<script>
+  import { register } from 'swiper/element/bundle';
+  register();
+
+  class AstroSwiper extends HTMLElement {
+    constructor() {
+      super();
+    }
+  }
+
+  customElements.define("astro-swiper", AstroSwiper);
+</script>
+
 <section class="team">
   <h2 set:html={title} class="team-title" />
 
@@ -43,6 +56,30 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     }
   </div>
 
+  <astro-swiper>
+    <swiper-container speed="500" loop="true" space-between="16">
+      {
+        cards.map((card: Card) => (
+          <swiper-slide>
+            <div class="team-card">
+              {card.imagePath && (
+                <div class="team-card-cover">
+                  <Picture
+                    src={images[card.imagePath]()}
+                    formats={["jpeg", "webp"]}
+                    alt={card.name}
+                  />
+                </div>
+              )}
+      
+              {card.name && <div class="team-card-name">{card.name}</div>}
+              {card.position && <div class="team-card-position">{card.position}</div>}
+            </div>
+          </swiper-slide>
+        ))
+      }
+    </swiper-container>
+  </astro-swiper>
 </section>
 
 <style>
@@ -50,10 +87,11 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 48px 16px;
+    padding: 48px 0;
   }
 
   .team-title {
+    padding: 0 16px;
     font-size: 40px;
     font-weight: 500;
     line-height: 48px;
@@ -61,15 +99,38 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     text-transform: uppercase;
   }
 
+  .team-cards {
+    display: none;
+  }
+
   .team-card {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.48px;
     text-transform: uppercase;
+    width: 100%;
+    padding-bottom: 16px;
+  }
+
+  .team-card-cover img {
+    width: 100%;
+    height: 280px;
+    margin-bottom: 8px;
+    object-fit: cover;
+    vertical-align: top;
   }
 
   .team-card-position {
     color: rgba(22, 22, 25, 0.50);
+  }
+
+  astro-swiper {
+    display: block;
+    margin-left: 16px;
+  }
+
+  swiper-slide {
+    width: calc(100% - 32px)!important;
   }
 
   @media screen and (min-width: 1024px) {
@@ -79,6 +140,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     }
 
     .team-title {
+      padding: 0;
       font-size: 96px;
       line-height: 104px;
       letter-spacing: -7.68px;
@@ -93,6 +155,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
     .team-card {
       flex: 1 1 calc((100% / 4) - 16px);
+      padding-bottom: 0;
     }
 
     .team-card:first-child {
@@ -102,8 +165,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     .team-card-cover img {
       width: 100%;
       height: 480px;
-      object-fit: cover;
-      vertical-align: top;
+    }
+
+    astro-swiper {
+      display: none;
     }
   }
 </style>
