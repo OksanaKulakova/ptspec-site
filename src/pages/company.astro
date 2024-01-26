@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import SimpleList from "@components/SimpleList.astro";
+import TeamCards from "@components/TeamCards.astro";
 
 type cardWidget = {
   title: string;
@@ -46,6 +47,50 @@ const list: ListItem[] = [
     text: "Наша компания имеет лицензию министерства культуры и СРО на проектирование, изыскание, строительные работы. Также наличие собственного автопарка, геодезического оборудования и оргтехники позволяет качественно оказывать услуги.",
   },
 ];
+
+type cardsForTeam = {
+  name: string;
+  position: string;
+  imagePath: string;
+};
+
+const team: cardsForTeam[] = [
+  {
+    name: "Михаил Харасов",
+    position: "Директор",
+    imagePath: "/src/assets/team/1.jpg",
+  },
+  {
+    name: "Антон Погудин",
+    position: "Заместитель директора",
+    imagePath: "/src/assets/team/2.jpg",
+  },
+  {
+    name: "Дмитрий Захаров",
+    position: "Начальник отдела контроля качества",
+    imagePath: "/src/assets/team/3.jpg",
+  },
+  {
+    name: "Михаил Харасов",
+    position: "Директор",
+    imagePath: "/src/assets/team/4.jpg",
+  },
+  {
+    name: "Михаил Харасов",
+    position: "Директор",
+    imagePath: "/src/assets/team/5.jpg",
+  },
+  {
+    name: "Михаил Харасов",
+    position: "Директор",
+    imagePath: "/src/assets/team/6.jpg",
+  },
+  {
+    name: "Михаил Харасов",
+    position: "Директор",
+    imagePath: "/src/assets/team/7.jpg",
+  },
+];
 ---
 
 <Layout title="КОМПАНИЯ">
@@ -63,4 +108,6 @@ const list: ListItem[] = [
     <h2 class="title">преимущества <br /> нашей компании</h2>
     <SimpleList list={list} />
   </section>
+
+  <TeamCards title="Команда <br> профессионалов" cards={team} />
 </Layout>

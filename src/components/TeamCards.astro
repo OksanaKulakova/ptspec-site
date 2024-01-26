@@ -1,5 +1,6 @@
 ---
 interface Props {
+  title: string;
   cards: Array<Card>;
 }
 
@@ -9,7 +10,7 @@ interface Card {
   imagePath: string;
 }
 
-const { cards } = Astro.props;
+const { title, cards } = Astro.props;
 
 import type { ImageMetadata } from "astro";
 import { Picture } from "astro:assets";
@@ -18,21 +19,91 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
-<section class="team-cards">
-  {
-    cards.map((card: Card) => (
-      <div class="team-card">
-        {card.imagePath && (
-          <Picture
-            src={images[card.imagePath]()}
-            formats={["jpeg", "webp"]}
-            alt={card.name}
-          />
-        )}
+<section class="team">
+  <h2 set:html={title} class="team-title" />
 
-        {card.name && <div class="team-card-name">{card.name}</div>}
-        {card.position && <div class="team-card-position">{card.position}</div>}
-      </div>
-    ))
-  }
+  <div class="team-cards">
+    {
+      cards.map((card: Card) => (
+        <div class="team-card">
+          {card.imagePath && (
+            <div class="team-card-cover">
+              <Picture
+                src={images[card.imagePath]()}
+                formats={["jpeg", "webp"]}
+                alt={card.name}
+              />
+            </div>
+          )}
+  
+          {card.name && <div class="team-card-name">{card.name}</div>}
+          {card.position && <div class="team-card-position">{card.position}</div>}
+        </div>
+      ))
+    }
+  </div>
+
 </section>
+
+<style>
+  .team {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 48px 16px;
+  }
+
+  .team-title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: -2.4px;
+    text-transform: uppercase;
+  }
+
+  .team-card {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    text-transform: uppercase;
+  }
+
+  .team-card-position {
+    color: rgba(22, 22, 25, 0.50);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .team {
+      gap: 32px;
+      padding: 96px 32px;
+    }
+
+    .team-title {
+      font-size: 96px;
+      line-height: 104px;
+      letter-spacing: -7.68px;
+    }
+
+    .team-cards {
+      display: flex;
+      gap: 32px 16px;
+      flex-flow: row wrap;
+      align-items: flex-start;
+    }
+
+    .team-card {
+      flex: 1 1 calc((100% / 4) - 16px);
+    }
+
+    .team-card:first-child {
+      flex: 1 1 calc((100% / 2) - 16px);
+    }
+
+    .team-card-cover img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      vertical-align: top;
+    }
+  }
+</style>
