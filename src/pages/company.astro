@@ -5,6 +5,7 @@ import SimpleList from "@components/SimpleList.astro";
 import Team from "@components/Team.astro";
 import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
 import CardsWithMobileSlider from "@components/CardsWithMobileSlider.astro";
+import Documents from "@components/blocks/Documents.astro";
 
 type cardWidget = {
   title: string;
@@ -144,4 +145,6 @@ const cardsWMS: cardWMS[] = [
     title="социальная <br> ответственность"
     cards={cardsWMS}
   />
+
+  <Documents />
 </Layout>

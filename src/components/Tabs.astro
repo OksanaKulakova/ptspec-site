@@ -9,68 +9,78 @@ const { title, tab1, tab2 } = Astro.props;
 ---
 
 <script>
-  const tab: NodeListOf<Element> = document.querySelectorAll(".header-tab");
-  const tabContent: NodeListOf<Element> =
-    document.querySelectorAll(".tabcontent");
+  class AstroTab extends HTMLElement {
+    constructor() {
+      super();
 
-  function hideTabContent(a: number): void {
-    for (let i: number = a; i < tabContent.length; i++) {
-      tabContent[i].classList.remove("show");
-      tabContent[i].classList.add("hide");
-    }
-  }
+      const tab: NodeListOf<Element> = this.querySelectorAll(".header-tab");
+      const tabContent: NodeListOf<Element> =
+        this.querySelectorAll(".tabcontent");
 
-  function showTabContent(b: number): void {
-    if (tabContent[b].classList.contains("hide")) {
-      tabContent[b].classList.remove("hide");
-      tabContent[b].classList.add("show");
-    }
-  }
-
-  function toggleTab(b: number): void {
-    for (let i: number = 0; i < tab.length; i++) {
-      if (i === b) {
-        tab[i].classList.add("header-tab--active");
-      } else {
-        tab[i].classList.remove("header-tab--active");
-      }
-    }
-  }
-
-  toggleTab(0);
-  hideTabContent(1);
-
-  document.querySelector(".tab").addEventListener("click", (event: Event) => {
-    let target: Element = event.target as Element;
-
-    if (target && target.classList.contains("header-tab")) {
-      for (let i: number = 0; i < tab.length; i++) {
-        if (target == tab[i]) {
-          hideTabContent(0);
-          showTabContent(i);
-          toggleTab(i);
-          break;
+      function hideTabContent(a: number): void {
+        for (let i: number = a; i < tabContent.length; i++) {
+          tabContent[i].classList.remove("show");
+          tabContent[i].classList.add("hide");
         }
       }
+
+      function showTabContent(b: number): void {
+        if (tabContent[b].classList.contains("hide")) {
+          tabContent[b].classList.remove("hide");
+          tabContent[b].classList.add("show");
+        }
+      }
+
+      function toggleTab(b: number): void {
+        for (let i: number = 0; i < tab.length; i++) {
+          if (i === b) {
+            tab[i].classList.add("header-tab--active");
+          } else {
+            tab[i].classList.remove("header-tab--active");
+          }
+        }
+      }
+
+      toggleTab(0);
+      hideTabContent(1);
+
+      this.querySelector(".tab").addEventListener("click", (event: Event) => {
+        let target: Element = event.target as Element;
+
+        if (target && target.classList.contains("header-tab")) {
+          for (let i: number = 0; i < tab.length; i++) {
+            if (target == tab[i]) {
+              hideTabContent(0);
+              showTabContent(i);
+              toggleTab(i);
+              break;
+            }
+          }
+        }
+      });
     }
-  });
+  }
+
+  customElements.define("astro-tab", AstroTab);
 </script>
 
 <section class="section">
   <h2 set:html={title} class="title" />
 
-  <div class="tab">
-    <div class="header">
-      <div class="header-tab">{tab1}</div>
-      <div class="header-tab">{tab2}</div>
+  <astro-tab>
+    <div class="tab">
+      <div class="header">
+        <div class="header-tab">{tab1}</div>
+        <div class="header-tab">{tab2}</div>
+      </div>
+      <div class="tabcontent">
+        <slot name="tabcontent-1" />
+      </div>
+      <div class="tabcontent">
+        <slot name="tabcontent-2" />
+      </div>
     </div>
-    <div class="tabcontent">
-      <slot name="tabcontent-1" />
-    </div>
-    <div class="tabcontent">
-      <slot name="tabcontent-2" />
-    </div>
-  </div>
+  </astro-tab>
 </section>
 
 <style>
