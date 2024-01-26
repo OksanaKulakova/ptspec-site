@@ -3,10 +3,8 @@ import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import List from "@components/List.astro";
 import Cards from "@components/Cards.astro";
-import Tabs from "@components/Tabs.astro";
 import services from "@data/services.json";
-import customers from "@data/customers.json";
-import gratitudes from "@data/gratitudes.json";
+import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
 
 type cardWidget = {
   title: string;
@@ -75,15 +73,6 @@ const cards2: card[] = [
     href: "/career/",
   },
 ];
-
-type ListItem = {
-  title: string;
-  href?: string;
-};
-
-const tab1: ListItem[] = customers;
-
-const tab2: ListItem[] = gratitudes;
 ---
 
 <Layout title="ГЛАВНАЯ">
@@ -104,14 +93,7 @@ const tab2: ListItem[] = gratitudes;
 
   <Cards cards={cards1} />
 
-  <Tabs
-    title="Заказчики <br> и благодарности"
-    tab1="Заказчики"
-    tab2="Благодарности"
-  >
-    <Fragment slot="tabcontent-1"><List list={tab1} /></Fragment>
-    <Fragment slot="tabcontent-2"><List list={tab2} /></Fragment>
-  </Tabs>
+  <CustomersAndGratitude />
 
   <Cards cards={cards2} />
 </Layout>

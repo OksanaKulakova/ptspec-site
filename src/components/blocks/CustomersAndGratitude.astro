@@ -1,0 +1,24 @@
+---
+import Tabs from "@components/Tabs.astro";
+import List from "@components/List.astro";
+import customers from "@data/customers.json";
+import gratitudes from "@data/gratitudes.json";
+
+type TabListItem = {
+  title: string;
+  href?: string;
+};
+
+const tab1: TabListItem[] = customers;
+
+const tab2: TabListItem[] = gratitudes;
+---
+
+<Tabs
+  title="Заказчики <br> и благодарности"
+  tab1="Заказчики"
+  tab2="Благодарности"
+>
+  <Fragment slot="tabcontent-1"><List list={tab1} /></Fragment>
+  <Fragment slot="tabcontent-2"><List list={tab2} /></Fragment>
+</Tabs>

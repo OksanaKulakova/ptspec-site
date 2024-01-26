@@ -2,7 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import SimpleList from "@components/SimpleList.astro";
-import TeamCards from "@components/TeamCards.astro";
+import Team from "@components/Team.astro";
+import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
 
 type cardWidget = {
   title: string;
@@ -109,5 +110,7 @@ const team: cardsForTeam[] = [
     <SimpleList list={list} />
   </section>
 
-  <TeamCards title="Команда <br> профессионалов" cards={team} />
+  <Team title="Команда <br> профессионалов" cards={team} />
+
+  <CustomersAndGratitude />
 </Layout>

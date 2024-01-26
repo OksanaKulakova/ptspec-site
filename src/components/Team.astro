@@ -20,7 +20,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 ---
 
 <script>
-  import { register } from 'swiper/element/bundle';
+  import { register } from "swiper/element/bundle";
   register();
 
   class AstroSwiper extends HTMLElement {
@@ -48,16 +48,23 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
               />
             </div>
           )}
-  
+
           {card.name && <div class="team-card-name">{card.name}</div>}
-          {card.position && <div class="team-card-position">{card.position}</div>}
+          {card.position && (
+            <div class="team-card-position">{card.position}</div>
+          )}
         </div>
       ))
     }
   </div>
 
   <astro-swiper>
-    <swiper-container speed="500" loop="true" space-between="16" slides-per-view="1.1">
+    <swiper-container
+      speed="500"
+      loop="true"
+      space-between="16"
+      slides-per-view="1.1"
+    >
       {
         cards.map((card: Card) => (
           <swiper-slide>
@@ -71,9 +78,11 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
                   />
                 </div>
               )}
-      
+
               {card.name && <div class="team-card-name">{card.name}</div>}
-              {card.position && <div class="team-card-position">{card.position}</div>}
+              {card.position && (
+                <div class="team-card-position">{card.position}</div>
+              )}
             </div>
           </swiper-slide>
         ))
@@ -121,7 +130,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   }
 
   .team-card-position {
-    color: rgba(22, 22, 25, 0.50);
+    color: rgba(22, 22, 25, 0.5);
   }
 
   astro-swiper {
