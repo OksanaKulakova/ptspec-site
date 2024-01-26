@@ -57,7 +57,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   </div>
 
   <astro-swiper>
-    <swiper-container speed="500" loop="true" space-between="16">
+    <swiper-container speed="500" loop="true" space-between="16" slides-per-view="1.1">
       {
         cards.map((card: Card) => (
           <swiper-slide>
@@ -129,9 +129,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     margin-left: 16px;
   }
 
-  swiper-slide {
+  /* swiper-container {
+    width: calc(100% - 32px);
+  } */
+
+  /* swiper-slide {
     width: calc(100% - 32px)!important;
-  }
+  } */
 
   @media screen and (min-width: 1024px) {
     .team {
