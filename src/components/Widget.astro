@@ -2,8 +2,8 @@
 interface Props {
   title: string;
   subtitle: string;
-  imagePath: string;
-  altText: string;
+  imagePath?: string;
+  altText?: string;
   link: string;
   href: string;
   cards?: Array<Card>;
@@ -22,7 +22,7 @@ import { Picture } from "astro:assets";
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/*.{jpeg,jpg,png,gif}",
 );
-if (!images[imagePath])
+if (imagePath && !images[imagePath])
   throw new Error(
     `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`,
   );
@@ -41,11 +41,15 @@ if (!images[imagePath])
   </div>
 
   <div class="widget-cover">
-    <Picture
-      src={images[imagePath]()}
-      formats={["jpeg", "webp"]}
-      alt={altText}
-    />
+    {imagePath &&
+      <Picture
+        src={images[imagePath]()}
+        formats={["jpeg", "webp"]}
+        alt={altText}
+      />
+    }
+
+    <slot />
   </div>
 
   <div class="widget-cards">
@@ -152,9 +156,13 @@ if (!images[imagePath])
     text-transform: uppercase;
   }
 
+  .widget-cover {
+    height: 480px;
+  }
+
   .widget-cover img {
     width: 100%;
-    height: 480px;
+    height: 100%;
     object-fit: cover;
     vertical-align: top;
   }
@@ -256,6 +264,10 @@ if (!images[imagePath])
       font-size: 64px;
       line-height: 72px;
       letter-spacing: -4.48px;
+    }
+
+    .widget-cover {
+      height: 960px;
     }
 
     .widget-cover img {
