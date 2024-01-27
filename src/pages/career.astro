@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import Vacancies from "@components/blocks/Vacancies.astro";
 import Team from "@components/Team.astro";
+import SimpleList from "@components/SimpleList.astro";
 
 type cardWidget = {
   title: string;
@@ -57,6 +58,30 @@ const team: cardForTeam[] = [
     imagePath: "/src/assets/team/random3.jpg",
   },
 ];
+
+type ListItem = {
+  title: string;
+  text: string;
+};
+
+const list: ListItem[] = [
+  {
+    title: "Профессионально развиваем <br> специалистов",
+    text: "Предлагаем различные программы обучения, как внутри компании, так и за ее пределами. Наши специалисты регулярно проходят курсы повышения квалификации, улучшая свои навыки и знания в сфере строительства.",
+  },
+  {
+    title: "Предоставляем возможности <br> для карьерного роста",
+    text: "Более 50 сотрудников нашей компании заняли должности начальников ПТО и руководителей отделов ПТО в Российских и международных строительных компаниях.",
+  },
+  {
+    title: "Привлекаем к сотрудничеству <br> выпускников ВУЗов",
+    text: "Предоставляем выпускникам ВУЗов возможность применить свои знания на практике и расти профессионально. Гарантируем достойную заработную плату, комфортные условия работы и карьерный рост.",
+  },
+  {
+    title: "вносим вклад в социальное <br> благополучие",
+    text: "Активно участвуем в благотворительных проектах, помогая детям-сиротам, малоимущим семьям и ветеранам. Мы считаем, что помощь тем, кто в ней нуждается, является неотъемлемой частью нашей социальной ответственности.",
+  },
+];
 ---
 
 <Layout title="КАРЬЕРА">
@@ -73,4 +98,9 @@ const team: cardForTeam[] = [
   <Vacancies />
 
   <Team title="Команда <br> отдела кадров" cards={team} />
+
+  <section class="section">
+    <h2 class="title">наши Ценности</h2>
+    <SimpleList list={list} />
+  </section>
 </Layout>
