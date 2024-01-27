@@ -13,13 +13,12 @@ interface Card {
 const { title, cards } = Astro.props;
 
 import TeamCard from "@components/TeamCard.astro";
-
 ---
 
 <script>
   import { register } from "swiper/element/bundle";
   register();
-  
+
   class AstroSwiper extends HTMLElement {
     constructor() {
       super();

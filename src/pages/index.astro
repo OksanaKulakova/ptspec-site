@@ -31,15 +31,19 @@ const list = services.map((item) => ({
   href: `/services/${item.slug}/`,
 }));
 
+type linkItem = {
+  link?: string;
+  href?: string;
+  classLink?: string;
+};
+
 type card = {
   classList?: string;
   title?: string;
   caption?: string;
-  link?: string;
-  href?: string;
-  classLink?: string;
   imagePath?: string;
   altText?: string;
+  links?: Array<linkItem>;
 };
 
 const cards1: card[] = [
@@ -47,15 +51,23 @@ const cards1: card[] = [
     classList: "card--white",
     title: "Проекты",
     caption: "гордимся каждым <br> проектом",
-    link: "Смотреть проекты",
-    href: "/projects/",
+    links: [
+      {
+        link: "Смотреть проекты",
+        href: "/projects/",
+      },
+    ],
   },
   {
     classList: "card--black",
     title: "заявка",
     caption: "Поможем с выбором <br> услуги",
-    link: "оставить заявку",
-    classLink: "show-modal",
+    links: [
+      {
+        link: "оставить заявку",
+        classLink: "show-modal",
+      },
+    ],
   },
 ];
 
@@ -69,8 +81,12 @@ const cards2: card[] = [
     classList: "card--white",
     title: "карьера",
     caption: "Активно развиваемся <br> и ищем таланты",
-    link: "Карьера в компании",
-    href: "/career/",
+    links: [
+      {
+        link: "Карьера в компании",
+        href: "/career/",
+      },
+    ],
   },
 ];
 ---

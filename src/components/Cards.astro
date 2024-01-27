@@ -3,15 +3,19 @@ interface Props {
   cards: Array<Card>;
 }
 
+type linkItem = {
+  link?: string;
+  href?: string;
+  classLink?: string;
+};
+
 interface Card {
   classList?: string;
   title?: string;
   caption?: string;
-  link?: string;
-  href?: string;
-  classLink?: string;
   imagePath?: string;
   altText?: string;
+  links?: Array<linkItem>;
 }
 
 const { cards } = Astro.props;
@@ -32,16 +36,22 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
             <div set:html={card.caption} class="card-caption" />
           </div>
         )}
+
         {card.title && <h2 class="card-title title">{card.title}</h2>}
-        {(card.href || card.classLink) && (
+
+        {card.links && (
           <div class="card-block">
-            <a
-              class="card-link link"
-              class:list={[card.classLink]}
-              href={card.href}
-            >
-              {card.link}
-            </a>
+            {card.links.map((item: linkItem) => (
+              <a
+                class="card-link link"
+                class:list={[item.classLink]}
+                href={item.href}
+              >
+                {item.link}
+              </a>
+
+              <div class="card-link-sign">/</div>
+            ))}
           </div>
         )}
 
@@ -157,6 +167,18 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     height: 320px;
     object-fit: cover;
     vertical-align: top;
+  }
+
+  .card-link-sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    padding: 0 8px;
+  }
+
+  .card-link-sign:last-child {
+    display: none;
   }
 
   @media screen and (min-width: 1024px) {

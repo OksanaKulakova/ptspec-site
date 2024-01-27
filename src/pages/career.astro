@@ -4,6 +4,7 @@ import Widget from "@components/Widget.astro";
 import Vacancies from "@components/blocks/Vacancies.astro";
 import Team from "@components/Team.astro";
 import SimpleList from "@components/SimpleList.astro";
+import Cards from "@components/Cards.astro";
 
 type cardWidget = {
   title: string;
@@ -82,6 +83,58 @@ const list: ListItem[] = [
     text: "Активно участвуем в благотворительных проектах, помогая детям-сиротам, малоимущим семьям и ветеранам. Мы считаем, что помощь тем, кто в ней нуждается, является неотъемлемой частью нашей социальной ответственности.",
   },
 ];
+
+type linkItem = {
+  link?: string;
+  href?: string;
+  classLink?: string;
+};
+
+type card = {
+  classList?: string;
+  title?: string;
+  caption?: string;
+  imagePath?: string;
+  altText?: string;
+  links?: Array<linkItem>;
+};
+
+const cards1: card[] = [
+  {
+    classList: "card--white",
+    title: "SuperJob",
+    caption: "Привлекательный работодатель <br> по версии портала SuperJob",
+    links: [
+      {
+        link: "2019",
+        href: "#",
+      },
+      {
+        link: "2020",
+        href: "#",
+      },
+      {
+        link: "2021",
+        href: "#",
+      },
+      {
+        link: "2022",
+        href: "#",
+      },
+    ],
+  },
+  {
+    classList: "card--black",
+    title: "59.ru",
+    caption: "топ–10 лучших работодателей <br> по версии портала 59.ru",
+    links: [
+      {
+        link: "2023",
+        href: "#",
+      },
+    ],
+  },
+];
 ---
 
 <Layout title="КАРЬЕРА">
@@ -103,4 +156,6 @@ const list: ListItem[] = [
     <h2 class="title">наши Ценности</h2>
     <SimpleList list={list} />
   </section>
+
+  <Cards cards={cards1} />
 </Layout>
