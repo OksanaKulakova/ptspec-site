@@ -1,0 +1,107 @@
+---
+import List from "@components/List.astro";
+import vacancies from "@data/vacancies.json";
+
+const list = vacancies.map((item) => ({
+  ...item,
+  href: `/vacancies/${item.slug}/`,
+}));
+---
+
+<section class="vacancies">
+  <h2 class="title">сейчас в поиске</h2>
+
+  <List list={list} />
+  
+  <div class="promt">
+    <div class="promt-block">
+      <div class="promt-text">
+        <div class="text">
+          <p>
+            Если интересующая вакансия отсутствует,вы можете заполнить анкету и
+            попасть в нашу базу специалистов.
+          </p>
+          <p>Мы свяжемся с вами, когда появятся подходящие вакансии.</p>
+        </div>
+        <a class="link" href="">Заполнить анкету</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vacancies {
+    padding: 48px 16px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .section:last-child {
+    margin-bottom: 0;
+  }
+
+  .promt {
+    position: relative;
+    padding-top: 16px;
+  }
+
+  .promt::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  .promt-text p {
+    font-family: "Roboto Mono";
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.7px;
+    text-transform: none;
+  }
+
+  .promt-text .text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .promt-text .link {
+    padding-bottom: 0;
+    height: 40px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .vacancies {
+      padding: 96px 32px;
+    }
+
+    .title {
+      margin-bottom: 32px;
+    }
+
+    .promt {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .promt-block {
+      width: calc(50% - 8px);
+    }
+
+    .promt-text {
+      width: 50%;
+    }
+
+    .promt-text p {
+      font-family: "Roboto Mono";
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.8px;
+    }
+  }
+</style>

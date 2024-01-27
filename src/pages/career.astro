@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
+import Vacancies from "@components/blocks/Vacancies.astro";
 
 type cardWidget = {
   title: string;
@@ -33,4 +34,6 @@ const cardsForWidget: cardWidget[] = [
     href="/"
     cards={cardsForWidget}
   />
+
+  <Vacancies />
 </Layout>
