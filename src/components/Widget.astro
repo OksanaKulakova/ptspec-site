@@ -41,12 +41,14 @@ if (imagePath && !images[imagePath])
   </div>
 
   <div class="widget-cover">
-    {imagePath &&
-      <Picture
-        src={images[imagePath]()}
-        formats={["jpeg", "webp"]}
-        alt={altText}
-      />
+    {
+      imagePath && (
+        <Picture
+          src={images[imagePath]()}
+          formats={["jpeg", "webp"]}
+          alt={altText}
+        />
+      )
     }
 
     <slot />
