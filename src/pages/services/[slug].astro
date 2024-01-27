@@ -1,5 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import List from "@components/List.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
 import pages from "@data/services.json";
 
 export async function getStaticPaths() {
@@ -12,11 +14,40 @@ export async function getStaticPaths() {
 }
 
 const { title, slug } = Astro.props;
+
+const otherServices = pages.filter((page) => page.slug !== slug);
+
+type Crumb = {
+  title: string;
+  href?: string;
+};
+
+const breadcrumbs: Crumb[] = [
+  {
+    title: "Главная",
+    href: "/",
+  },
+  {
+    title: "Услуги",
+    href: "/services/",
+  },
+  {
+    title: title,
+  },
+];
 ---
 
 <Layout title={title}>
   <section class="section">
     <h2 class="title">{title}</h2>
-    <div>{slug}</div>
+    <div class="page">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <div class="page-content"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="title">Другие услуги</h2>
+    <List list={otherServices} />
   </section>
 </Layout>
