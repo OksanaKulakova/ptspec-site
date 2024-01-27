@@ -5,6 +5,7 @@ import Vacancies from "@components/blocks/Vacancies.astro";
 import Team from "@components/Team.astro";
 import SimpleList from "@components/SimpleList.astro";
 import Cards from "@components/Cards.astro";
+import vacancies from "@data/vacancies.json";
 
 type cardWidget = {
   title: string;
@@ -148,7 +149,7 @@ const cards1: card[] = [
     cards={cardsForWidget}
   />
 
-  <Vacancies />
+  <Vacancies title="сейчас в поиске" data={vacancies} />
 
   <Team title="Команда <br> отдела кадров" cards={team} />
 

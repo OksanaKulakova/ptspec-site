@@ -1,5 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Vacancies from "@components/blocks/Vacancies.astro";
 import pages from "@data/vacancies.json";
 
 export async function getStaticPaths() {
@@ -12,11 +14,37 @@ export async function getStaticPaths() {
 }
 
 const { title, slug } = Astro.props;
+
+const otherServices = pages.filter((page) => page.slug !== slug);
+
+type Crumb = {
+  title: string;
+  href?: string;
+};
+
+const breadcrumbs: Crumb[] = [
+  {
+    title: "Главная",
+    href: "/",
+  },
+  {
+    title: "Карьера",
+    href: "/career/",
+  },
+  {
+    title: title,
+  },
+];
 ---
 
 <Layout title={title}>
   <section class="section">
     <h2 class="title">{title}</h2>
-    <div>{slug}</div>
+    <div class="page">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <div class="page-content"></div>
+    </div>
   </section>
+
+  <Vacancies title="другие вакансии" data={otherServices} />
 </Layout>

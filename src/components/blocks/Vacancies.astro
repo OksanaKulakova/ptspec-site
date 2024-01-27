@@ -1,15 +1,26 @@
 ---
-import List from "@components/List.astro";
-import vacancies from "@data/vacancies.json";
+interface Props {
+  title: string;
+  data: Array<ListItem>
+}
 
-const list = vacancies.map((item) => ({
+type ListItem = {
+  title: string;
+  slug: string;
+};
+
+import List from "@components/List.astro";
+
+const { title, data } = Astro.props;
+
+const list = data.map((item) => ({
   ...item,
   href: `/vacancies/${item.slug}/`,
 }));
 ---
 
 <section class="vacancies">
-  <h2 class="title">сейчас в поиске</h2>
+  <h2 class="title">{ title }</h2>
 
   <List list={list} />
 
