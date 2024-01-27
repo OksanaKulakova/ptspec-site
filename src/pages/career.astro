@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import Vacancies from "@components/blocks/Vacancies.astro";
+import Team from "@components/Team.astro";
 
 type cardWidget = {
   title: string;
@@ -22,6 +23,40 @@ const cardsForWidget: cardWidget[] = [
     text: "Более 75 <br> сотрудников продолжили <br> карьеру в крупных компаниях",
   },
 ];
+
+type cardForTeam = {
+  name: string;
+  position: string;
+  imagePath: string;
+};
+
+const team: cardForTeam[] = [
+  {
+    name: "Светлана Пермякова",
+    position: "Решаю трудовые вопросы",
+    imagePath: "/src/assets/team/random.jpg",
+  },
+  {
+    name: "Рамиль Яруллин",
+    position: "Составляю маршрут до проекта",
+    imagePath: "/src/assets/team/random2.jpg",
+  },
+  {
+    name: "Татьяна Спиридонова",
+    position: "Подбираю подходящие проекты",
+    imagePath: "/src/assets/team/random3.jpg",
+  },
+  {
+    name: "Светлана Власова",
+    position: "Помогаю при трудоустройстве",
+    imagePath: "/src/assets/team/random.jpg",
+  },
+  {
+    name: "Наталья Боталова",
+    position: "Направляю в пути до проекта",
+    imagePath: "/src/assets/team/random3.jpg",
+  },
+];
 ---
 
 <Layout title="КАРЬЕРА">
@@ -36,4 +71,6 @@ const cardsForWidget: cardWidget[] = [
   />
 
   <Vacancies />
+
+  <Team title="Команда <br> отдела кадров" cards={team} />
 </Layout>
