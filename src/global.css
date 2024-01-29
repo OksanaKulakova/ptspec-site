@@ -219,9 +219,9 @@ input:focus {
   outline: none;
 }
 
-input:invalid {
+/* input:invalid {
   border-color: #fe5639;
-}
+} */
 
 @media screen and (min-width: 1024px) {
   .section {

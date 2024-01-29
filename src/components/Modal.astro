@@ -29,12 +29,14 @@
 </script>
 
 <div class="modal">
-  <div class="modal-header">
-    <a class="link hide-modal">Закрыть</a>
-  </div>
-  <div class="modal-body">
-    <div class="modal-title"><slot name="title" /></div>
-    <div class="modal-content"><slot name="content" /></div>
+  <div class="modal-container">
+    <div class="modal-header">
+      <a class="link hide-modal">Закрыть</a>
+    </div>
+    <div class="modal-body">
+      <div class="modal-title"><slot name="title" /></div>
+      <div class="modal-content"><slot name="content" /></div>
+    </div>
   </div>
 </div>
 
@@ -81,13 +83,19 @@
     }
   }
 
+  .modal-container {
+    position: relative;
+  }
+
   .modal-header {
     position: sticky;
     top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #faf8f8;
+    width: 100%;
     padding: 0px 32px;
   }
 
@@ -98,8 +106,6 @@
     gap: 16px;
     padding: 48px 16px;
     background-color: #faf8f8;
-    height: calc(100vh - 56px);
-    overflow-y: auto;
   }
 
   .modal-title {
@@ -114,7 +120,7 @@
     width: 100%;
   }
 
-  @media screen and (width >= 1024px) {
+  @media screen and (min-width: 1024px) {
     .modal-body {
       gap: 64px;
       padding: 96px 32px;
