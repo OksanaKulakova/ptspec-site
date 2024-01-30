@@ -5,11 +5,6 @@ import projects from "@data/projects.json";
 import gratitudes from "@data/gratitudes.json";
 import ProjectList from "@components/blocks/Projects.astro";
 
-const list = projects.map((item) => ({
-  ...item,
-  href: `/projects/${item.slug}/`,
-}));
-
 const count = projects.length;
 ---
 
