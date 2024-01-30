@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  data: Array<ListItem>
+  data: Array<ListItem>;
 }
 
 type ListItem = {
@@ -20,7 +20,7 @@ const list = data.map((item) => ({
 ---
 
 <section class="vacancies">
-  <h2 class="title">{ title }</h2>
+  <h2 class="title">{title}</h2>
 
   <List list={list} />
 

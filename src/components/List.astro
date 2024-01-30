@@ -6,7 +6,6 @@ interface Props {
 interface List {
   title: string;
   href?: string;
-  slug?: string;
 }
 
 const { list } = Astro.props;
@@ -63,26 +62,30 @@ const { list } = Astro.props;
   <div class="list">
     {
       list.map((item: List) => (
-        <a href={item.href} class="list-item">
+        <a href={item.href} class="list-item" class:list={[{ "list-item-clickable": item.href }]}>
           <div class="list-item-content">
             <div class="list-item-name">{item.title}</div>
           </div>
-          <div class="list-item-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-            >
-              <path
-                d="M6 6L26 26M26 26L26 6M26 26L6 26"
-                stroke="#161619"
-                stroke-width="2"
-                stroke-linecap="square"
-              />
-            </svg>
-          </div>
+          {
+            item.href && (
+              <div class="list-item-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                >
+                  <path
+                    d="M6 6L26 26M26 26L26 6M26 26L6 26"
+                    stroke="#161619"
+                    stroke-width="2"
+                    stroke-linecap="square"
+                  />
+                </svg>
+              </div>
+            )
+          }
         </a>
       ))
     }
@@ -153,12 +156,12 @@ const { list } = Astro.props;
     padding: 0;
   }
 
-  .list-item:hover {
+  .list-item-clickable:hover {
     background-color: #fe5639;
     color: #faf8f8;
   }
 
-  .list-item:hover::before {
+  .list-item-clickable:hover::before {
     left: -16px;
     width: calc(100% + 32px);
     height: calc(100% + 1px);
@@ -166,7 +169,7 @@ const { list } = Astro.props;
     z-index: -1;
   }
 
-  .list-item:hover::after {
+  .list-item-clickable:hover::after {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -235,7 +238,7 @@ const { list } = Astro.props;
       rotate: none;
     }
 
-    .list-item:hover::before {
+    .list-item-clickable:hover::before {
       left: -32px;
       width: calc(100% + 64px);
     }
