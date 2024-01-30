@@ -1,0 +1,15 @@
+---
+import List from "@components/List.astro";
+import Filter from "@components/Filter.astro";
+import projects from "@data/projects.json";
+
+const list = projects.map((item) => ({
+  ...item,
+  href: `/projects/${item.slug}/`,
+}));
+---
+
+<div>
+  <Filter />
+  <List list={list} />
+</div>

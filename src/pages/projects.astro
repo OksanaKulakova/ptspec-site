@@ -4,6 +4,7 @@ import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
 import projects from "@data/projects.json";
 import gratitudes from "@data/gratitudes.json";
+import ProjectList from "@components/blocks/Projects.astro";
 
 const list = projects.map((item) => ({
   ...item,
@@ -16,8 +17,7 @@ const count = projects.length;
 <Layout title="ПРОЕКТЫ">
   <section class="section">
     <h2 class="title">ПРОЕКТЫ / {count}</h2>
-    <Filter />
-    <List list={list} />
+    <ProjectList />
   </section>
 
   <section class="section">

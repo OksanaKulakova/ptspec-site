@@ -20,10 +20,10 @@ const { breadcrumbs } = Astro.props;
     const thr: number = chr.getBoundingClientRect().top;
 
     if (thr <= 56) {
-      (container as HTMLElement).style.position = "fixed";
+      container.classList.add("crumbs-container--fixed");
       (chr as HTMLElement).style.marginBottom = "56px";
     } else {
-      (container as HTMLElement).style.position = "static";
+      container.classList.remove("crumbs-container--fixed");
       (chr as HTMLElement).style.marginBottom = "0";
     }
   });
@@ -57,10 +57,14 @@ const { breadcrumbs } = Astro.props;
   }
 
   .crumbs-container {
-    top: 56px;
-    width: calc(100vw - 64px);
     height: 56px;
     background-color: #faf8f8;
+  }
+
+  .crumbs-container--fixed {
+    position: fixed;
+    top: 56px;
+    width: calc(100% - 64px);
     z-index: 10;
   }
 

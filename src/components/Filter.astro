@@ -7,10 +7,10 @@
     const thr: number = chr.getBoundingClientRect().top;
 
     if (thr <= 56) {
-      (container as HTMLElement).style.position = "fixed";
+      container.classList.add("filter-container--fixed");
       (chr as HTMLElement).style.marginBottom = "56px";
     } else {
-      (container as HTMLElement).style.position = "static";
+      container.classList.remove("filter-container--fixed");
       (chr as HTMLElement).style.marginBottom = "0";
     }
   });
@@ -37,10 +37,14 @@
 
 <style>
   .filter-container {
-    top: 56px;
-    width: calc(100vw - 32px);
     height: 56px;
     background-color: #faf8f8;
+  }
+
+  .filter-container--fixed {
+    position: fixed;
+    width: calc(100% - 32px);
+    top: 56px;
     z-index: 10;
   }
 
@@ -113,8 +117,8 @@
   }
 
   @media screen and (min-width: 1024px) {
-    .filter-container {
-      width: calc(100vw - 64px);
+    .filter-container--fixed {
+      width: calc(100% - 64px);
     }
 
     .filter {
