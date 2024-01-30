@@ -15,7 +15,12 @@ export async function getStaticPaths() {
 
 const { title, slug } = Astro.props;
 
-const otherServices = pages.filter((page) => page.slug !== slug);
+const otherServices = pages
+  .filter((page) => page.slug !== slug)
+  .map((item) => ({
+    ...item,
+    href: `/services/${item.slug}/`,
+  }));
 
 type Crumb = {
   title: string;

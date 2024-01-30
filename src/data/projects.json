@@ -1,82 +1,104 @@
 [
   {
-    "title": "Горно–металлургический Комбинат «Удокан»",
-    "slug": "technical-customer"
+    "id": "1",
+    "title": "Амурский ГПЗ",
+    "slug": "amur-gpz",
+    "categories": "[1, 2]"
   },
   {
-    "title": "Амурский газохимический комплекс",
-    "slug": "construction-control"
+    "id": "2",
+    "title": "ГМК «Удокан»",
+    "slug": "construction-control",
+    "categories": "[3, 4]"
   },
   {
     "title": "Объекты муниципального назначения",
-    "slug": "as-built-documentation"
+    "slug": "as-built-documentation",
+    "categories": "[3, 4]"
   },
   {
     "title": "Объекты фонда капитального ремонта",
-    "slug": "geodetic-support-construction"
+    "slug": "geodetic-support-construction",
+    "categories": "[5, 6]"
   },
   {
     "title": "Морской торговый порт Усть–Луга",
-    "slug": "project-work-production"
+    "slug": "project-work-production",
+    "categories": "[7, 8]"
   },
   {
     "title": "Компрессорная станция КС–7 «Сивакинская»",
-    "slug": "construction-installation-works"
+    "slug": "construction-installation-works",
+    "categories": "[9]"
   },
   {
     "title": "Проект «Сила Сибири»",
-    "slug": "development-estimate-documentation"
+    "slug": "development-estimate-documentation",
+    "categories": "[10]"
   },
   {
     "title": "Киринский ГКМ",
-    "slug": "schedule-network-planning"
+    "slug": "schedule-network-planning",
+    "categories": "[10]"
   },
   {
     "title": "Порт «Тамань»",
-    "slug": "development-technological-maps"
+    "slug": "development-technological-maps",
+    "categories": "[3, 4]"
   },
   {
     "title": "Амурский ГПЗ",
-    "slug": "financial-technical-control"
+    "slug": "financial-technical-control",
+    "categories": "[3, 4]"
   },
   {
     "title": "Горно–металлургический Комбинат «Удокан»",
-    "slug": "technical-customer"
+    "slug": "technical-customer",
+    "categories": "[3, 4]"
   },
   {
     "title": "Амурский газохимический комплекс",
-    "slug": "construction-control"
+    "slug": "construction-control",
+    "categories": "[3, 4]"
   },
   {
     "title": "Объекты муниципального назначения",
-    "slug": "as-built-documentation"
+    "slug": "as-built-documentation",
+    "categories": "[3, 4]"
   },
   {
     "title": "Объекты фонда капитального ремонта",
-    "slug": "geodetic-support-construction"
+    "slug": "geodetic-support-construction",
+    "categories": "[3, 4]"
   },
   {
     "title": "Морской торговый порт Усть–Луга",
-    "slug": "project-work-production"
+    "slug": "project-work-production",
+    "categories": "[3, 4]"
   },
   {
     "title": "Компрессорная станция КС–7 «Сивакинская»",
-    "slug": "construction-installation-works"
+    "slug": "construction-installation-works",
+    "categories": "[3, 4]"
   },
   {
     "title": "Проект «Сила Сибири»",
-    "slug": "development-estimate-documentation"
+    "slug": "development-estimate-documentation",
+    "categories": "[3, 4]"
   },
   {
     "title": "Киринский ГКМ",
-    "slug": "schedule-network-planning"
+    "slug": "schedule-network-planning",
+    "categories": "[3, 4]"
   },
   {
     "title": "Порт «Тамань»",
-    "slug": "development-technological-maps"
+    "slug": "development-technological-maps",
+    "categories": "[3, 4]"
   },
   {
     "title": "Амурский ГПЗ",
-    "slug": "financial-technical-control"
+    "slug": "financial-technical-control",
+    "categories": "[3, 4]"
   }
 ]
