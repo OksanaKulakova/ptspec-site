@@ -1,3 +1,17 @@
+---
+interface Props {
+  filters: Array<Filter>;
+}
+
+interface Filter {
+  id: string;
+  title: string;
+  slug: string;
+}
+
+const { filters } = Astro.props;
+---
+
 <script>
   const container: HTMLElement | null =
     document.querySelector(".filter-container");
@@ -14,26 +28,97 @@
       (chr as HTMLElement).style.marginBottom = "0";
     }
   });
+
+  class AstroFilter extends HTMLElement {
+    constructor() {
+      super();
+
+      const list: HTMLElement | null = this.querySelector(".filter-list");
+      const btnOpen: HTMLElement | null = this.querySelector(".filter-button-open");
+      const btnReset: HTMLElement | null = this.querySelector(".filter-button-reset");
+
+      function toggleOpenList(): void {
+        list.classList.toggle("filter-list--open");
+      }
+
+      function closeOpenList(): void {
+        list.classList.remove("filter-list--open");
+      }
+
+      btnOpen.addEventListener("click", () => {
+        toggleOpenList();
+      });
+
+      const elements: NodeListOf<Element> = this.querySelectorAll(".filter-list-item");
+
+      function deleteActiveClass(): void {
+        elements.forEach((el: Element) => {
+          el.classList.remove("filter-list-item--active");
+        });
+      }
+
+      function resetFilter(): void {
+        deleteActiveClass();
+        btnOpen.classList.remove("filter-button--active");
+        btnOpen.childNodes[0].textContent= "Фильтровать по услуге";
+        btnReset.setAttribute("disabled", "true");
+        closeOpenList();
+      }
+
+      elements.forEach((el: Element) => {
+        el.addEventListener("click", (event: Event) => {
+          event.preventDefault();
+          deleteActiveClass();
+
+          let target: HTMLElement = event.target as HTMLElement;
+          target.classList.add("filter-list-item--active");
+          const text = target.innerText;
+          
+          btnOpen.classList.add("filter-button--active");
+          btnOpen.childNodes[0].textContent= text;
+          btnReset.removeAttribute("disabled");
+        });
+      });
+
+      btnReset.addEventListener("click", () => {
+        resetFilter();
+      });
+    }
+  }
+
+  customElements.define("astro-filter", AstroFilter);
 </script>
 
-<div class="filter-hr"></div>
-<div class="filter-container">
-  <div class="filter-wrapper">
-    <div class="filter">
-      <div class="filter-block">
-        <button class="filter-button">
-          Фильтровать по услуге
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M15 6L9 12L15 18V6Z" fill="#161619"/>
-          </svg>
-        </button>
+<astro-filter>
+  <div class="filter-hr"></div>
+  <div class="filter-container">
+    <div class="filter-wrapper">
+      <div class="filter">
+        <div class="filter-block">
+          <button class="filter-button filter-button-open">
+            Фильтровать по услуге
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 6L9 12L15 18V6Z" fill="#161619"/>
+            </svg>
+          </button>
+        </div>
+        <div class="filter-block">
+          <button disabled class="filter-button filter-button-reset">Сбросить фильтр</button>
+        </div>
       </div>
-      <div class="filter-block">
-        <button disabled class="filter-button filter-button-reset">Сбросить фильтр</button>
+
+      <div class="filter-list">
+        {
+          filters.map((f: Filter) => (
+            <div class="filter-list-item">
+              {f.title}
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
-</div>
+</astro-filter>
 
 <style>
   .filter-container {
@@ -99,11 +184,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--, #161619);
+    color: #161619;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.48px;
     text-transform: uppercase;
+  }
+
+  .filter-button-reset {
+    text-decoration: underline;
+  }
+
+  .filter-button--active {
+    color: #FE5639;
   }
 
   .filter-button:disabled,
@@ -114,6 +207,38 @@
 
   .filter-button svg {
     pointer-events: none;
+  }
+
+  .filter-list {
+    display: none;
+    width: calc(50% - 8px);
+    height: 320px;
+    background-color: #faf8f8;
+    padding: 16px 0;
+    outline: 1px solid #161619;
+    outline-offset: -1px;
+    overflow-y: auto;
+  }
+
+  .filter-list--open {
+    display: block;
+    position: absolute;
+    top: 55px;
+    z-index: 10;
+  }
+
+  .filter-list-item {
+    padding: 16px;
+  }
+
+  .filter-list-item:hover {
+    background-color: #FE5639;
+    color: #FAF8F8;
+    cursor: pointer;
+  }
+
+  .filter-list-item--active {
+    color: #FE5639;
   }
 
   @media screen and (min-width: 1024px) {
@@ -146,6 +271,7 @@
     }
 
     .filter-block:last-child {
+      display: flex;
       width: calc(50% + 8px);
     }
   }

@@ -2,6 +2,7 @@
 import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
 import projects from "@data/projects.json";
+import services from "@data/services.json";
 
 const list = projects.map((item) => ({
   ...item,
@@ -10,6 +11,6 @@ const list = projects.map((item) => ({
 ---
 
 <div>
-  <Filter />
+  <Filter filters={services} />
   <List list={list} />
 </div>
