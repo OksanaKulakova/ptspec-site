@@ -10,32 +10,36 @@ interface Filter {
 }
 
 const { filters } = Astro.props;
+
+import ModalSmall from "./ModalSmall.astro";
 ---
 
 <script>
-  const container: HTMLElement | null =
-    document.querySelector(".filter-container");
-  const chr: HTMLElement | null = document.querySelector(".filter-hr");
-
-  window.addEventListener("scroll", () => {
-    const thr: number = chr.getBoundingClientRect().top;
-
-    if (thr <= 56) {
-      container.classList.add("filter-container--fixed");
-      (chr as HTMLElement).style.marginBottom = "56px";
-    } else {
-      container.classList.remove("filter-container--fixed");
-      (chr as HTMLElement).style.marginBottom = "0";
-    }
-  });
-
   class AstroFilter extends HTMLElement {
     constructor() {
       super();
 
+      const container: HTMLElement | null =
+        this.querySelector(".filter-container");
+      const chr: HTMLElement | null = this.querySelector(".filter-hr");
+
+      window.addEventListener("scroll", () => {
+        const thr: number = chr.getBoundingClientRect().top;
+
+        if (thr <= 56) {
+          container.classList.add("filter-container--fixed");
+          (chr as HTMLElement).style.marginBottom = "56px";
+        } else {
+          container.classList.remove("filter-container--fixed");
+          (chr as HTMLElement).style.marginBottom = "0";
+        }
+      });
+
       const list: HTMLElement | null = this.querySelector(".filter-list");
-      const btnOpen: HTMLElement | null = this.querySelector(".filter-button-open");
-      const btnReset: HTMLElement | null = this.querySelector(".filter-button-reset");
+      const btnOpen: HTMLElement | null = this.querySelector(
+        ".filter-button-open",
+      );
+      const btnReset: NodeListOf<Element> = this.querySelectorAll(".filter-button-reset");
 
       function toggleOpenList(): void {
         list.classList.toggle("filter-list--open");
@@ -45,11 +49,17 @@ const { filters } = Astro.props;
         list.classList.remove("filter-list--open");
       }
 
-      btnOpen.addEventListener("click", () => {
-        toggleOpenList();
+      btnOpen?.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+        const width: number = window.innerWidth;
+
+        if (width >= 1024) {
+          toggleOpenList();
+        }
       });
 
-      const elements: NodeListOf<Element> = this.querySelectorAll(".filter-list-item");
+      const elements: NodeListOf<Element> =
+        this.querySelectorAll(".filter-list-item");
 
       function deleteActiveClass(): void {
         elements.forEach((el: Element) => {
@@ -60,8 +70,12 @@ const { filters } = Astro.props;
       function resetFilter(): void {
         deleteActiveClass();
         btnOpen.classList.remove("filter-button--active");
-        btnOpen.childNodes[0].textContent= "Фильтровать по услуге";
-        btnReset.setAttribute("disabled", "true");
+        btnOpen.childNodes[0].textContent = "Фильтровать по услуге";
+
+        btnReset.forEach((btn: Element) => {
+          btn.setAttribute("disabled", "true");
+        });
+        
         closeOpenList();
       }
 
@@ -73,15 +87,21 @@ const { filters } = Astro.props;
           let target: HTMLElement = event.target as HTMLElement;
           target.classList.add("filter-list-item--active");
           const text = target.innerText;
-          
+
           btnOpen.classList.add("filter-button--active");
-          btnOpen.childNodes[0].textContent= text;
-          btnReset.removeAttribute("disabled");
+          btnOpen.childNodes[0].textContent = text;
+
+          btnReset.forEach((btn: Element) => {
+            btn.removeAttribute("disabled");
+          });
         });
       });
 
-      btnReset.addEventListener("click", () => {
-        resetFilter();
+      btnReset.forEach((btn: Element) => {
+        btn.addEventListener("click", (event: Event) => {
+          event.preventDefault();
+          resetFilter();
+        });
       });
     }
   }
@@ -95,27 +115,50 @@ const { filters } = Astro.props;
     <div class="filter-wrapper">
       <div class="filter">
         <div class="filter-block">
-          <button class="filter-button filter-button-open">
+          <button class="filter-button filter-button-open button-open-modal">
             Фильтровать по услуге
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 6L9 12L15 18V6Z" fill="#161619"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M15 6L9 12L15 18V6Z" fill="#161619"></path>
             </svg>
           </button>
         </div>
         <div class="filter-block">
-          <button disabled class="filter-button filter-button-reset">Сбросить фильтр</button>
+          <button disabled class="filter-button filter-button-reset">
+            Сбросить фильтр
+          </button>
         </div>
       </div>
 
       <div class="filter-list">
         {
           filters.map((f: Filter) => (
-            <div class="filter-list-item">
-              {f.title}
-            </div>
+            <div class="filter-list-item">{f.title}</div>
           ))
         }
       </div>
+
+      <ModalSmall>
+        <div class="filter-container-mobile">
+          <div  class="filter-list-mobile">
+            {
+              filters.map((f: Filter) => (
+                <div class="filter-list-item">{f.title}</div>
+              ))
+            }
+          </div>
+          <div class="filter-block-mobile-bottom">
+            <button disabled class="filter-button filter-button-reset">
+              Сбросить фильтр
+            </button>
+          </div>
+        </div>
+      </ModalSmall>
     </div>
   </div>
 </astro-filter>
@@ -184,6 +227,7 @@ const { filters } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto;
     color: #161619;
     font-size: 16px;
     line-height: 24px;
@@ -196,11 +240,11 @@ const { filters } = Astro.props;
   }
 
   .filter-button--active {
-    color: #FE5639;
+    color: #fe5639;
   }
 
   .filter-button:disabled,
-  .filter-button[disabled]{
+  .filter-button[disabled] {
     opacity: 0.25;
     cursor: default;
   }
@@ -211,20 +255,6 @@ const { filters } = Astro.props;
 
   .filter-list {
     display: none;
-    width: calc(50% - 8px);
-    height: 320px;
-    background-color: #faf8f8;
-    padding: 16px 0;
-    outline: 1px solid #161619;
-    outline-offset: -1px;
-    overflow-y: auto;
-  }
-
-  .filter-list--open {
-    display: block;
-    position: absolute;
-    top: 55px;
-    z-index: 10;
   }
 
   .filter-list-item {
@@ -232,13 +262,29 @@ const { filters } = Astro.props;
   }
 
   .filter-list-item:hover {
-    background-color: #FE5639;
-    color: #FAF8F8;
+    background-color: #fe5639;
+    color: #faf8f8;
     cursor: pointer;
   }
 
   .filter-list-item--active {
-    color: #FE5639;
+    color: #fe5639;
+  }
+
+  .filter-container-mobile {
+    height: 504px;
+    padding-bottom: 32px;
+  }
+
+  .filter-block-mobile-bottom {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 88px;
+    padding-top: 16px;
+    padding-bottom: 48px;
+    background-color: #faf8f8;
   }
 
   @media screen and (min-width: 1024px) {
@@ -273,6 +319,28 @@ const { filters } = Astro.props;
     .filter-block:last-child {
       display: flex;
       width: calc(50% + 8px);
+    }
+
+    .filter-list {
+      display: none;
+      width: calc(50% - 8px);
+      height: 321px;
+      background-color: #faf8f8;
+      padding: 16px 0;
+      outline: 1px solid #161619;
+      outline-offset: -1px;
+      overflow-y: auto;
+    }
+
+    .filter-list--open {
+      display: block;
+      position: absolute;
+      top: 56px;
+      z-index: 10;
+    }
+
+    .modal {
+      display: none;
     }
   }
 </style>

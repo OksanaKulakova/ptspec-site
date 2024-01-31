@@ -1,0 +1,183 @@
+<script>
+  class AstroModalSmall extends HTMLElement {
+    constructor() {
+      super();
+
+      const hideScroll = (): void => {
+        document.documentElement.style.setProperty("overflow-y", "hidden");
+      };
+
+      const showScroll = (): void => {
+        document.documentElement.style.setProperty("overflow-y", "auto");
+      };
+
+      const modal: HTMLElement | null = this.querySelector(".modal-small");
+      const overlay: HTMLElement | null = this.querySelector(
+        ".modal-small-overlay",
+      );
+      const content: HTMLElement | null = this.querySelector(
+        ".modal-small-content",
+      );
+
+      const btnOpen: HTMLElement | null =
+        document.querySelector(".button-open-modal");
+      const btnClose: HTMLElement | null =
+        this.querySelector(".modal-small-close");
+
+      const fadeIn = (
+        el: HTMLElement,
+        timeout: number = 150,
+        display: string = "block",
+      ): void => {
+        el.style.opacity = "0";
+        el.style.display = display;
+        el.style.transition = `opacity ${timeout}ms`;
+        setTimeout(() => {
+          el.style.opacity = "1";
+        }, 10);
+      };
+
+      const fadeOut = (el: HTMLElement, timeout: number = 150) => {
+        el.style.opacity = "1";
+        el.style.transition = `opacity ${timeout}ms`;
+        el.style.opacity = "0";
+
+        setTimeout(() => {
+          el.style.display = "none";
+        }, timeout);
+      };
+
+      const slideUp = (
+        el: HTMLElement,
+        timeout: number = 500,
+        display: string = "block",
+      ): void => {
+        el.style.bottom = "-560px";
+        el.style.display = display;
+        el.style.transition = `bottom ${timeout}ms`;
+        setTimeout(() => {
+          el.style.bottom = "0";
+        }, 10);
+      };
+
+      const slideDown = (el: HTMLElement, timeout: number = 500) => {
+        el.style.bottom = "0";
+        el.style.transition = `bottom ${timeout}ms`;
+        el.style.bottom = "-560px";
+
+        setTimeout(() => {
+          el.style.display = "none";
+        }, timeout);
+      };
+
+      const openModal = (): void => {
+        modal?.classList.add("modal-small--open");
+        fadeIn(overlay);
+        slideUp(content);
+      };
+
+      const closeModal = (): void => {
+        fadeOut(overlay);
+        slideDown(content);
+        setTimeout(() => {
+          modal?.classList.remove("modal-small--open");
+        }, 500);
+      };
+
+      btnOpen?.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+        const width: number = window.innerWidth;
+
+        if (width < 1024) {
+          openModal();
+          hideScroll();
+        }
+      });
+
+      btnClose?.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+
+        closeModal();
+        showScroll();
+      });
+    }
+  }
+
+  customElements.define("astro-modal-small", AstroModalSmall);
+</script>
+
+<astro-modal-small>
+  <div class="modal-small">
+    <div class="modal-small-overlay"></div>
+    <div class="modal-small-content">
+      <div class="modal-small-container">
+        <div class="modal-small-header">
+          <a class="link modal-small-close">Закрыть</a>
+        </div>
+        <div class="modal-small-body">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</astro-modal-small>
+
+<style>
+  .modal-small {
+    display: none;
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .modal-small--open {
+    display: block;
+  }
+
+  .modal-small-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 22, 25, 0.32);
+    z-index: 10;
+  }
+
+  .modal-small-content {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 560px;
+    background-color: #faf8f8;
+    z-index: 20;
+    overflow-y: auto;
+  }
+
+  .modal-small-container {
+    position: relative;
+  }
+
+  .modal-small-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #faf8f8;
+    width: 100%;
+    padding: 0px 16px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .modal-small {
+      display: none;
+    }
+
+    .modal-small--open {
+      display: none;
+    }
+  }
+</style>
