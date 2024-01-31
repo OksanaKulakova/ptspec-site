@@ -1,86 +1,152 @@
 <script>
-  const modal: HTMLElement | null = document.querySelector(".modal");
-  modal?.classList.toggle("modal--hide");
+  class AstroModal extends HTMLElement {
+    constructor() {
+      super();
 
-  function hideScroll(): void {
-    document.documentElement.style.setProperty("overflow-y", "hidden");
+      const hideScroll = (): void => {
+        document.documentElement.style.setProperty("overflow-y", "hidden");
+      };
+
+      const showScroll = (): void => {
+        document.documentElement.style.setProperty("overflow-y", "auto");
+      };
+
+      const modal: HTMLElement | null = this.querySelector(".modal");
+      const overlay: HTMLElement | null = this.querySelector(".modal-overlay");
+      const content: HTMLElement | null = this.querySelector(".modal-content-wrapper");
+
+      const btnOpen: NodeListOf<Element> = document.querySelectorAll(".show-modal");
+      const btnClose: HTMLElement | null = this.querySelector(".modal-close");    
+
+      const fadeIn = (
+        el: HTMLElement,
+        timeout: number = 150,
+        display: string = "block",
+      ): void => {
+        el.style.opacity = "0";
+        el.style.display = display;
+        el.style.transition = `opacity ${timeout}ms`;
+        setTimeout(() => {
+          el.style.opacity = "1";
+        }, 10);
+      };
+
+      const fadeOut = (el: HTMLElement, timeout: number = 1000) => {
+        el.style.opacity = "1";
+        el.style.transition = `opacity ${timeout}ms`;
+        el.style.opacity = "0";
+
+        setTimeout(() => {
+          el.style.display = "none";
+        }, timeout);
+      };
+
+      const slideUp = (
+        el: HTMLElement,
+        timeout: number = 1000,
+        display: string = "block",
+      ): void => {
+        el.style.top = "100vh";
+        el.style.display = display;
+        el.style.transition = `top ${timeout}ms`;
+        setTimeout(() => {
+          el.style.top = "0";
+        }, 10);
+      };
+
+      const slideDown = (el: HTMLElement, timeout: number = 1000) => {
+        el.style.top = "0";
+        el.style.transition = `top ${timeout}ms`;
+        el.style.top = "100vh";
+
+        setTimeout(() => {
+          el.style.display = "none";
+        }, timeout);
+      };
+
+      const openModal = (): void => {
+        modal?.classList.add("modal--open");
+        fadeIn(overlay);
+        slideUp(content);
+      };
+
+      const closeModal = (): void => {
+        fadeOut(overlay);
+        slideDown(content);
+        setTimeout(() => {
+          modal?.classList.remove("modal--open");
+        }, 1000);
+      };
+
+      btnOpen?.forEach((btn: Element) => {
+        btn.addEventListener("click", (event) => {
+          event.preventDefault();
+          openModal();
+          setTimeout(hideScroll, 1000);
+        });
+      });
+
+      btnClose?.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+
+        closeModal();
+        showScroll();
+      });
+    }
   }
 
-  function showScroll(): void {
-    document.documentElement.style.setProperty("overflow-y", "auto");
-  }
-
-  const cbox: NodeListOf<Element> = document.querySelectorAll(".show-modal");
-  cbox.forEach((box: Element) => {
-    box.addEventListener("click", (event) => {
-      event.preventDefault();
-      modal?.classList.add("modal--open");
-      modal?.classList.remove("modal--hide");
-
-      setTimeout(hideScroll, 1000);
-    });
-  });
-
-  document.querySelector(".hide-modal")?.addEventListener("click", () => {
-    modal?.classList.remove("modal--open");
-
-    showScroll();
-  });
+  customElements.define("astro-modal", AstroModal);
 </script>
 
-<div class="modal">
-  <div class="modal-container">
-    <div class="modal-header">
-      <a class="link hide-modal">Закрыть</a>
-    </div>
-    <div class="modal-body">
-      <div class="modal-title"><slot name="title" /></div>
-      <div class="modal-content"><slot name="content" /></div>
+<astro-modal>
+  <div class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content-wrapper">
+      <div class="modal-container">
+        <div class="modal-header">
+          <a class="link modal-close">Закрыть</a>
+        </div>
+        <div class="modal-body">
+          <div class="modal-title"><slot name="title" /></div>
+          <div class="modal-content"><slot name="content" /></div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</astro-modal>
 
 <style>
   .modal {
+    display: none;
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     width: 100vw;
     height: 100vh;
     z-index: 50;
-
-    overflow-y: auto;
-    background-color: #faf8f8;
-
-    animation: hide 1s linear;
-  }
-
-  .modal--hide {
-    display: none;
   }
 
   .modal--open {
     display: block;
-    top: 0;
-    animation: move 1s linear;
   }
 
-  @keyframes move {
-    0% {
-      top: 100vh;
-    }
-    100% {
-      top: 0px;
-    }
+  .modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 22, 25, 0.32);
+    z-index: 10;
   }
 
-  @keyframes hide {
-    0% {
-      top: 0px;
-    }
-    100% {
-      top: 100vh;
-    }
+  .modal-content-wrapper {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #faf8f8;
+    z-index: 20;
+    overflow-y: auto;
   }
 
   .modal-container {
