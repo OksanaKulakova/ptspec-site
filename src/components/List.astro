@@ -6,6 +6,7 @@ interface Props {
 interface List {
   title: string;
   href?: string;
+  blank?: boolean;
 }
 
 const { list } = Astro.props;
@@ -66,6 +67,7 @@ const { list } = Astro.props;
           href={item.href}
           class="list-item"
           class:list={[{ "list-item-clickable": item.href }]}
+          target={item.blank ? "_blank" : "_self"}
         >
           <div class="list-item-content">
             <div class="list-item-name">{item.title}</div>

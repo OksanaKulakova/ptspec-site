@@ -6,6 +6,7 @@ interface Props {
   altText?: string;
   link: string;
   href: string;
+  blank?: boolean;
   cards?: Array<Card>;
 }
 
@@ -14,7 +15,7 @@ interface Card {
   text: string;
 }
 
-const { title, subtitle, imagePath, altText, link, href, cards } = Astro.props;
+const { title, subtitle, imagePath, altText, link, href, blank = false, cards } = Astro.props;
 
 import type { ImageMetadata } from "astro";
 import { Picture } from "astro:assets";
@@ -36,7 +37,7 @@ if (imagePath && !images[imagePath])
       <h2 set:html={subtitle} class="widget-subtitle" />
     </div>
     <div class="widget-content-block">
-      <a class="widget-link link" href={href}>{link}</a>
+      <a class="widget-link link" href={href} target={blank ? "_blank" : "_self"}>{link}</a>
     </div>
   </div>
 
