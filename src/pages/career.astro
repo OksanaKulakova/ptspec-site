@@ -6,6 +6,8 @@ import Team from "@components/Team.astro";
 import SimpleList from "@components/SimpleList.astro";
 import Cards from "@components/Cards.astro";
 import vacancies from "@data/vacancies.json";
+import Modal from "@components/Modal.astro";
+import Form from "@components/forms/FormVacancy.astro"
 
 type cardWidget = {
   title: string;
@@ -145,7 +147,7 @@ const cards1: card[] = [
     imagePath="/src/assets/images/cover2.jpg"
     altText="Картинка для баннера"
     link="Заполнить анкету"
-    href="/"
+    modalId={2}
     cards={cardsForWidget}
   />
 
@@ -160,3 +162,10 @@ const cards1: card[] = [
 
   <Cards cards={cards1} />
 </Layout>
+
+<Modal>
+  <Fragment slot="title">
+    Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+  </Fragment>
+  <Fragment slot="content"><Form /></Fragment>
+</Modal>

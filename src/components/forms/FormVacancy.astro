@@ -1,0 +1,38 @@
+---
+import "./form.css";
+---
+
+<form class="form" method="POST">
+  <div class="form-body">
+    <div class="form-block">
+      <div class="form-blok-title">Как к вам обращаться</div>
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Имя" required />
+        <input type="email" name="email" placeholder="Фамилия" />
+      </div>
+    </div>
+    <div class="form-block">
+      <div class="form-blok-title">Контакты</div>
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Номер телефона" required />
+        <input type="email" name="email" placeholder="Электронная почта" />
+      </div>
+    </div>
+    <div class="form-block">
+      <div class="form-blok-title">Комментарий</div>
+      <div class="form-row">
+        <input
+          type="email"
+          name="email"
+          placeholder="Напишите что–то по необходимости"
+        />
+      </div>
+    </div>
+    <p>
+      отправляя анкету, вы соглашаетесь с <a class="form-link link"
+        >политикой конфиденциальности</a
+      >
+    </p>
+    <button class="btn">Отправить заявку</button>
+  </div>
+</form>

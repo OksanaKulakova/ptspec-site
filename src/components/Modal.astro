@@ -64,7 +64,8 @@
         }, timeout);
       };
 
-      const openModal = (): void => {
+      const openModal = (id: number): void => {
+        console.log(id)
         modal?.classList.add("modal--open");
         fadeIn(overlay);
         slideUp(content);
@@ -79,9 +80,13 @@
       };
 
       btnOpen?.forEach((btn: Element) => {
-        btn.addEventListener("click", (event) => {
+        btn.addEventListener("click", (event: Event) => {
           event.preventDefault();
-          openModal();
+
+          const target: HTMLElement = event.target as HTMLElement;
+          const id = Number(target.dataset.modalId) ?? 1;
+
+          openModal(id);
           setTimeout(hideScroll, 1000);
         });
       });
