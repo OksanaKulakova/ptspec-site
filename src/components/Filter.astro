@@ -83,8 +83,14 @@ import ModalSmall from "./ModalSmall.astro";
           deleteActiveClass();
 
           let target: HTMLElement = event.target as HTMLElement;
-          target.classList.add("filter-list-item--active");
+ 
           const text = target.innerText;
+
+          elements.forEach((el: HTMLElement) => {
+            if (el.innerText.toLowerCase() == text.toLowerCase()) {
+              el.classList.add("filter-list-item--active");
+            }
+          });
 
           btnOpen.classList.add("filter-button--active");
           btnOpen.childNodes[0].textContent = text;
