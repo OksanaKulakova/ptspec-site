@@ -1,47 +1,51 @@
 ---
 import "./form.css";
 import services from "@data/services.json";
-
+import InputText from "./InputText.astro";
 import Select from "./Select.astro";
 ---
 
-<form class="form" method="POST">
-  <div class="form-body">
-    <div class="form-block">
-      <div class="form-blok-title">Как к вам обращаться</div>
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Имя" required />
-        <input type="email" name="email" placeholder="Фамилия" />
+<script src="./form.ts"></script>
+
+<astro-form>
+  <form class="form" method="POST">
+    <div class="form-body">
+      <div class="form-block">
+        <div class="form-blok-title">Как к вам обращаться</div>
+        <div class="form-row">
+          <InputText type="text" name="name" placeholder="Имя" required />
+          <InputText type="email" name="email" placeholder="Фамилия" />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Интересующая услуга</div>
-      <div class="form-row">
-        <Select id={2} name="service" list={services} />
+      <div class="form-block">
+        <div class="form-blok-title">Интересующая услуга</div>
+        <div class="form-row">
+          <Select id={2} name="service" list={services} />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Контакты</div>
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Номер телефона" required />
-        <input type="email" name="email" placeholder="Электронная почта" />
+      <div class="form-block">
+        <div class="form-blok-title">Контакты</div>
+        <div class="form-row">
+          <InputText type="text" name="name" placeholder="Номер телефона" required />
+          <InputText type="email" name="email" placeholder="Электронная почта" />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Комментарий</div>
-      <div class="form-row">
-        <input
-          type="email"
-          name="email"
-          placeholder="Напишите что–то по необходимости"
-        />
+      <div class="form-block">
+        <div class="form-blok-title">Комментарий</div>
+        <div class="form-row">
+          <input
+            type="email"
+            name="email"
+            placeholder="Напишите что–то по необходимости"
+          />
+        </div>
       </div>
+      <p>
+        отправляя заявку, вы соглашаетесь с <a class="form-link link"
+          >политикой конфиденциальности</a
+        >
+      </p>
+      <button type="submit" class="btn form-submit">Отправить заявку</button>
     </div>
-    <p>
-      отправляя заявку, вы соглашаетесь с <a class="form-link link"
-        >политикой конфиденциальности</a
-      >
-    </p>
-    <button class="btn">Отправить заявку</button>
-  </div>
-</form>
+  </form>
+</astro-form>

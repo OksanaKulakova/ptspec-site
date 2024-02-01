@@ -197,6 +197,7 @@ button {
 }
 
 input {
+  display: block;
   width: 100%;
   height: 56px;
   padding: 16px 0px 15px;
@@ -219,15 +220,13 @@ input::placeholder {
   line-height: 24px;
   letter-spacing: -0.48px;
   text-transform: uppercase;
+  color: #161619;
+  opacity: 0.5;
 }
 
 input:focus {
   outline: none;
 }
-
-/* input:invalid {
-  border-color: #fe5639;
-} */
 
 @media screen and (min-width: 1024px) {
   .section {
