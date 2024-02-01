@@ -1,60 +1,64 @@
 ---
 import "./form.css";
+import InputText from "./InputText.astro";
 ---
 
-<form class="form" method="POST">
-  <div class="form-body">
-    <div class="form-block">
-      <div class="form-blok-title">Как к вам обращаться</div>
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Имя" required />
-        <input type="email" name="email" placeholder="Фамилия" />
+<script src="./form.ts"></script>
+
+<astro-form>
+  <form class="form">
+    <div class="form-body">
+      <div class="form-block">
+        <div class="form-blok-title">Как к вам обращаться</div>
+        <div class="form-row">
+          <InputText type="text" name="name" placeholder="Имя" required />
+          <InputText type="text" name="lastname" placeholder="Фамилия" />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Интересующая вакансия</div>
-      <div class="form-row">
-        <input
-          type="text"
-          name="vacancy"
-          placeholder="укажите название вакансии"
-          required
-        />
+      <div class="form-block">
+        <div class="form-blok-title">Интересующая вакансия</div>
+        <div class="form-row">
+          <input
+            type="text"
+            name="vacancy"
+            placeholder="укажите название вакансии"
+            required
+          />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Резюме</div>
-      <div class="form-row">
-        <input
-          type="text"
-          name="resume"
-          placeholder="вставьте ссылку на резюме"
-          required
-        />
+      <div class="form-block">
+        <div class="form-blok-title">Резюме</div>
+        <div class="form-row">
+          <input
+            type="text"
+            name="resume"
+            placeholder="вставьте ссылку на резюме"
+          />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Контакты</div>
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Номер телефона" required />
-        <input type="email" name="email" placeholder="Электронная почта" />
+      <div class="form-block">
+        <div class="form-blok-title">Контакты</div>
+        <div class="form-row">
+          <InputText type="text" name="name" placeholder="Номер телефона" required />
+          <InputText type="email" name="email" placeholder="Электронная почта" />
+        </div>
       </div>
-    </div>
-    <div class="form-block">
-      <div class="form-blok-title">Комментарий</div>
-      <div class="form-row">
-        <input
-          type="email"
-          name="email"
-          placeholder="Напишите что–то по необходимости"
-        />
+      <div class="form-block">
+        <div class="form-blok-title">Комментарий</div>
+        <div class="form-row">
+          <input
+            type="text"
+            name="comment"
+            placeholder="Напишите что–то по необходимости"
+          />
+        </div>
       </div>
+      <p>
+        отправляя анкету, вы соглашаетесь с <a class="form-link link"
+          >политикой конфиденциальности</a
+        >
+      </p>
+      <button type="submit" class="btn form-submit">Отправить заявку</button>
     </div>
-    <p>
-      отправляя анкету, вы соглашаетесь с <a class="form-link link"
-        >политикой конфиденциальности</a
-      >
-    </p>
-    <button type="submit" class="btn">Отправить заявку</button>
-  </div>
-</form>
+  </form>
+</astro-form>

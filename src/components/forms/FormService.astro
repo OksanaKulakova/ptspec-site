@@ -14,7 +14,7 @@ import Select from "./Select.astro";
         <div class="form-blok-title">Как к вам обращаться</div>
         <div class="form-row">
           <InputText type="text" name="name" placeholder="Имя" required />
-          <InputText type="email" name="email" placeholder="Фамилия" />
+          <InputText type="text" name="lastname" placeholder="Фамилия" />
         </div>
       </div>
       <div class="form-block">
@@ -26,7 +26,7 @@ import Select from "./Select.astro";
       <div class="form-block">
         <div class="form-blok-title">Контакты</div>
         <div class="form-row">
-          <InputText type="text" name="name" placeholder="Номер телефона" required />
+          <InputText type="text" name="phone" placeholder="Номер телефона" required />
           <InputText type="email" name="email" placeholder="Электронная почта" />
         </div>
       </div>
@@ -34,8 +34,8 @@ import Select from "./Select.astro";
         <div class="form-blok-title">Комментарий</div>
         <div class="form-row">
           <input
-            type="email"
-            name="email"
+            type="text"
+            name="comment"
             placeholder="Напишите что–то по необходимости"
           />
         </div>
