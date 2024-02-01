@@ -7,8 +7,8 @@ import SimpleList from "@components/SimpleList.astro";
 import Cards from "@components/Cards.astro";
 import vacancies from "@data/vacancies.json";
 import Modal from "@components/Modal.astro";
-import Form from "@components/forms/FormVacancy.astro"
-import Form2 from "@components/forms/FormVacancyOther.astro"
+import Form from "@components/forms/FormVacancy.astro";
+import Form2 from "@components/forms/FormVacancyOther.astro";
 
 type cardWidget = {
   title: string;
@@ -170,7 +170,6 @@ const cards1: card[] = [
   </Fragment>
   <Fragment slot="content"><Form /></Fragment>
 </Modal>
-
 
 <Modal id={3}>
   <Fragment slot="title">

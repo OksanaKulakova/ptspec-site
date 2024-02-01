@@ -37,7 +37,9 @@ import ModalSmall from "./ModalSmall.astro";
       const btnOpen: HTMLElement | null = this.querySelector(
         ".filter-button-open",
       );
-      const btnReset: NodeListOf<Element> = this.querySelectorAll(".filter-button-reset");
+      const btnReset: NodeListOf<Element> = this.querySelectorAll(
+        ".filter-button-reset",
+      );
 
       function toggleOpenList(): void {
         list.classList.toggle("filter-list--open");
@@ -73,7 +75,7 @@ import ModalSmall from "./ModalSmall.astro";
         btnReset.forEach((btn: Element) => {
           btn.setAttribute("disabled", "true");
         });
-        
+
         closeOpenList();
       }
 
@@ -83,7 +85,7 @@ import ModalSmall from "./ModalSmall.astro";
           deleteActiveClass();
 
           let target: HTMLElement = event.target as HTMLElement;
- 
+
           const text = target.innerText;
 
           elements.forEach((el: HTMLElement) => {
@@ -138,7 +140,7 @@ import ModalSmall from "./ModalSmall.astro";
             </button>
           </div>
         </div>
-  
+
         <div class="filter-list">
           {
             filters.map((f: Filter) => (
@@ -146,10 +148,10 @@ import ModalSmall from "./ModalSmall.astro";
             ))
           }
         </div>
-  
+
         <ModalSmall>
           <div class="filter-container-mobile">
-            <div  class="filter-list-mobile">
+            <div class="filter-list-mobile">
               {
                 filters.map((f: Filter) => (
                   <div class="filter-list-item">{f.title}</div>

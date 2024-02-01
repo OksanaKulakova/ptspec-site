@@ -21,10 +21,13 @@ const { id = 1 } = Astro.props;
 
       const modal: HTMLElement | null = this.querySelector(".modal");
       const overlay: HTMLElement | null = this.querySelector(".modal-overlay");
-      const content: HTMLElement | null = this.querySelector(".modal-content-wrapper");
+      const content: HTMLElement | null = this.querySelector(
+        ".modal-content-wrapper",
+      );
 
-      const btnOpen: NodeListOf<Element> = document.querySelectorAll(".show-modal");
-      const btnClose: HTMLElement | null = this.querySelector(".modal-close");    
+      const btnOpen: NodeListOf<Element> =
+        document.querySelectorAll(".show-modal");
+      const btnClose: HTMLElement | null = this.querySelector(".modal-close");
 
       const fadeIn = (
         el: HTMLElement,

@@ -1,3 +1,11 @@
+---
+interface Props {
+  id?: number;
+}
+
+const { id = 1 } = Astro.props;
+---
+
 <script>
   class AstroModalSmall extends HTMLElement {
     constructor() {
@@ -19,8 +27,9 @@
         ".modal-small-content",
       );
 
-      const btnOpen: HTMLElement | null =
-        document.querySelector(".button-open-modal");
+      const btnOpen: NodeListOf<Element> =
+        document.querySelectorAll(".button-open-modal");
+
       const btnClose: HTMLElement | null =
         this.querySelector(".modal-small-close");
 
@@ -70,10 +79,12 @@
         }, timeout);
       };
 
-      const openModal = (): void => {
-        modal?.classList.add("modal-small--open");
-        fadeIn(overlay);
-        slideUp(content);
+      const openModal = (id: number): void => {
+        if (id === Number(modal?.id)) {
+          modal?.classList.add("modal-small--open");
+          fadeIn(overlay);
+          slideUp(content);
+        }
       };
 
       const closeModal = (): void => {
@@ -84,14 +95,19 @@
         }, 500);
       };
 
-      btnOpen?.addEventListener("click", (event: Event) => {
-        event.preventDefault();
-        const width: number = window.innerWidth;
+      btnOpen?.forEach((btn: Element) => {
+        btn.addEventListener("click", (event: Event) => {
+          event.preventDefault();
+          const width: number = window.innerWidth;
 
-        if (width < 1024) {
-          openModal();
-          hideScroll();
-        }
+          const target: HTMLElement = event.target as HTMLElement;
+          const id = Number(target.dataset.modalId) || 1;
+
+          if (width < 1024) {
+            openModal(id);
+            hideScroll();
+          }
+        });
       });
 
       btnClose?.addEventListener("click", (event: Event) => {
@@ -107,7 +123,7 @@
 </script>
 
 <astro-modal-small>
-  <div class="modal-small">
+  <div id={id} class="modal-small">
     <div class="modal-small-overlay"></div>
     <div class="modal-small-content">
       <div class="modal-small-container">
@@ -149,7 +165,7 @@
     position: absolute;
     left: 0;
     width: 100vw;
-    height: 560px;
+    max-height: 560px;
     background-color: #faf8f8;
     z-index: 20;
     overflow-y: auto;
