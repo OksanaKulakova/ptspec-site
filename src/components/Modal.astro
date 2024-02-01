@@ -1,3 +1,11 @@
+---
+interface Props {
+  id?: number;
+}
+
+const { id = 1 } = Astro.props;
+---
+
 <script>
   class AstroModal extends HTMLElement {
     constructor() {
@@ -65,10 +73,11 @@
       };
 
       const openModal = (id: number): void => {
-        console.log(id)
-        modal?.classList.add("modal--open");
-        fadeIn(overlay);
-        slideUp(content);
+        if (id === Number(modal?.id)) {
+          modal?.classList.add("modal--open");
+          fadeIn(overlay);
+          slideUp(content);
+        }
       };
 
       const closeModal = (): void => {
@@ -84,7 +93,7 @@
           event.preventDefault();
 
           const target: HTMLElement = event.target as HTMLElement;
-          const id = Number(target.dataset.modalId) ?? 1;
+          const id = Number(target.dataset.modalId) || 1;
 
           openModal(id);
           setTimeout(hideScroll, 1000);
@@ -104,7 +113,7 @@
 </script>
 
 <astro-modal>
-  <div class="modal">
+  <div id={id} class="modal">
     <div class="modal-overlay"></div>
     <div class="modal-content-wrapper">
       <div class="modal-container">
