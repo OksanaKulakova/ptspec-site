@@ -1,5 +1,8 @@
 ---
 import "./form.css";
+import services from "@data/services.json";
+
+import Select from "./Select.astro";
 ---
 
 <form class="form" method="POST">
@@ -9,6 +12,12 @@ import "./form.css";
       <div class="form-row">
         <input type="text" name="name" placeholder="Имя" required />
         <input type="email" name="email" placeholder="Фамилия" />
+      </div>
+    </div>
+    <div class="form-block">
+      <div class="form-blok-title">Интересующая услуга</div>
+      <div class="form-row">
+        <Select name="service" list={services} />
       </div>
     </div>
     <div class="form-block">

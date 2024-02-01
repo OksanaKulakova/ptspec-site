@@ -205,6 +205,12 @@ input {
   font: inherit;
   color: inherit;
   background-color: transparent;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+  text-transform: uppercase;
 }
 
 input::placeholder {

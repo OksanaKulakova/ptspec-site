@@ -1,0 +1,166 @@
+---
+interface Props {
+  name: string;
+  list: Array<Option>;
+}
+
+interface Option {
+  title: string;
+  slug: string;
+}
+
+const { name, list } = Astro.props;
+---
+
+<script>
+  class AstroSelect extends HTMLElement {
+    constructor() {
+      super();
+
+      const input:HTMLInputElement = this.querySelector('.input');
+      const items: NodeListOf<HTMLElement> = this.querySelectorAll(".select-list-item");
+
+      const text = items[0].innerText;
+      input.value = text;
+
+      const list: HTMLElement | null = this.querySelector(".select-list");
+
+      function toggleOpenList(): void {
+        list.classList.toggle("select-list--open");
+      }
+
+      const select: HTMLElement = this.querySelector('.select-input');
+
+      select?.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+        const width: number = window.innerWidth;
+
+        if (width >= 1024) {
+          toggleOpenList();
+          console.log(event.target);
+        }
+      });
+
+      const elements: NodeListOf<HTMLElement> = this.querySelectorAll(".select-list-item");
+
+      elements.forEach((el: HTMLElement) => {
+        if (el.innerText === text) {
+          el.classList.add("select-list-item--active");
+        }
+      });
+
+      function deleteActiveClass(): void {
+        elements.forEach((el: HTMLElement) => {
+          el.classList.remove("select-list-item--active");
+        });
+      }
+
+      elements.forEach((el: HTMLElement) => {
+        el.addEventListener("click", (event: Event) => {
+          event.preventDefault();
+          deleteActiveClass();
+
+          let target: HTMLElement = event.target as HTMLElement;
+          target.classList.add("select-list-item--active");
+          const text = target.innerText;
+          input.value = text;
+        });
+      });
+    }
+  }
+
+  customElements.define("astro-select", AstroSelect);
+</script>
+
+<astro-select>
+  <div class="select-container">
+    <div class="select-input">
+      <input class="input" type="text" name={name} readonly />
+
+      <div class="select-input-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 6L9 12L15 18V6Z" fill="#161619"/>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="select-list">
+      {
+        list.map((item: Option) => (
+          <div class="select-list-item">{item.title}</div>
+        ))
+      }
+    </div>
+  </div>
+</astro-select>
+
+<style>
+  astro-select {
+    width: 100%;
+  }
+
+  .select-container {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .select-input {
+    position: relative;
+  }
+
+  .select-input .input {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .select-input-icon {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    pointer-events: none;
+  }
+
+  .select-input-icon svg {
+    pointer-events: none;
+  }
+
+  .select-list {
+    display: none;
+  }
+
+  .select-list-item {
+    padding: 16px;
+  }
+
+  .select-list-item:hover {
+    background-color: #fe5639;
+    color: #faf8f8;
+    cursor: pointer;
+  }
+
+  .select-list-item--active {
+    color: #fe5639;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .select-list {
+      display: none;
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 100%;
+      height: 320px;
+      background-color: #faf8f8;
+      padding: 16px 0;
+      outline: 1px solid #161619;
+      outline-offset: -1px;
+      overflow-y: auto;
+      z-index: 5;
+    }
+
+    .select-list--open {
+      display: block;
+    }
+  }
+</style>
