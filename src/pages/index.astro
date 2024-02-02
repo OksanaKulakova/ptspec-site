@@ -100,10 +100,14 @@ const cards2: card[] = [
     cards={cardsForWidget}
   />
 
-  <section class="section">
-    <h2 class="title">Эффективно решаем <br /> поставленные задачи</h2>
-    <List list={services} />
-  </section>
+  {
+    (services.length > 0) && (
+      <section class="section">
+        <h2 class="title">Эффективно решаем <br /> поставленные задачи</h2>
+        <List list={services} />
+      </section>
+    )
+  }
 
   <Cards cards={cards1} />
 
