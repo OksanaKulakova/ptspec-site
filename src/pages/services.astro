@@ -1,13 +1,10 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import List from "@components/List.astro";
-import services from "@data/services.json";
 import gratitudes from "@data/gratitudes.json";
+import getServises from "@data/getServices";
 
-const list = services.map((item) => ({
-  ...item,
-  href: `/services/${item.slug}/`,
-}));
+const services = await getServises();
 
 const count = services.length;
 ---
@@ -15,7 +12,7 @@ const count = services.length;
 <Layout title="УСЛУГИ">
   <section class="section">
     <h2 class="title">УСЛУГИ / {count}</h2>
-    <List list={list} />
+    <List list={services} />
   </section>
 
   <section class="section">

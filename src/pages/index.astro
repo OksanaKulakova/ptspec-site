@@ -3,8 +3,11 @@ import Layout from "@layouts/Layout.astro";
 import Widget from "@components/Widget.astro";
 import List from "@components/List.astro";
 import Cards from "@components/Cards.astro";
-import services from "@data/services.json";
 import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
+
+import getServises from "@data/getServices";
+
+const services = await getServises();
 
 type cardWidget = {
   title: string;
@@ -25,11 +28,6 @@ const cardsForWidget: cardWidget[] = [
     text: "Более 30 <br> регионов <br> присутствия",
   },
 ];
-
-const list = services.map((item) => ({
-  ...item,
-  href: `/services/${item.slug}/`,
-}));
 
 type linkItem = {
   link?: string;
@@ -104,7 +102,7 @@ const cards2: card[] = [
 
   <section class="section">
     <h2 class="title">Эффективно решаем <br /> поставленные задачи</h2>
-    <List list={list} />
+    <List list={services} />
   </section>
 
   <Cards cards={cards1} />
