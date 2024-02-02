@@ -228,6 +228,37 @@ input:focus {
   outline: none;
 }
 
+.page-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.page-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-block-title {
+  padding-top: 16px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #161619;
+}
+
+.page-block-text {
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.05em;
+  color: #161619;
+  text-transform: none;
+}
+
 @media screen and (min-width: 1024px) {
   .section {
     gap: 32px;
@@ -238,5 +269,28 @@ input:focus {
     font-size: 64px;
     line-height: 72px;
     letter-spacing: -4.48px;
+  }
+
+  .page-blocks {
+    width: 50%;
+    margin-left: auto;
+    gap: 64px;
+  }
+
+  .page-block {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .page-block-title {
+    width: calc(50% - 8px);
+    padding: 16px 0;
+  }
+
+  .page-block-text {
+    width: calc(50% - 8px);
+    padding-top: 16px;
+    font-size: 16px;
+    line-height: 24px;
   }
 }

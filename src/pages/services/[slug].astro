@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 type Props = Service;
 
 const service = Astro.props;
-const { title, slug } = service.attributes;
+const { title, slug, description, textTitle, text, result } = service.attributes;
 
 const otherServices = pages.filter((page) => page.slug !== slug);
 
@@ -54,7 +54,22 @@ const breadcrumbs: Crumb[] = [
     <h2 class="title">{title}</h2>
     <div class="page">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div class="page-content"></div>
+      <div class="page-content">
+        <div class="page-blocks">
+          <div class="page-block">
+            <div class="page-block-title">Описание услуги</div>
+            <div class="page-block-text">{description}</div>
+          </div>
+          <div class="page-block">
+            <div class="page-block-title">{textTitle}</div>
+            <div class="page-block-text">{text}</div>
+          </div>
+          <div class="page-block">
+            <div class="page-block-title">результат</div>
+            <div class="page-block-text">{result}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
