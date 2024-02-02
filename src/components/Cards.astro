@@ -7,6 +7,7 @@ type linkItem = {
   link?: string;
   href?: string;
   classLink?: string;
+  blank?: boolean;
 };
 
 interface Card {
@@ -46,6 +47,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
                 class="card-link link"
                 class:list={[item.classLink]}
                 href={item.href}
+                target={item.blank ? "_blank" : "_self"}
               >
                 {item.link}
               </a>

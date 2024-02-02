@@ -92,6 +92,7 @@ type linkItem = {
   link?: string;
   href?: string;
   classLink?: string;
+  blank?: boolean;
 };
 
 type card = {
@@ -111,19 +112,23 @@ const cards1: card[] = [
     links: [
       {
         link: "2019",
-        href: "#",
+        href: "/pdf/2019.pdf",
+        blank: true,
       },
       {
         link: "2020",
-        href: "#",
+        href: "/pdf/2020.pdf",
+        blank: true,
       },
       {
         link: "2021",
-        href: "#",
+        href: "/pdf/2021.pdf",
+        blank: true,
       },
       {
         link: "2022",
-        href: "#",
+        href: "/pdf/2022.pdf",
+        blank: true,
       },
     ],
   },
@@ -134,7 +139,8 @@ const cards1: card[] = [
     links: [
       {
         link: "2023",
-        href: "#",
+        href: "/pdf/Топ–10%20лучших%20работодателей%20Пермского%20края.pdf",
+        blank: true,
       },
     ],
   },
