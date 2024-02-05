@@ -1,22 +1,126 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import pages from "@data/projects.json";
+import List from "@components/List.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+
+import fetchApi from "@lib/strapi";
+import type Project from "@interfaces/project";
+
+import getProjects from "@data/getProjects";
+
+import { marked } from 'marked';
+
+const pages = await getProjects();
 
 export async function getStaticPaths() {
-  return pages.map(({ slug, title }) => {
-    return {
-      params: { slug },
-      props: { title: title.toUpperCase(), slug },
-    };
+  const projects = await fetchApi<Project[]>({
+    endpoint: "projects",
+    wrappedByKey: "data",
+    query: { "populate[services][fields][0]": "title", "populate[services][fields][1]": "slug" },
   });
+
+  return projects.map((project) => ({
+    params: { slug: project.attributes.slug },
+    props: project,
+  }));
 }
 
-const { title, slug } = Astro.props;
+type Props = Project;
+
+const project = Astro.props;
+const { title, slug, region, type, deadline, services } = project.attributes;
+
+const customer = marked.parse(project.attributes.customer || '');
+
+const otherProjects = pages.filter((page) => page.slug !== slug);
+
+type Crumb = {
+  title: string;
+  href?: string;
+};
+
+const breadcrumbs: Crumb[] = [
+  {
+    title: "Главная",
+    href: "/",
+  },
+  {
+    title: "Проекты",
+    href: "/projects/",
+  },
+  {
+    title: title,
+  },
+];
 ---
 
 <Layout title={title}>
   <section class="section">
     <h2 class="title">{title}</h2>
-    <div>{slug}</div>
+    <div class="page">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <div class="page-content">
+        <div class="page-blocks">
+          {
+            region && (
+              <div class="page-block">
+                <div class="page-block-title">Регион</div>
+                <div class="page-block-text">{region}</div>
+              </div>
+            )
+          }
+
+          {
+            type && (
+              <div class="page-block">
+                <div class="page-block-title">Тип объекта</div>
+                <div class="page-block-text">{type}</div>
+              </div>
+            )
+          }
+
+          {
+            deadline && (
+              <div class="page-block">
+                <div class="page-block-title">Срок выполнения работ</div>
+                <div class="page-block-text">{deadline}</div>
+              </div>
+            )
+          }
+
+          {
+            customer && (
+              <div class="page-block">
+                <div class="page-block-title">Заказчики</div>
+                <div class="page-block-text" set:html={customer}></div>
+              </div>
+            )
+          }
+
+          {
+            services && (
+              <div class="page-block">
+                <div class="page-block-title">Оказанные услуги</div>
+                <div class="page-block-text">
+                  <ul>
+                    {
+                      services.data.map((item) => (
+                        <li>{item.attributes.title}</li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </div>
+            )
+          }
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="title">Другие проекты</h2>
+    <List list={otherProjects} />
   </section>
 </Layout>

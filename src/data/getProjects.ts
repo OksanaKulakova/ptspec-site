@@ -1,17 +1,17 @@
 import fetchApi from "@lib/strapi";
-import type Service from "@interfaces/service";
+import type Project from "@interfaces/project";
 
 export default async function getServises() {
-  const services = await fetchApi<Service[]>({
-    endpoint: "services",
+  const projects = await fetchApi<Project[]>({
+    endpoint: "projects",
     wrappedByKey: "data",
     query: { "fields[0]": "title", "fields[1]": "slug" },
   });
 
-  const list = services.map((item) => ({
+  const list = projects.map((item) => ({
     id: item.id,
     title: item.attributes.title,
-    href: `/services/${item.attributes.slug}/`,
+    href: `/projects/${item.attributes.slug}/`,
     slug: item.attributes.slug,
   }));
 

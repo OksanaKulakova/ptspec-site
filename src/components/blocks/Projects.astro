@@ -1,16 +1,14 @@
 ---
 import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
-import projects from "@data/projects.json";
-import services from "@data/services.json";
+import getServises from "@data/getServices";
+import getProjects from "@data/getProjects";
 
-const list = projects.map((item) => ({
-  ...item,
-  href: `/projects/${item.slug}/`,
-}));
+const services = await getServises();
+const projects = await getProjects();
 ---
 
 <div>
   <Filter filters={services} />
-  <List list={list} />
+  <List list={projects} />
 </div>
