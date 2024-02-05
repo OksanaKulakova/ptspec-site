@@ -8,6 +8,8 @@ import type Service from "@interfaces/service";
 
 import getServises from "@data/getServices";
 
+import { marked } from 'marked';
+
 const pages = await getServises();
 
 export async function getStaticPaths() {
@@ -25,8 +27,11 @@ export async function getStaticPaths() {
 type Props = Service;
 
 const service = Astro.props;
-const { title, slug, description, textTitle, text, result } =
-  service.attributes;
+const { title, slug, textTitle } = service.attributes;
+
+const description = marked.parse(service.attributes.description);
+const text = marked.parse(service.attributes.text);
+const result = marked.parse(service.attributes.result);
 
 const otherServices = pages.filter((page) => page.slug !== slug);
 
@@ -61,7 +66,7 @@ const breadcrumbs: Crumb[] = [
             description && (
               <div class="page-block">
                 <div class="page-block-title">Описание услуги</div>
-                <div class="page-block-text">{description}</div>
+                <div class="page-block-text" set:html={description}></div>
               </div>
             )
           }
@@ -79,10 +84,12 @@ const breadcrumbs: Crumb[] = [
             result && (
               <div class="page-block">
                 <div class="page-block-title">результат</div>
-                <div class="page-block-text">{result}</div>
+                <div class="page-block-text" set:html={result}></div>
               </div>
             )
           }
+
+          <button class="btn show-modal">Оставить заявку на услугу</button>
         </div>
       </div>
     </div>
