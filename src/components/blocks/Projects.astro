@@ -1,15 +1,37 @@
 ---
+interface Props {
+  projects: Array<Project>;
+}
+
+type Project = {
+  id: number;
+  title: string;
+  href: string;
+  slug: string;
+}
+
 import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
-import getServises from "@data/getServices";
-import getProjects from "@data/getProjects";
 
-const services = await getServises();
+import fetchApi from "@lib/strapi";
+import type Service from "@interfaces/service";
 
-const projects = await getProjects();
+const services = await fetchApi<Service[]>({
+    endpoint: "services",
+    wrappedByKey: "data",
+    query: { "fields[0]": "title", "fields[1]": "slug", "populate[0]": "projects" },
+  });
+
+const filters = services.map((item: Service) => ({
+  id: item.id,
+  title: item.attributes.title,
+  count: Number(item.attributes.projects.data.length),
+}));
+
+const { projects } = Astro.props;
 ---
 
 <div>
-  <Filter filters={services} />
+  <Filter filters={filters} />
   <List list={projects} />
 </div>
