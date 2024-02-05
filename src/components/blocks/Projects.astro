@@ -8,7 +8,7 @@ type Project = {
   title: string;
   href: string;
   slug: string;
-}
+};
 
 import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
@@ -17,10 +17,14 @@ import fetchApi from "@lib/strapi";
 import type Service from "@interfaces/service";
 
 const services = await fetchApi<Service[]>({
-    endpoint: "services",
-    wrappedByKey: "data",
-    query: { "fields[0]": "title", "fields[1]": "slug", "populate[0]": "projects" },
-  });
+  endpoint: "services",
+  wrappedByKey: "data",
+  query: {
+    "fields[0]": "title",
+    "fields[1]": "slug",
+    "populate[0]": "projects",
+  },
+});
 
 const filters = services.map((item: Service) => ({
   id: item.id,

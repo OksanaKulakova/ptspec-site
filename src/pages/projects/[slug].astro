@@ -8,7 +8,7 @@ import type Project from "@interfaces/project";
 
 import getProjects from "@data/getProjects";
 
-import { marked } from 'marked';
+import { marked } from "marked";
 
 const pages = await getProjects();
 
@@ -16,7 +16,10 @@ export async function getStaticPaths() {
   const projects = await fetchApi<Project[]>({
     endpoint: "projects",
     wrappedByKey: "data",
-    query: { "populate[services][fields][0]": "title", "populate[services][fields][1]": "slug" },
+    query: {
+      "populate[services][fields][0]": "title",
+      "populate[services][fields][1]": "slug",
+    },
   });
 
   return projects.map((project) => ({
@@ -30,7 +33,7 @@ type Props = Project;
 const project = Astro.props;
 const { title, slug, region, type, deadline, services } = project.attributes;
 
-const customer = marked.parse(project.attributes.customer || '');
+const customer = marked.parse(project.attributes.customer || "");
 
 const otherProjects = pages.filter((page) => page.slug !== slug);
 
@@ -92,7 +95,7 @@ const breadcrumbs: Crumb[] = [
             customer && (
               <div class="page-block">
                 <div class="page-block-title">Заказчики</div>
-                <div class="page-block-text" set:html={customer}></div>
+                <div class="page-block-text" set:html={customer} />
               </div>
             )
           }
@@ -103,17 +106,14 @@ const breadcrumbs: Crumb[] = [
                 <div class="page-block-title">Оказанные услуги</div>
                 <div class="page-block-text">
                   <ul>
-                    {
-                      services.data.map((item) => (
-                        <li>{item.attributes.title}</li>
-                      ))
-                    }
+                    {services.data.map((item) => (
+                      <li>{item.attributes.title}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
             )
           }
-
         </div>
       </div>
     </div>

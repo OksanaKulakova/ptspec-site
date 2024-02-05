@@ -26,19 +26,23 @@ const service = Astro.props;
 const { slug } = service.attributes;
 
 const projects = await fetchApi<Project[]>({
-    endpoint: "projects",
-    wrappedByKey: "data",
-    query: { "fields[0]": "title", "fields[1]": "slug", "filters[services][slug]": slug },
-  });
+  endpoint: "projects",
+  wrappedByKey: "data",
+  query: {
+    "fields[0]": "title",
+    "fields[1]": "slug",
+    "filters[services][slug]": slug,
+  },
+});
 
 const count = projects.length;
 
 const list = projects.map((item) => ({
-    id: item.id,
-    title: item.attributes.title,
-    href: `/projects/${item.attributes.slug}/`,
-    slug: item.attributes.slug,
-  }));
+  id: item.id,
+  title: item.attributes.title,
+  href: `/projects/${item.attributes.slug}/`,
+  slug: item.attributes.slug,
+}));
 ---
 
 <Layout title="ПРОЕКТЫ">

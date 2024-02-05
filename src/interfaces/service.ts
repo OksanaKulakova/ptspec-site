@@ -7,7 +7,7 @@ export default interface Service {
     textTitle: string;
     text: string;
     result: string;
-    projects: any,
+    projects: any;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;

@@ -1,7 +1,7 @@
 import fetchApi from "@lib/strapi";
 import type Project from "@interfaces/project";
 
-export default async function getServises() {
+export default async function getProjects() {
   const projects = await fetchApi<Project[]>({
     endpoint: "projects",
     wrappedByKey: "data",

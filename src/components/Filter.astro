@@ -7,7 +7,7 @@ type Filter = {
   id: number;
   title: string;
   count: number;
-}
+};
 
 const { filters } = Astro.props;
 
@@ -144,7 +144,9 @@ import ModalSmall from "./ModalSmall.astro";
         <div class="filter-list">
           {
             filters.map((f: Filter) => (
-              <div class="filter-list-item">{f.title} / {f.count}</div>
+              <div class="filter-list-item">
+                {f.title} / {f.count}
+              </div>
             ))
           }
         </div>
@@ -154,7 +156,9 @@ import ModalSmall from "./ModalSmall.astro";
             <div class="filter-list-mobile">
               {
                 filters.map((f: Filter) => (
-                  <div class="filter-list-item">{f.title}</div>
+                  <div class="filter-list-item">
+                    {f.title} / {f.count}
+                  </div>
                 ))
               }
             </div>
