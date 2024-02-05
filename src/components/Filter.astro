@@ -3,8 +3,8 @@ interface Props {
   filters: Array<Filter>;
 }
 
-interface Filter {
-  id: string;
+type Filter = {
+  id: number;
   title: string;
   slug: string;
 }

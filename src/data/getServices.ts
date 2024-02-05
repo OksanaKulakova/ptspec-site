@@ -8,7 +8,7 @@ export default async function getServises() {
     query: { "fields[0]": "title", "fields[1]": "slug" },
   });
 
-  const list = services.map((item) => ({
+  const list = services.map((item: Service) => ({
     id: item.id,
     title: item.attributes.title,
     href: `/services/${item.attributes.slug}/`,
