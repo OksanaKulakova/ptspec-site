@@ -12,6 +12,13 @@
   src: url("/fonts/RobotoMono-VariableFont_wght.ttf");
 }
 
+@font-face {
+  font-family: Roboto Mono;
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/RobotoMono-VariableFont_wght.ttf");
+}
+
 :root {
   font-family: Roboto_Condensed, sans-serif;
   font-size: 16px;
@@ -263,7 +270,20 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-left: 20px;
+  padding-left: 30px;
+}
+
+.page-block-text h4 {
+  margin-top: 22px;
+  margin-bottom: 8px;
+}
+
+.page-block-text h4:first-child {
+  margin-top: 0;
+}
+
+.page-block-text h4 ~ p {
+  margin: 8px 0;
 }
 
 @media screen and (min-width: 1024px) {
@@ -299,5 +319,9 @@ input:focus {
     padding-top: 16px;
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .page-block-text h4 {
+    margin-top: 24px;
   }
 }

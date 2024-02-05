@@ -29,9 +29,9 @@ type Props = Service;
 const service = Astro.props;
 const { title, slug, textTitle } = service.attributes;
 
-const description = marked.parse(service.attributes.description);
-const text = marked.parse(service.attributes.text);
-const result = marked.parse(service.attributes.result);
+const description = marked.parse(service.attributes.description || '');
+const text = marked.parse(service.attributes.text || '');
+const result = marked.parse(service.attributes.result || '');
 
 const otherServices = pages.filter((page) => page.slug !== slug);
 
