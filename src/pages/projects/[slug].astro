@@ -9,6 +9,7 @@ import type Project from "@interfaces/project";
 import getProjects from "@data/getProjects";
 
 import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
 
 const pages = await getProjects();
 
@@ -19,6 +20,8 @@ export async function getStaticPaths() {
     query: {
       "populate[services][fields][0]": "title",
       "populate[services][fields][1]": "slug",
+      "pagination[start]": "0",
+      "pagination[limit]": "100",
     },
   });
 
@@ -31,9 +34,11 @@ export async function getStaticPaths() {
 type Props = Project;
 
 const project = Astro.props;
-const { title, slug, region, type, deadline, services } = project.attributes;
+const { slug, region, type, deadline, services } = project.attributes;
 
-const customer = marked.parse(project.attributes.customer || "");
+const title = replaceQuotes(project.attributes.title);
+
+const customer = marked.parse(replaceQuotes(project.attributes.customer) || "");
 
 const otherProjects = pages.filter((page) => page.slug !== slug);
 
