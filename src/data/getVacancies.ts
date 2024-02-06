@@ -1,5 +1,6 @@
 import fetchApi from "@lib/strapi";
 import type Vacancy from "@interfaces/vacancy";
+import replaceQuotes from "@utils/replaceQuotes";
 
 export default async function getvacancys() {
   const vacancies = await fetchApi<Vacancy[]>({
@@ -14,7 +15,7 @@ export default async function getvacancys() {
 
   const list = vacancies.map((item) => ({
     id: item.id,
-    title: item.attributes.title,
+    title: replaceQuotes(item.attributes.title),
     href: `/vacancies/${item.attributes.slug}/`,
     slug: item.attributes.slug,
   }));

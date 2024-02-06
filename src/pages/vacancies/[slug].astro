@@ -12,6 +12,7 @@ import type Vacancy from "@interfaces/vacancy";
 import getVacancies from "@data/getVacancies";
 
 import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
 
 const pages = await getVacancies();
 
@@ -31,7 +32,9 @@ type Props = Vacancy;
 
 const vacancy = Astro.props;
 
-const { title, slug } = vacancy.attributes;
+const { slug } = vacancy.attributes;
+
+const title = replaceQuotes(vacancy.attributes.title);
 
 const responsibilities = marked.parse(vacancy.attributes.responsibilities || "");
 const directionwork = marked.parse(vacancy.attributes.directionwork || "");

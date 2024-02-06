@@ -1,5 +1,6 @@
 import fetchApi from "@lib/strapi";
 import type Project from "@interfaces/project";
+import replaceQuotes from "@utils/replaceQuotes";
 
 export default async function getProjects() {
   const projects = await fetchApi<Project[]>({
@@ -16,7 +17,7 @@ export default async function getProjects() {
 
   const list = projects.map((item) => ({
     id: item.id,
-    title: item.attributes.title,
+    title: replaceQuotes(item.attributes.title),
     href: `/projects/${item.attributes.slug}/`,
     slug: item.attributes.slug,
   }));
