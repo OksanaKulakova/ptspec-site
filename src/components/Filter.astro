@@ -87,11 +87,12 @@ import ModalSmall from "./ModalSmall.astro";
 
           let target: HTMLElement = event.target as HTMLElement;
 
-          const text = target.innerText;
+          const text = target.innerText.split("/")[0];
+
           const filterId = target.dataset.filterId;
 
           elements.forEach((el: HTMLElement) => {
-            if (el.innerText.toLowerCase() == text.toLowerCase()) {
+            if (el.dataset.filterId == filterId) {
               el.classList.add("filter-list-item--active");
             }
           });
@@ -103,6 +104,8 @@ import ModalSmall from "./ModalSmall.astro";
           btnReset.forEach((btn: Element) => {
             btn.removeAttribute("disabled");
           });
+
+          closeOpenList();
         });
       });
 

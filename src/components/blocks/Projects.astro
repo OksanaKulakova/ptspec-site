@@ -35,35 +35,74 @@ const filters = services.map((item: Service) => ({
 ---
 
 <script>
-  class AstroFilterList extends HTMLElement {
+  class AstroFilterContent extends HTMLElement {
     constructor() {
       super();
     }
   }
 
-  customElements.define("astro-filter-list", AstroFilterList);
+  const btnOpen: HTMLElement | null = document.querySelector(".filter-button-open");
+
+  const elements: NodeListOf<HTMLElement> = document.querySelectorAll(".filter-content");
+
+  const countElement: HTMLElement | null = document.querySelector("#count");
+
+  const hideElements = (): void => {
+    elements.forEach((el: HTMLElement) => {
+      el.style.display = "none";
+    });
+  }
+
+  const showElement = (id: string): void => {
+    elements.forEach((el: HTMLElement) => {
+      if (el.dataset.filterId === id) {
+        el.style.display = "block";
+        const count = el.dataset.count;
+        countElement.innerText = count;
+      }
+    }); 
+  }
+
+  let observer = new MutationObserver((mutationRecords: MutationRecord[]) => {
+    const filterId: string | undefined = btnOpen.dataset.filterId;
+    hideElements();
+
+    if (filterId) {
+      showElement(filterId);
+    }
+  });
+
+  observer.observe(btnOpen, {
+    attributes: true,
+  });
+
+  customElements.define("astro-filter-content", AstroFilterContent);
 </script>
 
 <h2 class="title">ПРОЕКТЫ / <span id="count">{count}</span></h2>
 
-<astro-filter-list>
+<astro-filter-content>
   <Filter filters={filters} />
 
-  <div class="filter-list-all">
+  <div class="filter-content" data-filter-id="0" data-count={count}>
     <List list={projects} />
   </div>
 
   {
     filters.map((item) => (
-      <div class="filter-list" data-filter-id={item.id}>
+      <div class="filter-content" data-filter-id={item.id} data-count={item.count}>
         <List list={item.projects} />
       </div>
     ))
   }
-</astro-filter-list>
+</astro-filter-content>
 
 <style>
-  .filter-list {
+  .filter-content[data-filter-id="0"] {
+    display: block;
+  }
+
+  .filter-content {
     display: none;
   }
 </style>
