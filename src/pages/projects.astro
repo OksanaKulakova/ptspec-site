@@ -4,16 +4,15 @@ import List from "@components/List.astro";
 import gratitudes from "@data/gratitudes.json";
 import ProjectList from "@components/blocks/Projects.astro";
 
-import getProjects from "@data/getProjects";
-const projects = await getProjects();
+// import getProjects from "@data/getProjects";
+// const projects = await getProjects();
 
-const count = projects.length;
+// const count = projects.length;
 ---
 
 <Layout title="ПРОЕКТЫ">
   <section class="section">
-    <h2 class="title">ПРОЕКТЫ / {count}</h2>
-    <ProjectList projects={projects} />
+    <ProjectList />
   </section>
 
   <section class="section">

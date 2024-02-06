@@ -71,6 +71,7 @@ import ModalSmall from "./ModalSmall.astro";
         deleteActiveClass();
         btnOpen.classList.remove("filter-button--active");
         btnOpen.childNodes[0].textContent = "Фильтровать по услуге";
+        btnOpen.dataset.filterId = '0';
 
         btnReset.forEach((btn: Element) => {
           btn.setAttribute("disabled", "true");
@@ -87,6 +88,7 @@ import ModalSmall from "./ModalSmall.astro";
           let target: HTMLElement = event.target as HTMLElement;
 
           const text = target.innerText;
+          const filterId = target.dataset.filterId;
 
           elements.forEach((el: HTMLElement) => {
             if (el.innerText.toLowerCase() == text.toLowerCase()) {
@@ -96,6 +98,7 @@ import ModalSmall from "./ModalSmall.astro";
 
           btnOpen.classList.add("filter-button--active");
           btnOpen.childNodes[0].textContent = text;
+          btnOpen.dataset.filterId = filterId;
 
           btnReset.forEach((btn: Element) => {
             btn.removeAttribute("disabled");
@@ -121,7 +124,7 @@ import ModalSmall from "./ModalSmall.astro";
       <div class="filter-wrapper">
         <div class="filter">
           <div class="filter-block">
-            <button class="filter-button filter-button-open button-open-modal">
+            <button class="filter-button filter-button-open button-open-modal" data-filter-id="0">
               Фильтровать по услуге
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +147,7 @@ import ModalSmall from "./ModalSmall.astro";
         <div class="filter-list">
           {
             filters.map((f: Filter) => (
-              <div class="filter-list-item">
+              <div class="filter-list-item" data-filter-id={f.id}>
                 {f.title} / {f.count}
               </div>
             ))
@@ -156,7 +159,7 @@ import ModalSmall from "./ModalSmall.astro";
             <div class="filter-list-mobile">
               {
                 filters.map((f: Filter) => (
-                  <div class="filter-list-item">
+                  <div class="filter-list-item" data-filter-id={f.id}>
                     {f.title} / {f.count}
                   </div>
                 ))

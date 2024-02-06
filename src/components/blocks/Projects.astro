@@ -1,20 +1,14 @@
 ---
-interface Props {
-  projects: Array<Project>;
-}
-
-type Project = {
-  id: number;
-  title: string;
-  href: string;
-  slug: string;
-};
-
 import List from "@components/List.astro";
 import Filter from "@components/Filter.astro";
 
 import fetchApi from "@lib/strapi";
 import type Service from "@interfaces/service";
+
+import getProjects from "@data/getProjects";
+const projects = await getProjects();
+
+const count = projects.length;
 
 const services = await fetchApi<Service[]>({
   endpoint: "services",
@@ -22,7 +16,8 @@ const services = await fetchApi<Service[]>({
   query: {
     "fields[0]": "title",
     "fields[1]": "slug",
-    "populate[0]": "projects",
+    "populate[projects][fields][0]": "title",
+    "populate[projects][fields][1]": 'slug',
   },
 });
 
@@ -30,12 +25,45 @@ const filters = services.map((item: Service) => ({
   id: item.id,
   title: item.attributes.title,
   count: Number(item.attributes.projects.data.length),
+  projects: item.attributes.projects.data.map((item) => ({
+    id: item.id,
+    title: item.attributes.title,
+    href: `/projects/${item.attributes.slug}/`,
+  }))
 }));
 
-const { projects } = Astro.props;
 ---
 
-<div>
+<script>
+  class AstroFilterList extends HTMLElement {
+    constructor() {
+      super();
+    }
+  }
+
+  customElements.define("astro-filter-list", AstroFilterList);
+</script>
+
+<h2 class="title">ПРОЕКТЫ / <span id="count">{count}</span></h2>
+
+<astro-filter-list>
   <Filter filters={filters} />
-  <List list={projects} />
-</div>
+
+  <div class="filter-list-all">
+    <List list={projects} />
+  </div>
+
+  {
+    filters.map((item) => (
+      <div class="filter-list" data-filter-id={item.id}>
+        <List list={item.projects} />
+      </div>
+    ))
+  }
+</astro-filter-list>
+
+<style>
+  .filter-list {
+    display: none;
+  }
+</style>
