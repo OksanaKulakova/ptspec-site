@@ -5,24 +5,21 @@ interface Props {
 }
 
 type ListItem = {
+  id: number;
   title: string;
+  href: string;
   slug: string;
 };
 
 import List from "@components/List.astro";
 
 const { title, data } = Astro.props;
-
-const list = data.map((item) => ({
-  ...item,
-  href: `/vacancies/${item.slug}/`,
-}));
 ---
 
 <section class="vacancies">
   <h2 class="title">{title}</h2>
 
-  <List list={list} />
+  <List list={data} />
 
   <div class="promt">
     <div class="promt-block">

@@ -1,13 +1,11 @@
-export default interface Project {
+export default interface Vacancy {
   id: number;
   attributes: {
     title: string;
     slug: string;
-    region: string;
-    type: string;
-    deadline: string;
-    customer: string;
-    services: any;
+    responsibilities: string;
+    directionwork: string;
+    requirements: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;

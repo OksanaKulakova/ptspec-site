@@ -5,10 +5,12 @@ import Vacancies from "@components/blocks/Vacancies.astro";
 import Team from "@components/Team.astro";
 import SimpleList from "@components/SimpleList.astro";
 import Cards from "@components/Cards.astro";
-import vacancies from "@data/vacancies.json";
 import Modal from "@components/Modal.astro";
 import Form from "@components/forms/FormVacancy.astro";
 import Form2 from "@components/forms/FormVacancyOther.astro";
+
+import getVacancies from "@data/getVacancies";
+const vacancies = await getVacancies();
 
 type cardWidget = {
   title: string;

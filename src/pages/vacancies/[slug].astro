@@ -2,20 +2,42 @@
 import Layout from "@layouts/Layout.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Vacancies from "@components/blocks/Vacancies.astro";
-import pages from "@data/vacancies.json";
+import Modal from "@components/Modal.astro";
+import Form from "@components/forms/FormVacancy.astro";
+import Form2 from "@components/forms/FormVacancyOther.astro";
+
+import fetchApi from "@lib/strapi";
+import type Vacancy from "@interfaces/vacancy";
+
+import getVacancies from "@data/getVacancies";
+
+import { marked } from "marked";
+
+const pages = await getVacancies();
 
 export async function getStaticPaths() {
-  return pages.map(({ slug, title }) => {
-    return {
-      params: { slug },
-      props: { title: title.toUpperCase(), slug },
-    };
+  const vacancies = await fetchApi<Vacancy[]>({
+    endpoint: "vacancies",
+    wrappedByKey: "data",
   });
+
+  return vacancies.map((vacancy) => ({
+    params: { slug: vacancy.attributes.slug },
+    props: vacancy,
+  }));
 }
 
-const { title, slug } = Astro.props;
+type Props = Vacancy;
 
-const otherServices = pages.filter((page) => page.slug !== slug);
+const vacancy = Astro.props;
+
+const { title, slug } = vacancy.attributes;
+
+const responsibilities = marked.parse(vacancy.attributes.responsibilities || "");
+const directionwork = marked.parse(vacancy.attributes.directionwork || "");
+const requirements = marked.parse(vacancy.attributes.requirements || "");
+
+const otherVacancies = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {
   title: string;
@@ -42,9 +64,53 @@ const breadcrumbs: Crumb[] = [
     <h2 class="title">{title}</h2>
     <div class="page">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div class="page-content"></div>
+      <div class="page-content">
+        <div class="page-blocks">
+          {
+            responsibilities && (
+              <div class="page-block">
+                <div class="page-block-title">Обязанности</div>
+                <div class="page-block-text" set:html={responsibilities} />
+              </div>
+            )
+          }
+
+          {
+            directionwork && (
+              <div class="page-block">
+                <div class="page-block-title">Направление работ</div>
+                <div class="page-block-text" set:html={directionwork} />
+              </div>
+            )
+          }
+
+          {
+            requirements && (
+              <div class="page-block">
+                <div class="page-block-title">Требования</div>
+                <div class="page-block-text" set:html={requirements} />
+              </div>
+            )
+          }
+
+          <button class="btn show-modal" data-modal-id="2">Откликнуться на вакансию</button>
+      </div>
     </div>
   </section>
 
-  <Vacancies title="другие вакансии" data={otherServices} />
+  <Vacancies title="другие вакансии" data={otherVacancies} />
 </Layout>
+
+<Modal id={2}>
+  <Fragment slot="title">
+    Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+  </Fragment>
+  <Fragment slot="content"><Form /></Fragment>
+</Modal>
+
+<Modal id={3}>
+  <Fragment slot="title">
+    Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+  </Fragment>
+  <Fragment slot="content"><Form2 /></Fragment>
+</Modal>
