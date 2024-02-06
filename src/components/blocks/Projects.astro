@@ -18,6 +18,7 @@ const services = await fetchApi<Service[]>({
     "fields[1]": "slug",
     "populate[projects][fields][0]": "title",
     "populate[projects][fields][1]": 'slug',
+    "sort[0]": "id",
   },
 });
 
