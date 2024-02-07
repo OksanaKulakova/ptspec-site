@@ -1,9 +1,23 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Tabs from "@components/Tabs.astro";
+import List from "@components/List.astro";
+
+import getNews from "@data/getNews";
+
+const news = await getNews();
+
+const countTab1 = news.length;
+
 ---
 
 <Layout title="ЖУРНАЛ">
-  <section class="section">
-    <h2 class="title">ЖУРНАЛ</h2>
-  </section>
+  <Tabs
+    title="ЖУРНАЛ"
+    tab1=`Новости компании / ${countTab1}`
+    tab2=`СМИ о нас / ${countTab1}`
+  >
+    <Fragment slot="tabcontent-1"><List list={news} /></Fragment>
+    <Fragment slot="tabcontent-2"><List list={news} /></Fragment>
+  </Tabs>
 </Layout>

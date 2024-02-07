@@ -7,6 +7,7 @@ interface List {
   title: string;
   href?: string;
   blank?: boolean;
+  sign?: string;
 }
 
 const { list } = Astro.props;
@@ -71,6 +72,12 @@ const { list } = Astro.props;
         >
           <div class="list-item-content">
             <div class="list-item-name">{item.title}</div>
+
+            {
+              item.sign && (
+                <div class="list-item-sign">{item.sign}</div>
+              )
+            }
           </div>
           {item.href && (
             <div class="list-item-icon">
@@ -137,6 +144,15 @@ const { list } = Astro.props;
     text-transform: uppercase;
   }
 
+  .list-item-sign {
+    max-width: 488px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: rgba(22, 22, 25, 0.5);
+  }
+
   .list-item::before {
     content: "";
     position: absolute;
@@ -162,6 +178,10 @@ const { list } = Astro.props;
 
   .list-item-clickable:hover {
     background-color: #fe5639;
+    color: #faf8f8;
+  }
+
+  .list-item-clickable:hover .list-item-sign {
     color: #faf8f8;
   }
 
@@ -234,6 +254,10 @@ const { list } = Astro.props;
       font-size: 24px;
       line-height: 32px;
       letter-spacing: -1.44px;
+    }
+
+    .list-item-sign {
+      max-width: 920px;
     }
 
     .list-item-icon {

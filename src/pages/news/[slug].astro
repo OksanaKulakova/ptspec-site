@@ -1,0 +1,96 @@
+---
+import Layout from "@layouts/Layout.astro";
+import List from "@components/List.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+
+import fetchApi from "@lib/strapi";
+import type New from "@interfaces/new";
+
+import getNews from "@data/getNews";
+
+import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
+import formatDate from "@utils/formatDate";
+
+const pages = await getNews();
+
+export async function getStaticPaths() {
+  const news = await fetchApi<New[]>({
+    endpoint: "news",
+    wrappedByKey: "data",
+  });
+
+  return news.map((item: New) => ({
+    params: { slug: item.attributes.slug },
+    props: item,
+  }));
+}
+
+type Props = New;
+
+const service = Astro.props;
+const { slug, introTitle } = service.attributes;
+
+const title = replaceQuotes(service.attributes.title);
+const date = formatDate(service.attributes.date);
+
+const introText = marked.parse(service.attributes.introText || "");
+// const text = marked.parse(service.attributes.text || "");
+// const result = marked.parse(service.attributes.result || "");
+
+const otherServices = pages.filter((page) => page.slug !== slug);
+
+type Crumb = {
+  title: string;
+  href?: string;
+};
+
+const breadcrumbs: Crumb[] = [
+  {
+    title: "Главная",
+    href: "/",
+  },
+  {
+    title: "журнал",
+    href: "/news/",
+  },
+  {
+    title: title,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <h2 class="title">{title}</h2>
+    <div class="page">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <div class="page-content">
+        <div class="page-blocks">
+          {
+            date && (
+              <div class="page-block">
+                <div class="page-block-title">{date}</div>
+              </div>
+            )
+          }
+          {
+            introText && (
+              <div class="page-block">
+                <div class="page-block-title">{introTitle}</div>
+                <div class="page-block-text" set:html={introText} />
+              </div>
+            )
+          }
+
+          <button class="btn">скопировать ссылку на материал</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="title">Другие новости</h2>
+    <List list={otherServices} />
+  </section>
+</Layout>
