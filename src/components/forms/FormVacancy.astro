@@ -1,6 +1,7 @@
 ---
 import "./form.css";
 import InputText from "./InputText.astro";
+import InputPhone from "./InputPhone.astro";
 import Select from "./Select.astro";
 import Textarea from "./Textarea.astro";
 
@@ -38,8 +39,7 @@ const vacancies = await getVacancies();
       <div class="form-block">
         <div class="form-blok-title">Контакты</div>
         <div class="form-row">
-          <InputText
-            type="text"
+          <InputPhone
             name="phone"
             placeholder="Номер телефона"
             required

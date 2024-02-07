@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
+  myProp?: boolean;
+}
+
+const { name, placeholder, required } = Astro.props;
+---
+
+<script>
+  import formatPhone from "@utils/formatPhone.ts";
+
+  class AstroInputPhone extends HTMLElement {
+    constructor() {
+      super();
+
+      const textarea = this.querySelector('input');
+
+      textarea.addEventListener('input', (event: Event) => {
+        let target: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
+        const text = target.value;
+
+        const value = formatPhone(text);
+
+        target.value = value;
+      });
+    }
+  }
+
+  customElements.define("astro-input-phone", AstroInputPhone);
+</script>
+
+
+<astro-input-phone>
+  <div class="input-text">
+    <input
+      type=tel
+      name={name}
+      placeholder={placeholder}
+      required={required}
+    />
+  
+    {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
+  </div>
+</astro-input-phone>
+
+<style>
+  astro-input-phone {
+    width: 100%;
+  }
+</style>
+
