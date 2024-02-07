@@ -1,8 +1,11 @@
 ---
 import "./form.css";
-import services from "@data/services.json";
 import InputText from "./InputText.astro";
 import Select from "./Select.astro";
+
+import getServises from "@data/getServices";
+
+const services = await getServises();
 ---
 
 <script src="./form.ts"></script>

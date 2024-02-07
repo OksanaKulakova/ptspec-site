@@ -1,8 +1,10 @@
 ---
 import "./form.css";
-import vacancies from "@data/vacancies.json";
 import InputText from "./InputText.astro";
 import Select from "./Select.astro";
+
+import getVacancies from "@data/getVacancies";
+const vacancies = await getVacancies();
 ---
 
 <script src="./form.ts"></script>

@@ -38,8 +38,6 @@ const title = replaceQuotes(service.attributes.title);
 const date = formatDate(service.attributes.date);
 
 const introText = marked.parse(service.attributes.introText || "");
-// const text = marked.parse(service.attributes.text || "");
-// const result = marked.parse(service.attributes.result || "");
 
 const pages = await getNews();
 const otherServices = pages.filter((page) => page.slug !== slug);
