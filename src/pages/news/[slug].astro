@@ -12,8 +12,6 @@ import { marked } from "marked";
 import replaceQuotes from "@utils/replaceQuotes";
 import formatDate from "@utils/formatDate";
 
-const pages = await getNews();
-
 export async function getStaticPaths() {
   const news = await fetchApi<New[]>({
     endpoint: "news",
@@ -29,6 +27,7 @@ export async function getStaticPaths() {
 type Props = New;
 
 const service = Astro.props;
+const id = service.id;
 const { slug, introTitle } = service.attributes;
 
 const title = replaceQuotes(service.attributes.title);
@@ -38,6 +37,7 @@ const introText = marked.parse(service.attributes.introText || "");
 // const text = marked.parse(service.attributes.text || "");
 // const result = marked.parse(service.attributes.result || "");
 
+const pages = await getNews();
 const otherServices = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {
@@ -58,6 +58,33 @@ const breadcrumbs: Crumb[] = [
     title: title,
   },
 ];
+
+async function getPictureUrl(id: number) {
+  const item = await fetchApi<New[]>({
+    endpoint: `news/${id}`,
+    wrappedByKey: "data",
+    query: { 
+      "populate[picture][fields][0]": "url",
+    },
+  });
+
+  const STRAPI_URL = "http://172.16.20.50:1337";
+
+  const url = item.attributes.picture.data.attributes.url;
+
+  return `${STRAPI_URL}${url}`;
+}
+
+const pictureUrl = await getPictureUrl(id);
+
+import { getImage } from "astro:assets";
+
+const desktopImg = await getImage({
+    src: pictureUrl,
+    format: "jpeg, webp",
+    width: 920,
+    height: 560,
+});
 ---
 
 <Layout title={title}>
@@ -79,6 +106,16 @@ const breadcrumbs: Crumb[] = [
               <div class="page-block">
                 <div class="page-block-title">{introTitle}</div>
                 <div class="page-block-text" set:html={introText} />
+              </div>
+            )
+          }
+
+          {
+            pictureUrl && (
+              <div class="page-block">
+                <div class="page-image">
+                  <img src={desktopImg.src} alt={title} />
+                </div>
               </div>
             )
           }

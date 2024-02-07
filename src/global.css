@@ -296,6 +296,18 @@ input:focus {
   margin: 8px 0;
 }
 
+.page-image {
+  width: 100%;
+  height: 480px;
+}
+
+.page-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: top;
+}
+
 @media screen and (min-width: 1024px) {
   .section {
     gap: 32px;
@@ -333,5 +345,9 @@ input:focus {
 
   .page-block-text h4 {
     margin-top: 24px;
+  }
+
+  .page-image {
+    height: 560px;
   }
 }
