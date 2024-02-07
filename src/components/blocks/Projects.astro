@@ -39,43 +39,43 @@ const filters = services.map((item: Service) => ({
   class AstroFilterContent extends HTMLElement {
     constructor() {
       super();
-    }
-  }
 
-  const btnOpen: HTMLElement | null = document.querySelector(".filter-button-open");
+      const btnOpen: HTMLElement | null = this.querySelector(".filter-button-open");
 
-  const elements: NodeListOf<HTMLElement> = document.querySelectorAll(".filter-content");
+      const elements: NodeListOf<HTMLElement> = this.querySelectorAll(".filter-content");
 
-  const countElement: HTMLElement | null = document.querySelector("#count");
+      const countElement: HTMLElement | null = document.querySelector("#count");
 
-  const hideElements = (): void => {
-    elements.forEach((el: HTMLElement) => {
-      el.style.display = "none";
-    });
-  }
-
-  const showElement = (id: string): void => {
-    elements.forEach((el: HTMLElement) => {
-      if (el.dataset.filterId === id) {
-        el.style.display = "block";
-        const count = el.dataset.count;
-        countElement.innerText = count;
+      const hideElements = (): void => {
+        elements.forEach((el: HTMLElement) => {
+          el.style.display = "none";
+        });
       }
-    }); 
-  }
 
-  let observer = new MutationObserver((mutationRecords: MutationRecord[]) => {
-    const filterId: string | undefined = btnOpen.dataset.filterId;
-    hideElements();
+      const showElement = (id: string): void => {
+        elements.forEach((el: HTMLElement) => {
+          if (el.dataset.filterId === id) {
+            el.style.display = "block";
+            const count = el.dataset.count;
+            countElement.innerText = count;
+          }
+        }); 
+      }
 
-    if (filterId) {
-      showElement(filterId);
+      let observer = new MutationObserver((mutationRecords: MutationRecord[]) => {
+        const filterId: string | undefined = btnOpen.dataset.filterId;
+        hideElements();
+
+        if (filterId) {
+          showElement(filterId);
+        }
+      });
+
+      observer.observe(btnOpen, {
+        attributes: true,
+      });
     }
-  });
-
-  observer.observe(btnOpen, {
-    attributes: true,
-  });
+  }
 
   customElements.define("astro-filter-content", AstroFilterContent);
 </script>
