@@ -25,41 +25,20 @@ const { name, placeholder, required } = Astro.props;
   customElements.define("astro-textarea", AstroTextarea);
 </script>
 
-<div class="input-text">
-  <astro-textarea>
+<astro-textarea>
+  <div class="input-text">
     <textarea
       name={name}
       placeholder={placeholder}
       required={required}
     />
-  </astro-textarea>
-
-  {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
-</div>
+  
+    {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
+  </div>
+</astro-textarea>
 
 <style>
-  .input-text {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  astro-textarea {
     width: 100%;
-  }
-
-  .input-text-error {
-    display: none;
-    font-family: Roboto Mono;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.05em;
-    text-transform: none;
-    color: #fe5639;
-  }
-
-  .input--invalid {
-    border-color: #fe5639;
-  }
-
-  .input--invalid ~ .input-text-error {
-    display: block;
   }
 </style>
