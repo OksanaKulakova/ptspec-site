@@ -203,7 +203,7 @@ button {
   opacity: 0.25;
 }
 
-input {
+input, textarea {
   display: block;
   width: 100%;
   height: 56px;
@@ -221,7 +221,7 @@ input {
   text-transform: uppercase;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -232,6 +232,14 @@ input::placeholder {
 }
 
 input:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea:focus {
   outline: none;
 }
 

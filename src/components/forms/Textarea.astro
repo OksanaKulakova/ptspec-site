@@ -1,0 +1,65 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
+  myProp?: boolean;
+}
+
+const { name, placeholder, required } = Astro.props;
+---
+
+<script>
+  class AstroTextarea extends HTMLElement {
+    constructor() {
+      super();
+
+      const textarea = this.querySelector('textarea');
+
+      textarea.addEventListener('input', (event: Event) => {
+        let target: HTMLElement = event.target as HTMLElement;
+        target.style.height = target.scrollHeight + 1 + "px";
+      });
+    }
+  }
+
+  customElements.define("astro-textarea", AstroTextarea);
+</script>
+
+<div class="input-text">
+  <astro-textarea>
+    <textarea
+      name={name}
+      placeholder={placeholder}
+      required={required}
+    />
+  </astro-textarea>
+
+  {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
+</div>
+
+<style>
+  .input-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .input-text-error {
+    display: none;
+    font-family: Roboto Mono;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.05em;
+    text-transform: none;
+    color: #fe5639;
+  }
+
+  .input--invalid {
+    border-color: #fe5639;
+  }
+
+  .input--invalid ~ .input-text-error {
+    display: block;
+  }
+</style>

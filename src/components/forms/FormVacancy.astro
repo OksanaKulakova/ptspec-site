@@ -2,6 +2,7 @@
 import "./form.css";
 import InputText from "./InputText.astro";
 import Select from "./Select.astro";
+import Textarea from "./Textarea.astro";
 
 import getVacancies from "@data/getVacancies";
 const vacancies = await getVacancies();
@@ -28,8 +29,7 @@ const vacancies = await getVacancies();
       <div class="form-block">
         <div class="form-blok-title">Резюме</div>
         <div class="form-row">
-          <input
-            type="text"
+          <Textarea
             name="resume"
             placeholder="вставьте ссылку на резюме"
           />
@@ -54,8 +54,7 @@ const vacancies = await getVacancies();
       <div class="form-block">
         <div class="form-blok-title">Комментарий</div>
         <div class="form-row">
-          <input
-            type="text"
+          <Textarea
             name="comment"
             placeholder="Напишите что–то по необходимости"
           />
