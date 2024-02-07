@@ -16,6 +16,9 @@ export async function getStaticPaths() {
   const news = await fetchApi<New[]>({
     endpoint: "news",
     wrappedByKey: "data",
+    query: { 
+      "populate[0]": "blocks", 
+    },
   });
 
   return news.map((item: New) => ({
@@ -28,7 +31,7 @@ type Props = New;
 
 const service = Astro.props;
 const id = service.id;
-const { slug, introTitle } = service.attributes;
+const { slug, introTitle, blocks } = service.attributes;
 
 const title = replaceQuotes(service.attributes.title);
 const date = formatDate(service.attributes.date);
@@ -118,6 +121,15 @@ const desktopImg = await getImage({
                 </div>
               </div>
             )
+          }
+
+          {
+            blocks.map((item) => (
+              <div class="page-block">
+                <div class="page-block-title">{item.title}</div>
+                <div class="page-block-text" set:html={marked.parse(item.text)} />
+              </div>
+            ))
           }
 
           <button class="btn">скопировать ссылку на материал</button>
