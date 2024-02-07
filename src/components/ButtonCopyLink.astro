@@ -1,0 +1,41 @@
+<script>
+  class AstroBtnCopyLink extends HTMLElement {
+    constructor() {
+      super();
+
+      const btn: HTMLElement | null = this.querySelector(".btn");
+
+      const resetTextButton = (): void => {
+        btn.innerText = "скопировать ссылку на материал";
+      }
+
+      btn?.addEventListener("click", (event: Event): void => {
+        event.preventDefault();
+
+        const link: string = window.location.href;
+
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(link)
+            .then(() => {
+              btn.innerText = "ссылка скопирована";
+            })
+            .catch((err: Error) => {
+              btn.innerText = err.message;
+            });
+        } else {
+          btn.innerText = "буфера обмена не доступен";
+        }
+
+        setTimeout(() => {
+          resetTextButton();
+        }, 5000);
+      });
+    }
+  }
+
+  customElements.define("astro-btn-copy-link", AstroBtnCopyLink);
+</script>
+
+<astro-btn-copy-link>
+  <button class="btn">скопировать ссылку на материал</button>
+</astro-btn-copy-link>

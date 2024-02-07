@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import List from "@components/List.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import ButtonCopyLink from "@components/ButtonCopyLink.astro";
 
 import fetchApi from "@lib/strapi";
 import type New from "@interfaces/new";
@@ -132,7 +133,7 @@ const desktopImg = await getImage({
             ))
           }
 
-          <button class="btn">скопировать ссылку на материал</button>
+          <ButtonCopyLink />
         </div>
       </div>
     </div>
