@@ -13,7 +13,7 @@ const services = await getServises();
 <script src="./form.ts"></script>
 
 <astro-form>
-  <form class="form" method="POST">
+  <form class="form" action=`${import.meta.env.STRAPI_URL}/api/order-services`>
     <div class="form-body">
       <div class="form-block">
         <div class="form-blok-title">Как к вам обращаться</div>

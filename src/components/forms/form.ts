@@ -37,18 +37,20 @@ class AstroForm extends HTMLElement {
       const XHR = new XMLHttpRequest();
       const data = new FormData(form);
 
-      // form.classList.add('callback__form--preloader');
+      const url = form.action;
+
+      // form.classList.add('form--preloader');
       // XHR.open('POST', url);
       // XHR.send(data);
       // XHR.onload = function () {
       //   if (XHR.status != 200) {
       //     console.log(`Ошибка ${XHR.status}: ${XHR.statusText}`);
-      //     form.classList.add('callback__form--error');
+      //     form.classList.add('form--error');
       //   } else {
       //     console.log(`Готово, получили ${XHR.response}`);
-      //     form.classList.add('callback__form--succes');
+      //     form.classList.add('form--succes');
       //   }
-      //   form.classList.remove('callback__form--preloader');
+      //   form.classList.remove('form--preloader');
       // };
     }
 
