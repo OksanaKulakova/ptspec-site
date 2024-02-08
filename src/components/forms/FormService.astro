@@ -13,7 +13,7 @@ const services = await getServises();
 <script src="./form.ts"></script>
 
 <astro-form>
-  <form class="form" action=`${import.meta.env.STRAPI_URL}/api/order-services`>
+  <form class="form" action=`${import.meta.env.PUBLIC_STRAPI_URL}/api/order-services` data-text-sucсess="Отлично! <br> Мы получили заявку и <br>скоро свяжемся с вами">
     <div class="form-body">
       <div class="form-block">
         <div class="form-blok-title">Как к вам обращаться</div>

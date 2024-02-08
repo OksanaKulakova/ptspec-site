@@ -315,6 +315,21 @@ textarea:focus {
   vertical-align: top;
 }
 
+.order-text {
+  width: 100%;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #161619;
+}
+
+.order-text body {
+  width: 100%;
+  height: 100%;
+}
+
 @media screen and (min-width: 1024px) {
   .section {
     gap: 32px;
@@ -356,5 +371,11 @@ textarea:focus {
 
   .page-image {
     height: 560px;
+  }
+
+  .order-text {
+    font-size: 96px;
+    line-height: 104px;
+    letter-spacing: -0.08em;
   }
 }

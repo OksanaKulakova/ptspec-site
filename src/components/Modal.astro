@@ -83,11 +83,22 @@ const { id = 1 } = Astro.props;
         }
       };
 
+      const resetModalContent = (): void => {
+        const title: HTMLElement | null = modal.querySelector(".modal-title");
+        const content: HTMLElement | null = modal.querySelector(".modal-content");
+        title.style.display = "block";
+        content.style.display = "block";
+
+        const text: HTMLElement | null = modal.querySelector(".order-text");
+        text?.remove();
+      }
+
       const closeModal = (): void => {
         fadeOut(overlay);
         slideDown(content);
         setTimeout(() => {
           modal?.classList.remove("modal--open");
+          resetModalContent();
         }, 1000);
       };
 
