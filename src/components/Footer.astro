@@ -3,6 +3,14 @@ import Social from "@components/Social.astro";
 import LanguagePicker from "./LanguagePicker.astro";
 
 const currentYear = new Date().getFullYear();
+
+import {
+  getLangFromUrl,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="footer">
@@ -12,7 +20,7 @@ const currentYear = new Date().getFullYear();
     </div>
     <div class="contacts">
       <div class="contact">
-        <div class="contact-title">Контакты</div>
+        <div class="contact-title">{t("footer.contacts")}</div>
         <div class="contact-text">
           <a class="contact-link footer-link" href="mailto:info@ptspec.ru"
             >info@ptspec.ru</a
@@ -23,10 +31,10 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
       <div class="contact">
-        <div class="contact-title">Адрес</div>
+        <div class="contact-title">{t("footer.address")}</div>
         <div class="contact-text">
-          <span>Пермь</span><br />
-          <span>Мира 45а, Офис 201</span><br />
+          <span>{t("footer.city")}</span><br />
+          <span>{t("footer.srteet")}</span><br />
           <span>9:00 – 18:00</span>
         </div>
       </div>
@@ -34,16 +42,16 @@ const currentYear = new Date().getFullYear();
   </div>
   <div class="footer-block footer-action">
     <div class="footer-button">
-      <button class="btn show-modal">Заказать услугу</button>
+      <button class="btn show-modal">{t("footer.order")}</button>
     </div>
-    <div class="footer-sign">Свяжемся с вами в течение рабочего дня</div>
+    <div class="footer-sign">{t("footer.order-sign")}</div>
   </div>
   <div class="footer-block">
     <div class="footer-social">
       <Social size={48} />
     </div>
     <div class="footer-info">
-      <div class="footer-org">© ООО «пермьтехспец» {currentYear}</div>
+      <div class="footer-org">© {t("footer.company")} {currentYear}</div>
       <div>
         <a class="footer-link" href="">mirodanko</a>
       </div>

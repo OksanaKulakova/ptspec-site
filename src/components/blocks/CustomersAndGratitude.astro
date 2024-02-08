@@ -12,12 +12,37 @@ type TabListItem = {
 const tab1: TabListItem[] = customers;
 
 const tab2: TabListItem[] = gratitudes;
+
+const ui = {
+  en: {
+    "title": "Customers <br> and gratitude",
+    "tab1": "Customers",
+    "tab2": "Acknowledgments",
+  },
+  ru: {
+    "title": "Заказчики <br> и благодарности",
+    "tab1": "Заказчики",
+    "tab2": "Благодарности",
+  },
+} as const;
+
+import { getLangFromUrl } from "../../i18n/utils";
+import { defaultLang } from "../../i18n/ui";
+
+function useTranslations(lang: keyof typeof ui) {
+  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
+    return ui[lang][key] || ui[defaultLang][key];
+  };
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Tabs
-  title="Заказчики <br> и благодарности"
-  tab1="Заказчики"
-  tab2="Благодарности"
+  title={t("title")}
+  tab1={t("tab1")}
+  tab2={t("tab2")}
 >
   <Fragment slot="tabcontent-1"><List list={tab1} /></Fragment>
   <Fragment slot="tabcontent-2"><List list={tab2} /></Fragment>

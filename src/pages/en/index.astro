@@ -1,0 +1,119 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+import List from "@components/List.astro";
+import Cards from "@components/Cards.astro";
+import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
+
+import getServises from "@data/getServices";
+
+const services = await getServises();
+
+type cardWidget = {
+  title: string;
+  text: string;
+};
+
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "2015",
+    text: "Since 2015 <br> we have been accumulating experience and expertise <br> in construction",
+  },
+  {
+    title: "100+",
+    text: "More than 100 <br> implemented <br> projects",
+  },
+  {
+    title: "30+",
+    text: "More than 30 <br> regions <br> presence",
+  },
+];
+
+type linkItem = {
+  link?: string;
+  href?: string;
+  classLink?: string;
+};
+
+type card = {
+  classList?: string;
+  title?: string;
+  caption?: string;
+  imagePath?: string;
+  altText?: string;
+  links?: Array<linkItem>;
+};
+
+const cards1: card[] = [
+  {
+    classList: "card--white",
+    title: "Projects",
+    caption: "We are proud of every <br> project",
+    links: [
+      {
+        link: "View projects",
+        href: "/en/projects/",
+      },
+    ],
+  },
+  {
+    classList: "card--black",
+    title: "application",
+    caption: "We will help you choose <br> services",
+    links: [
+      {
+        link: "submit your application",
+        classLink: "show-modal",
+      },
+    ],
+  },
+];
+
+const cards2: card[] = [
+  {
+    classList: "card--image",
+    imagePath: "/src/assets/images/cover2.jpg",
+    altText: "Picture",
+  },
+  {
+    classList: "card--white",
+    title: "career",
+    caption: "We are actively developing <br> and looking for talents",
+    links: [
+      {
+        link: "Career in the company",
+        href: "/en/career/",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="HOME">
+  <Widget
+    title="We are among the Top 20 <br> engineering <br> companies in Russia"
+    subtitle="We provide a full range of <br> engineering services <br> in industrial and civil <br> construction"
+    imagePath="/src/assets/images/cover1.jpg"
+    altText="Picture for banner"
+    link="More about the company"
+    href="/en/company/"
+    cards={cardsForWidget}
+  />
+
+  {
+    services.length > 0 && (
+      <section class="section">
+        <h2 class="title">
+          We effectively solve <br /> assigned tasks
+        </h2>
+        <List list={services} />
+      </section>
+    )
+  }
+
+  <Cards cards={cards1} />
+
+  <CustomersAndGratitude />
+
+  <Cards cards={cards2} />
+</Layout>
