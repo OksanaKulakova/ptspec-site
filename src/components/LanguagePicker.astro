@@ -1,0 +1,22 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+
+const {pathname} = Astro.url;
+
+const switchLang = lang === "ru" ? "en" : "ru";
+const href = lang === "ru" ? `/en${pathname}` : pathname.slice(3);
+---
+
+<a class="footer-link link" href={href}>{languages[switchLang]}</a>
+
+<style>
+  @media screen and (min-width: 1024px) {
+    .footer-link {
+      padding-top: 0;
+      height: 40px;
+    }
+  }
+</style>

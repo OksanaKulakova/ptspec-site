@@ -1,5 +1,6 @@
 ---
 import Social from "@components/Social.astro";
+import LanguagePicker from "./LanguagePicker.astro";
 import {
   getLangFromUrl,
   useTranslations,
@@ -94,7 +95,7 @@ const translatePath = useTranslatedPath(lang);
 
   <div class="menu-footer">
     <div class="menu-social"><Social /></div>
-    <a class="link" href="#">english version</a>
+    <LanguagePicker />
   </div>
 </div>
 
