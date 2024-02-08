@@ -8,7 +8,7 @@ import Textarea from "./Textarea.astro";
 <script src="./form.ts"></script>
 
 <astro-form>
-  <form class="form">
+  <form class="form" action=`${import.meta.env.PUBLIC_STRAPI_URL}/api/order-vacancies` data-text-sucсess="Отлично! <br> Мы получили анкету и <br>скоро свяжемся с вами">
     <div class="form-body">
       <div class="form-block">
         <div class="form-blok-title">Как к вам обращаться</div>
