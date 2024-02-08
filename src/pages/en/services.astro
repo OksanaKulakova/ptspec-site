@@ -1,0 +1,22 @@
+---
+import Layout from "@layouts/Layout.astro";
+import List from "@components/List.astro";
+import gratitudes from "@data/gratitudes.json";
+import getServises from "@data/getServices";
+
+const services = await getServises("en");
+
+const count = services.length;
+---
+
+<Layout title="SERVICES">
+  <section class="section">
+    <h2 class="title">SERVICES / {count}</h2>
+    <List list={services} />
+  </section>
+
+  <section class="section">
+    <h2 class="title">Reviews and thanks</h2>
+    <List list={gratitudes} />
+  </section>
+</Layout>
