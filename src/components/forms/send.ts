@@ -1,3 +1,7 @@
+import { getLangFromUrl} from "../../i18n/utils";
+
+const lang = getLangFromUrl(new URL(window.location.href));
+
 const preloader: HTMLElement | null = document.getElementById("preloader");
 
 const showPreloader: () => void = () => {
@@ -35,6 +39,7 @@ export default async function sendData(
   textSucсess: string = "Успешно отправлено",
 ): Promise<void> {
   const data: object = Object.fromEntries(formData.entries());
+  data['locale'] = lang;
 
   const json: string = JSON.stringify({ data: data });
 

@@ -1,3 +1,5 @@
+export type lang = 'ru' | 'en' ;
+
 export const languages = {
   en: "English version",
   ru: "Русская версия",
