@@ -23,7 +23,7 @@ export default async function fetchApi<T>({
     endpoint = endpoint.slice(1);
   }
 
-  const url = new URL(`${import.meta.env.STRAPI_URL}/api/${endpoint}`);
+  const url = new URL(`${import.meta.env.PUBLIC_STRAPI_URL}/api/${endpoint}`);
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
@@ -33,7 +33,7 @@ export default async function fetchApi<T>({
 
   try {
     const res = await fetch(url.toString(), {
-      headers: { Authorization: `Bearer ${import.meta.env.STRAPI_TOKEN}` },
+      headers: { Authorization: `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}` },
     });
 
     let data = await res.json();

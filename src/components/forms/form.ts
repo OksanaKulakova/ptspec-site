@@ -1,3 +1,5 @@
+import sendData from "./send";
+
 class AstroForm extends HTMLElement {
   constructor() {
     super();
@@ -33,26 +35,30 @@ class AstroForm extends HTMLElement {
       return errorInputs.length;
     };
 
-    function sendData() {
-      const XHR = new XMLHttpRequest();
-      const data = new FormData(form);
+    // function sendData() {
+    //   const XHR = new XMLHttpRequest();
+    //   const data = new FormData(form);
 
-      const url = form.action;
+    //   for (const pair of data.entries()) {
+    //     console.log(pair[0], pair[1]);
+    //   }
 
-      // form.classList.add('form--preloader');
-      // XHR.open('POST', url);
-      // XHR.send(data);
-      // XHR.onload = function () {
-      //   if (XHR.status != 200) {
-      //     console.log(`Ошибка ${XHR.status}: ${XHR.statusText}`);
-      //     form.classList.add('form--error');
-      //   } else {
-      //     console.log(`Готово, получили ${XHR.response}`);
-      //     form.classList.add('form--succes');
-      //   }
-      //   form.classList.remove('form--preloader');
-      // };
-    }
+    //   const url = form.action;
+
+    //   // form.classList.add('form--preloader');
+    //   // XHR.open('POST', url);
+    //   // XHR.send(data);
+    //   // XHR.onload = function () {
+    //   //   if (XHR.status != 200) {
+    //   //     console.log(`Ошибка ${XHR.status}: ${XHR.statusText}`);
+    //   //     form.classList.add('form--error');
+    //   //   } else {
+    //   //     console.log(`Готово, получили ${XHR.response}`);
+    //   //     form.classList.add('form--succes');
+    //   //   }
+    //   //   form.classList.remove('form--preloader');
+    //   // };
+    // }
 
     btn.addEventListener("click", function (event: Event) {
       event.preventDefault();

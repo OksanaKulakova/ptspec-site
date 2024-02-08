@@ -70,11 +70,9 @@ async function getPictureUrl(id: number) {
     },
   });
 
-  const STRAPI_URL = "http://172.16.20.50:1337";
-
   const url = item.attributes.picture.data.attributes.url;
 
-  return `${STRAPI_URL}${url}`;
+  return url;
 }
 
 const pictureUrl = await getPictureUrl(id);
@@ -82,7 +80,7 @@ const pictureUrl = await getPictureUrl(id);
 import { getImage } from "astro:assets";
 
 const desktopImg = await getImage({
-    src: pictureUrl,
+    src: `${import.meta.env.PUBLIC_STRAPI_URL}${pictureUrl}`,
     format: "jpeg, webp",
     width: 920,
     height: 560,
