@@ -1,5 +1,14 @@
 ---
 import Social from "@components/Social.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <script>
@@ -11,18 +20,38 @@ import Social from "@components/Social.astro";
 
 <div class="menu">
   <div class="menu-header">
-    <a class="link" href="/">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="75"
-        height="56"
-        viewBox="0 0 75 56"
-        fill="none"
-      >
-        <path
-          d="M22.5 15C23.8807 15 25 16.1193 25 17.5C25 16.1193 26.1193 15 27.5 15H47.5C48.8807 15 50 16.1193 50 17.5C50 16.1193 51.1193 15 52.5 15H72.5C73.8807 15 75 16.1193 75 17.5V20L55 20V35L75 35V37.5C75 38.8807 73.8807 40 72.5 40H52.5C51.1193 40 50 38.8807 50 37.5V20L40 20V40H35V20L25 20V40H20V20H5V40H0V17.5C0 16.1193 1.11929 15 2.5 15H22.5Z"
-          fill="#161619"></path>
-      </svg>
+    <a class="link" href={translatePath("/")}>
+      {
+        lang === "ru" ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="75"
+            height="56"
+            viewBox="0 0 75 56"
+            fill="none"
+          >
+            <path
+              d="M22.5 15C23.8807 15 25 16.1193 25 17.5C25 16.1193 26.1193 15 27.5 15H47.5C48.8807 15 50 16.1193 50 17.5C50 16.1193 51.1193 15 52.5 15H72.5C73.8807 15 75 16.1193 75 17.5V20L55 20V35L75 35V37.5C75 38.8807 73.8807 40 72.5 40H52.5C51.1193 40 50 38.8807 50 37.5V20L40 20V40H35V20L25 20V40H20V20H5V40H0V17.5C0 16.1193 1.11929 15 2.5 15H22.5Z"
+              fill="#161619"
+            />
+          </svg>
+        ) : (
+          <svg
+            width="67"
+            height="25"
+            viewBox="0 0 67 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M22.2222 2.5C22.2222 1.11929 21.2273 0 20 0H2.22222C0.994923 0 0 1.11929 0 2.5V25H4.44444V20H20C21.2273 20 22.2222 18.8807 22.2222 17.5V5L31.1111 5V25H35.5556V5L44.4444 5V12.5C44.4444 13.8807 45.4394 15 46.6667 15H62.2222V20H44.4444V22.5C44.4444 23.8807 45.4394 25 46.6667 25H64.4444C65.6717 25 66.6667 23.8807 66.6667 22.5V12.5C66.6667 11.1193 65.6717 10 64.4444 10H48.8889V5L66.6667 5V2.5C66.6667 1.11929 65.6717 0 64.4444 0H46.6667C45.4394 0 44.4444 1.11929 44.4444 2.5C44.4444 1.11929 43.4495 0 42.2222 0H24.4444C23.2171 0 22.2222 1.11929 22.2222 2.5ZM17.7778 15V5H4.44444V15H17.7778Z"
+              fill="#161619"
+            />
+          </svg>
+        )
+      }
     </a>
     <button class="menu-close">
       <svg
@@ -42,13 +71,24 @@ import Social from "@components/Social.astro";
 
   <div class="menu-body">
     <nav class="nav">
-      <a class="nav-link link" href="/services/">Услуги</a>
-      <a class="nav-link link" href="/projects/">Проекты</a>
-      <a class="nav-link link" href="/company/">Компания</a>
-      <a class="nav-link link" href="/career/">Карьера</a>
-      <a class="nav-link link" href="/news/">Журнал</a>
-      <a class="nav-link link" href="/contacts/">Контакты</a>
-      <a class="nav-link link show-modal">Заказать услугу</a>
+      <a class="nav-link link" href={translatePath("/services/")}
+        >{t("nav.services")}</a
+      >
+      <a class="nav-link link" href={translatePath("/projects/")}
+        >{t("nav.projects")}</a
+      >
+      <a class="nav-link link" href={translatePath("/company/")}
+        >{t("nav.company")}</a
+      >
+      <a class="nav-link link" href={translatePath("/career/")}
+        >{t("nav.career")}</a
+      >
+      <a class="nav-link link" href={translatePath("/news/")}>{t("nav.news")}</a
+      >
+      <a class="nav-link link" href={translatePath("/contacts/")}
+        >{t("nav.contacts")}</a
+      >
+      <a class="nav-link link show-modal">{t("nav.order")}</a>
     </nav>
   </div>
 

@@ -13,9 +13,9 @@ const { name, placeholder, required } = Astro.props;
     constructor() {
       super();
 
-      const textarea = this.querySelector('textarea');
+      const textarea = this.querySelector("textarea");
 
-      textarea.addEventListener('input', (event: Event) => {
+      textarea.addEventListener("input", (event: Event) => {
         let target: HTMLElement = event.target as HTMLElement;
         target.style.height = target.scrollHeight + 1 + "px";
       });
@@ -27,13 +27,10 @@ const { name, placeholder, required } = Astro.props;
 
 <astro-textarea>
   <div class="input-text">
-    <textarea
-      name={name}
-      placeholder={placeholder}
-      required={required}
-    />
-  
-    {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
+    <textarea name={name} placeholder={placeholder} required={required}
+    ></textarea>
+
+    {required && <div class="input-text-error">Обязательно для заполнения</div>}
   </div>
 </astro-textarea>
 

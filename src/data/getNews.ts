@@ -7,13 +7,13 @@ export default async function getNews() {
   const news = await fetchApi<New[]>({
     endpoint: "news",
     wrappedByKey: "data",
-    query: { 
-      "fields[0]": "title", 
+    query: {
+      "fields[0]": "title",
       "fields[1]": "slug",
       "fields[2]": "date",
       "pagination[start]": "0",
       "pagination[limit]": "100",
-      "sort[0]": "date"
+      "sort[0]": "date",
     },
   });
 

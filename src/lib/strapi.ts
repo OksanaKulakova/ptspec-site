@@ -33,7 +33,9 @@ export default async function fetchApi<T>({
 
   try {
     const res = await fetch(url.toString(), {
-      headers: { Authorization: `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}` },
+      headers: {
+        Authorization: `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`,
+      },
     });
 
     let data = await res.json();

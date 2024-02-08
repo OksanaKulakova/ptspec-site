@@ -12,7 +12,11 @@ const vacancies = await getVacancies();
 <script src="./form.ts"></script>
 
 <astro-form>
-  <form class="form" action=`${import.meta.env.PUBLIC_STRAPI_URL}/api/order-vacancies` data-text-sucсess="Отлично! <br> Мы получили анкету и <br>скоро свяжемся с вами">
+  <form
+    class="form"
+    action=`${import.meta.env.PUBLIC_STRAPI_URL}/api/order-vacancies`
+    data-text-sucсess="Отлично! <br> Мы получили анкету и <br>скоро свяжемся с вами"
+  >
     <div class="form-body">
       <div class="form-block">
         <div class="form-blok-title">Как к вам обращаться</div>
@@ -30,20 +34,13 @@ const vacancies = await getVacancies();
       <div class="form-block">
         <div class="form-blok-title">Резюме</div>
         <div class="form-row">
-          <Textarea
-            name="resume"
-            placeholder="вставьте ссылку на резюме"
-          />
+          <Textarea name="resume" placeholder="вставьте ссылку на резюме" />
         </div>
       </div>
       <div class="form-block">
         <div class="form-blok-title">Контакты</div>
         <div class="form-row">
-          <InputPhone
-            name="phone"
-            placeholder="Номер телефона"
-            required
-          />
+          <InputPhone name="phone" placeholder="Номер телефона" required />
           <InputText
             type="email"
             name="email"

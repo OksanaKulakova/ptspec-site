@@ -15,9 +15,9 @@ const { name, placeholder, required } = Astro.props;
     constructor() {
       super();
 
-      const textarea = this.querySelector('input');
+      const textarea = this.querySelector("input");
 
-      textarea.addEventListener('input', (event: Event) => {
+      textarea.addEventListener("input", (event: Event) => {
         let target: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
         const text = target.value;
 
@@ -31,17 +31,16 @@ const { name, placeholder, required } = Astro.props;
   customElements.define("astro-input-phone", AstroInputPhone);
 </script>
 
-
 <astro-input-phone>
   <div class="input-text">
     <input
-      type=tel
+      type="tel"
       name={name}
       placeholder={placeholder}
       required={required}
     />
-  
-    {required && (<div class="input-text-error">Обязательно для заполнения</div>)}
+
+    {required && <div class="input-text-error">Обязательно для заполнения</div>}
   </div>
 </astro-input-phone>
 
@@ -50,4 +49,3 @@ const { name, placeholder, required } = Astro.props;
     width: 100%;
   }
 </style>
-

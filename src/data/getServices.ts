@@ -5,9 +5,9 @@ export default async function getServises() {
   const services = await fetchApi<Service[]>({
     endpoint: "services",
     wrappedByKey: "data",
-    query: { 
-      "fields[0]": "title", 
-      "fields[1]": "slug", 
+    query: {
+      "fields[0]": "title",
+      "fields[1]": "slug",
       "sort[0]": "id",
     },
   });

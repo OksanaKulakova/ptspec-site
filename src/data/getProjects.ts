@@ -6,12 +6,12 @@ export default async function getProjects() {
   const projects = await fetchApi<Project[]>({
     endpoint: "projects",
     wrappedByKey: "data",
-    query: { 
-      "fields[0]": "title", 
+    query: {
+      "fields[0]": "title",
       "fields[1]": "slug",
       "pagination[start]": "0",
       "pagination[limit]": "100",
-      "sort[0]": "id"
+      "sort[0]": "id",
     },
   });
 

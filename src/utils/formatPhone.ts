@@ -1,29 +1,29 @@
 const formatPhone = (str) => {
-  let result = '';
+  let result = "";
 
   if (str) {
-    let value = str.replace(/\D+/g, '');
+    let value = str.replace(/\D+/g, "");
 
     if (value.length > 10) {
       value = value.slice(1);
     }
 
-    if (value[0] === '7' || value[0] === '8') {
+    if (value[0] === "7" || value[0] === "8") {
       value = value.slice(1);
     }
     const numberLength = 10;
 
-    result = '+7 (';
+    result = "+7 (";
     [...value].slice(0, numberLength).forEach((char, index) => {
       switch (index) {
         case 3:
-          result += ') ';
+          result += ") ";
           break;
         case 6:
-          result += '-';
+          result += "-";
           break;
         case 8:
-          result += '-';
+          result += "-";
           break;
         default:
           break;

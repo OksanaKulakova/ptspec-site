@@ -73,11 +73,7 @@ const { list } = Astro.props;
           <div class="list-item-content">
             <div class="list-item-name">{item.title}</div>
 
-            {
-              item.sign && (
-                <div class="list-item-sign">{item.sign}</div>
-              )
-            }
+            {item.sign && <div class="list-item-sign">{item.sign}</div>}
           </div>
           {item.href && (
             <div class="list-item-icon">

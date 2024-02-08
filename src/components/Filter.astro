@@ -71,7 +71,7 @@ import ModalSmall from "./ModalSmall.astro";
         deleteActiveClass();
         btnOpen.classList.remove("filter-button--active");
         btnOpen.childNodes[0].textContent = "Фильтровать по услуге";
-        btnOpen.dataset.filterId = '0';
+        btnOpen.dataset.filterId = "0";
 
         btnReset.forEach((btn: Element) => {
           btn.setAttribute("disabled", "true");
@@ -127,7 +127,10 @@ import ModalSmall from "./ModalSmall.astro";
       <div class="filter-wrapper">
         <div class="filter">
           <div class="filter-block">
-            <button class="filter-button filter-button-open button-open-modal" data-filter-id="0">
+            <button
+              class="filter-button filter-button-open button-open-modal"
+              data-filter-id="0"
+            >
               Фильтровать по услуге
               <svg
                 xmlns="http://www.w3.org/2000/svg"

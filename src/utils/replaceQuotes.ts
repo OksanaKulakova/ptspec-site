@@ -1,21 +1,21 @@
 const replaceQuotes = (str, openingQuote = '"', closingQuote = '"') => {
   let insideQuotes = true;
-  let result = '';
+  let result = "";
   if (str) {
     for (let i = 0; i < str.length; i += 1) {
       const char = str[i];
       if (char === openingQuote || char === closingQuote) {
-        if (insideQuotes && (str[i - 1] === ' ' || i === 0)) {
-          result += '«';
+        if (insideQuotes && (str[i - 1] === " " || i === 0)) {
+          result += "«";
         } else if (insideQuotes) {
           insideQuotes = false;
-          result += '»';
+          result += "»";
         } else if (!insideQuotes && i !== str.length - 1) {
           insideQuotes = true;
-          result += '«';
+          result += "«";
         } else if (!insideQuotes && i === str.length - 1) {
           insideQuotes = false;
-          result += '»';
+          result += "»";
         } else {
           result += char;
         }

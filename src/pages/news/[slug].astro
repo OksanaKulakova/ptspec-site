@@ -17,8 +17,8 @@ export async function getStaticPaths() {
   const news = await fetchApi<New[]>({
     endpoint: "news",
     wrappedByKey: "data",
-    query: { 
-      "populate[0]": "blocks", 
+    query: {
+      "populate[0]": "blocks",
     },
   });
 
@@ -65,7 +65,7 @@ async function getPictureUrl(id: number) {
   const item = await fetchApi<New>({
     endpoint: `news/${id}`,
     wrappedByKey: "data",
-    query: { 
+    query: {
       "populate[picture][fields][0]": "url",
     },
   });
@@ -80,10 +80,10 @@ const pictureUrl = await getPictureUrl(id);
 import { getImage } from "astro:assets";
 
 const desktopImg = await getImage({
-    src: `${import.meta.env.PUBLIC_STRAPI_URL}${pictureUrl}`,
-    format: "jpeg, webp",
-    width: 920,
-    height: 560,
+  src: `${import.meta.env.PUBLIC_STRAPI_URL}${pictureUrl}`,
+  format: "jpeg, webp",
+  width: 920,
+  height: 560,
 });
 ---
 
@@ -124,7 +124,10 @@ const desktopImg = await getImage({
             blocks.map((item) => (
               <div class="page-block">
                 <div class="page-block-title">{item.title}</div>
-                <div class="page-block-text" set:html={marked.parse(item.text)} />
+                <div
+                  class="page-block-text"
+                  set:html={marked.parse(item.text)}
+                />
               </div>
             ))
           }

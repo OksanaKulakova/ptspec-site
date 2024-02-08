@@ -7,8 +7,9 @@ class AstroForm extends HTMLElement {
     const form: HTMLFormElement | null = this.querySelector(".form");
     const btn: HTMLElement | null = this.querySelector(".form-submit");
 
-    const requiredInputs: NodeListOf<HTMLInputElement> =
-      form.querySelectorAll("input[required], textarea[required]");
+    const requiredInputs: NodeListOf<HTMLInputElement> = form.querySelectorAll(
+      "input[required], textarea[required]",
+    );
 
     const checkInput = (input: HTMLInputElement): void => {
       if (input.value && input.value.length) {

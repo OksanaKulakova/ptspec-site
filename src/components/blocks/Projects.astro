@@ -17,7 +17,7 @@ const services = await fetchApi<Service[]>({
     "fields[0]": "title",
     "fields[1]": "slug",
     "populate[projects][fields][0]": "title",
-    "populate[projects][fields][1]": 'slug',
+    "populate[projects][fields][1]": "slug",
     "sort[0]": "id",
   },
 });
@@ -30,9 +30,8 @@ const filters = services.map((item: Service) => ({
     id: item.id,
     title: item.attributes.title,
     href: `/projects/${item.attributes.slug}/`,
-  }))
+  })),
 }));
-
 ---
 
 <script>
@@ -40,9 +39,12 @@ const filters = services.map((item: Service) => ({
     constructor() {
       super();
 
-      const btnOpen: HTMLElement | null = this.querySelector(".filter-button-open");
+      const btnOpen: HTMLElement | null = this.querySelector(
+        ".filter-button-open",
+      );
 
-      const elements: NodeListOf<HTMLElement> = this.querySelectorAll(".filter-content");
+      const elements: NodeListOf<HTMLElement> =
+        this.querySelectorAll(".filter-content");
 
       const countElement: HTMLElement | null = document.querySelector("#count");
 
@@ -50,7 +52,7 @@ const filters = services.map((item: Service) => ({
         elements.forEach((el: HTMLElement) => {
           el.style.display = "none";
         });
-      }
+      };
 
       const showElement = (id: string): void => {
         elements.forEach((el: HTMLElement) => {
@@ -59,17 +61,19 @@ const filters = services.map((item: Service) => ({
             const count = el.dataset.count;
             countElement.innerText = count;
           }
-        }); 
-      }
+        });
+      };
 
-      let observer = new MutationObserver((mutationRecords: MutationRecord[]) => {
-        const filterId: string | undefined = btnOpen.dataset.filterId;
-        hideElements();
+      let observer = new MutationObserver(
+        (mutationRecords: MutationRecord[]) => {
+          const filterId: string | undefined = btnOpen.dataset.filterId;
+          hideElements();
 
-        if (filterId) {
-          showElement(filterId);
-        }
-      });
+          if (filterId) {
+            showElement(filterId);
+          }
+        },
+      );
 
       observer.observe(btnOpen, {
         attributes: true,
@@ -91,7 +95,11 @@ const filters = services.map((item: Service) => ({
 
   {
     filters.map((item) => (
-      <div class="filter-content" data-filter-id={item.id} data-count={item.count}>
+      <div
+        class="filter-content"
+        data-filter-id={item.id}
+        data-count={item.count}
+      >
         <List list={item.projects} />
       </div>
     ))

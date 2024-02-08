@@ -36,7 +36,9 @@ const { slug } = vacancy.attributes;
 
 const title = replaceQuotes(vacancy.attributes.title);
 
-const responsibilities = marked.parse(vacancy.attributes.responsibilities || "");
+const responsibilities = marked.parse(
+  vacancy.attributes.responsibilities || "",
+);
 const directionwork = marked.parse(vacancy.attributes.directionwork || "");
 const requirements = marked.parse(vacancy.attributes.requirements || "");
 
@@ -96,24 +98,27 @@ const breadcrumbs: Crumb[] = [
             )
           }
 
-          <button class="btn show-modal" data-modal-id="2">Откликнуться на вакансию</button>
+          <button class="btn show-modal" data-modal-id="2"
+            >Откликнуться на вакансию</button
+          >
+        </div>
       </div>
     </div>
+
+    <Vacancies title="другие вакансии" data={otherVacancies} />
   </section>
 
-  <Vacancies title="другие вакансии" data={otherVacancies} />
+  <Modal id={2}>
+    <Fragment slot="title">
+      Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+    </Fragment>
+    <Fragment slot="content"><Form /></Fragment>
+  </Modal>
+
+  <Modal id={3}>
+    <Fragment slot="title">
+      Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+    </Fragment>
+    <Fragment slot="content"><Form2 /></Fragment>
+  </Modal>
 </Layout>
-
-<Modal id={2}>
-  <Fragment slot="title">
-    Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
-  </Fragment>
-  <Fragment slot="content"><Form /></Fragment>
-</Modal>
-
-<Modal id={3}>
-  <Fragment slot="title">
-    Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
-  </Fragment>
-  <Fragment slot="content"><Form2 /></Fragment>
-</Modal>

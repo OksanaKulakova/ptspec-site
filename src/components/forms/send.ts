@@ -4,13 +4,13 @@ const showPreloader: () => void = () => {
   if (preloader) {
     preloader.style.display = "flex";
   }
-}
+};
 
 const hidePreloader: () => void = () => {
   if (preloader) {
     preloader.style.display = "none";
   }
-}
+};
 
 const showTextModal = (text: string): void => {
   const modal: HTMLElement | null = document.querySelector(".modal--open");
@@ -24,23 +24,30 @@ const showTextModal = (text: string): void => {
   div.className = "order-text";
 
   const parser: DOMParser = new DOMParser();
-  const html: Document = parser.parseFromString(text, 'text/html');
+  const html: Document = parser.parseFromString(text, "text/html");
   div.appendChild(html.body);
   body.appendChild(div);
-}
+};
 
-export default async function sendData(formData: FormData, url: string, textSucсess: string = "Успешно отправлено"): Promise<void> {
+export default async function sendData(
+  formData: FormData,
+  url: string,
+  textSucсess: string = "Успешно отправлено",
+): Promise<void> {
   const data: object = Object.fromEntries(formData.entries());
 
-  const json: string = JSON.stringify({data: data});
+  const json: string = JSON.stringify({ data: data });
 
   showPreloader();
 
   const XHR: XMLHttpRequest = new XMLHttpRequest();
 
-  XHR.open('POST', url);
-  XHR.setRequestHeader("Authorization", `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`);
-  XHR.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  XHR.open("POST", url);
+  XHR.setRequestHeader(
+    "Authorization",
+    `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`,
+  );
+  XHR.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
   XHR.send(json);
 

@@ -6,10 +6,10 @@ export default async function getvacancys() {
   const vacancies = await fetchApi<Vacancy[]>({
     endpoint: "vacancies",
     wrappedByKey: "data",
-    query: { 
-      "fields[0]": "title", 
+    query: {
+      "fields[0]": "title",
       "fields[1]": "slug",
-      "sort[0]": "id"
+      "sort[0]": "id",
     },
   });
 

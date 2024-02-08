@@ -7,7 +7,7 @@
 
       const resetTextButton = (): void => {
         btn.innerText = "скопировать ссылку на материал";
-      }
+      };
 
       btn?.addEventListener("click", (event: Event): void => {
         event.preventDefault();
@@ -15,7 +15,8 @@
         const link: string = window.location.href;
 
         if (navigator.clipboard) {
-          navigator.clipboard.writeText(link)
+          navigator.clipboard
+            .writeText(link)
             .then(() => {
               btn.innerText = "ссылка скопирована";
             })

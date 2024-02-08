@@ -7,10 +7,10 @@ export default async function getMassMedias() {
   const news = await fetchApi<New[]>({
     endpoint: "mass-medias",
     wrappedByKey: "data",
-    query: { 
+    query: {
       "pagination[start]": "0",
       "pagination[limit]": "100",
-      "sort[0]": "date"
+      "sort[0]": "date",
     },
   });
 
