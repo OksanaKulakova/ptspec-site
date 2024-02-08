@@ -62,7 +62,7 @@ const breadcrumbs: Crumb[] = [
 ];
 
 async function getPictureUrl(id: number) {
-  const item = await fetchApi<New[]>({
+  const item = await fetchApi<New>({
     endpoint: `news/${id}`,
     wrappedByKey: "data",
     query: { 

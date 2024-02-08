@@ -6,6 +6,8 @@ export default interface New {
     date: string;
     introTitle: string;
     introText: string;
+    blocks: any;
+    picture: any;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
