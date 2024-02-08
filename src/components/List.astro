@@ -11,6 +11,14 @@ interface List {
 }
 
 const { list } = Astro.props;
+
+import {
+  getLangFromUrl,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <script>
@@ -97,7 +105,7 @@ const { list } = Astro.props;
       ))
     }
   </div>
-  <button class="list-button-more">Показать еще</button>
+  <button class="list-button-more">{t("list.button")}</button>
 </astro-list>
 
 <style>

@@ -25,6 +25,8 @@ export const ui = {
     "footer.order": "Order service",
     "footer.order-sign": "We will contact you during business hours",
     "footer.company": "PERMTEKHSPETS LLC",
+
+    "list.button": "Show more",
   },
   ru: {
     "nav.home": "Главная",
@@ -43,5 +45,7 @@ export const ui = {
     "footer.order": "Заказать услугу",
     "footer.order-sign": "Свяжемся с вами в течение рабочего дня",
     "footer.company": "ООО «Пермьтехспец»",
+
+    "list.button": "Показать еще",
   },
 } as const;
