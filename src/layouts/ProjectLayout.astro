@@ -9,9 +9,7 @@ interface Props {
 
 const { project } = Astro.props;
 
-const { slug, region, type, deadline, services } = project.attributes;
-
-const title = replaceQuotes(project.attributes.title);
+const { region, type, deadline, services } = project.attributes;
 
 const customer = marked.parse(replaceQuotes(project.attributes.customer) || "");
 
