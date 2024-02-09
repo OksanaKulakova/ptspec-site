@@ -6,7 +6,14 @@ import fetchApi from "@lib/strapi";
 import type Service from "@interfaces/service";
 
 import getProjects from "@data/getProjects";
-const projects = await getProjects();
+
+import { getLangFromUrl } from "@i18n/utils";
+import { useTranslatedPath } from "@i18n/utils";
+import useTranslations from "@i18n/translation";
+
+const lang = getLangFromUrl(Astro.url);
+
+const projects = await getProjects(lang);
 
 const count = projects.length;
 
@@ -19,8 +26,12 @@ const services = await fetchApi<Service[]>({
     "populate[projects][fields][0]": "title",
     "populate[projects][fields][1]": "slug",
     "sort[0]": "id",
+    "locale": lang,
   },
 });
+
+const translatePath = useTranslatedPath(lang);
+const path = translatePath("/projects/");
 
 const filters = services.map((item: Service) => ({
   id: item.id,
@@ -29,9 +40,20 @@ const filters = services.map((item: Service) => ({
   projects: item.attributes.projects.data.map((item) => ({
     id: item.id,
     title: item.attributes.title,
-    href: `/projects/${item.attributes.slug}/`,
+    href: `${path}${item.attributes.slug}/`,
   })),
 }));
+
+const ui = {
+  en: {
+    "title": "PROJECTS",
+  },
+  ru: {
+    "title": "ПРОЕКТЫ",
+  },
+} as const;
+
+const t = useTranslations(lang, ui);
 ---
 
 <script>
@@ -84,7 +106,7 @@ const filters = services.map((item: Service) => ({
   customElements.define("astro-filter-content", AstroFilterContent);
 </script>
 
-<h2 class="title">ПРОЕКТЫ / <span id="count">{count}</span></h2>
+<h2 class="title">{t("title")} / <span id="count">{count}</span></h2>
 
 <astro-filter-content>
   <Filter filters={filters} />

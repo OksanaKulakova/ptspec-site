@@ -1,0 +1,95 @@
+---
+import type Project from "@interfaces/project";
+import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const { slug, region, type, deadline, services } = project.attributes;
+
+const title = replaceQuotes(project.attributes.title);
+
+const customer = marked.parse(replaceQuotes(project.attributes.customer) || "");
+
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "block.region": "Region",
+    "block.type": "Object type",
+    "block.deadline": "Deadline",
+    "block.customer": "Customers",
+    "block.services": "Services provided",
+  },
+  ru: {
+    "block.region": "Регион",
+    "block.type": "Тип объекта",
+    "block.deadline": "Срок выполнения работ",
+    "block.customer": "Заказчики",
+    "block.services": "Оказанные услуги",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
+---
+
+<div class="page-content">
+  <div class="page-blocks">
+    {
+      region && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.region")}</div>
+          <div class="page-block-text">{region}</div>
+        </div>
+      )
+    }
+
+    {
+      type && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.type")}</div>
+          <div class="page-block-text">{type}</div>
+        </div>
+      )
+    }
+
+    {
+      deadline && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.deadline")}</div>
+          <div class="page-block-text">{deadline}</div>
+        </div>
+      )
+    }
+
+    {
+      customer && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.customer")}</div>
+          <div class="page-block-text" set:html={customer} />
+        </div>
+      )
+    }
+
+    {
+      services && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.services")}</div>
+          <div class="page-block-text">
+            <ul>
+              {services.data.map((item) => (
+                <li>{item.attributes.title}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</div>

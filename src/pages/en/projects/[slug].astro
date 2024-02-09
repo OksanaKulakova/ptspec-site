@@ -1,0 +1,77 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ProjectLayout from "@layouts/ProjectLayout.astro";
+import List from "@components/List.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+
+import fetchApi from "@lib/strapi";
+import type Project from "@interfaces/project";
+
+import getProjects from "@data/getProjects";
+
+import replaceQuotes from "@utils/replaceQuotes";
+
+const pages = await getProjects("en");
+
+export async function getStaticPaths() {
+  const projects = await fetchApi<Project[]>({
+    endpoint: "projects",
+    wrappedByKey: "data",
+    query: {
+      "populate[services][fields][0]": "title",
+      "populate[services][fields][1]": "slug",
+      "pagination[start]": "0",
+      "pagination[limit]": "100",
+      "locale": "en",
+    },
+  });
+
+  return projects.map((project) => ({
+    params: { slug: project.attributes.slug },
+    props: project,
+  }));
+}
+
+type Props = Project;
+
+const project = Astro.props;
+const { slug } = project.attributes;
+
+const title = replaceQuotes(project.attributes.title);
+
+const otherProjects = pages.filter((page) => page.slug !== slug);
+
+type Crumb = {
+  title: string;
+  href?: string;
+};
+
+const breadcrumbs: Crumb[] = [
+  {
+    title: "Home",
+    href: "/en/",
+  },
+  {
+    title: "Projects",
+    href: "/en/projects/",
+  },
+  {
+    title: title,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <h2 class="title">{title}</h2>
+    <div class="page">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <ProjectLayout project={project} />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="title">Other Projects</h2>
+    <List list={otherProjects} />
+  </section>
+</Layout>
