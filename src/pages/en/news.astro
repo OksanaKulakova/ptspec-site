@@ -1,0 +1,25 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Tabs from "@components/Tabs.astro";
+import List from "@components/List.astro";
+
+import getNews from "@data/getNews";
+import getMassMedias from "@data/getMassMedias";
+
+const news = await getNews();
+const massMedias = await getMassMedias();
+
+const countTab1 = news.length;
+const countTab2 = massMedias.length;
+---
+
+<Layout title="MAGAZINE">
+  <Tabs
+    title="MAGAZINE"
+    tab1=`Сompany's news / ${countTab1}`
+    tab2=`Mass Media about us / ${countTab2}`
+  >
+    <Fragment slot="tabcontent-1"><List list={news} /></Fragment>
+    <Fragment slot="tabcontent-2"><List list={massMedias} /></Fragment>
+  </Tabs>
+</Layout>
