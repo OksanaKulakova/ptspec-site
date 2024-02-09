@@ -1,0 +1,187 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+import Vacancies from "@components/blocks/Vacancies.astro";
+import Team from "@components/Team.astro";
+import SimpleList from "@components/SimpleList.astro";
+import Cards from "@components/Cards.astro";
+import Modal from "@components/Modal.astro";
+import Form from "@components/forms/FormVacancy.astro";
+import Form2 from "@components/forms/FormVacancyOther.astro";
+
+import getVacancies from "@data/getVacancies";
+const vacancies = await getVacancies();
+
+type cardWidget = {
+  title: string;
+  text: string;
+};
+
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "Top 10",
+    text: "We are among the Top 10 <br> employers of the Perm region <br> according to the portal 59.ru",
+  },
+  {
+    title: "40+",
+    text: "More than 40 <br> employees have grown <br> to managers",
+  },
+  {
+    title: "75+",
+    text: "More than 75 <br> employees continued <br> careers in large companies",
+  },
+];
+
+type cardForTeam = {
+  name: string;
+  position: string;
+  imagePath: string;
+};
+
+const team: cardForTeam[] = [
+  {
+    name: "Svetlana Permyakova",
+    position: "I solve labor issues",
+    imagePath: "/src/assets/team/random.jpg",
+  },
+  {
+    name: "Ramil Yarullin",
+    position: "I'm making a route to the project",
+    imagePath: "/src/assets/team/random2.jpg",
+  },
+  {
+    name: "Tatiana Spiridonova",
+    position: "Selecting suitable projects",
+    imagePath: "/src/assets/team/random3.jpg",
+  },
+  {
+    name: "Svetlana Vlasova",
+    position: "I help with finding a job",
+    imagePath: "/src/assets/team/random.jpg",
+  },
+  {
+    name: "Natalia Botalova",
+    position: "Guiding on the way to the project",
+    imagePath: "/src/assets/team/random3.jpg",
+  },
+];
+
+type ListItem = {
+  title: string;
+  text: string;
+};
+
+const list: ListItem[] = [
+  {
+    title: "We professionally develop <br> specialists",
+    text: "We offer various training programs, both within the company and outside it. Our specialists regularly take advanced training courses, improving their skills and knowledge in the field of construction.",
+  },
+  {
+    title: "We provide <br> opportunities for career growth",
+    text: "More than 50 employees of our company have taken positions as heads of technical equipment and heads of technical departments in Russian and international construction companies.",
+  },
+  {
+    title: "We attract university graduates to cooperation",
+    text: "We provide university graduates with the opportunity to apply their knowledge in practice and grow professionally. We guarantee decent wages, comfortable working conditions and career growth.",
+  },
+  {
+    title: "contributing to social <br> well-being",
+    text: "We actively participate in charitable projects, helping orphans, low-income families and veterans. We believe that helping those who need it is an integral part of our social responsibility.",
+  },
+];
+
+type linkItem = {
+  link?: string;
+  href?: string;
+  classLink?: string;
+  blank?: boolean;
+};
+
+type card = {
+  classList?: string;
+  title?: string;
+  caption?: string;
+  imagePath?: string;
+  altText?: string;
+  links?: Array<linkItem>;
+};
+
+const cards1: card[] = [
+  {
+    classList: "card--white",
+    title: "SuperJob",
+    caption: "An attractive employer <br> according to the SuperJob portal",
+    links: [
+      {
+        link: "2019",
+        href: "/pdf/2019.pdf",
+        blank: true,
+      },
+      {
+        link: "2020",
+        href: "/pdf/2020.pdf",
+        blank: true,
+      },
+      {
+        link: "2021",
+        href: "/pdf/2021.pdf",
+        blank: true,
+      },
+      {
+        link: "2022",
+        href: "/pdf/2022.pdf",
+        blank: true,
+      },
+    ],
+  },
+  {
+    classList: "card--black",
+    title: "59.ru",
+    caption: "top 10 best employers <br> according to the portal 59.ru",
+    links: [
+      {
+        link: "2023",
+        href: "/pdf/Топ–10%20лучших%20работодателей%20Пермского%20края.pdf",
+        blank: true,
+      },
+    ],
+  },
+];
+---
+
+<Layout title="CAREER">
+  <Widget
+    title="Career"
+    subtitle="We invite specialists to join the team <br> who are ready to grow <br> and contribute to the development of the <br> construction industry"
+    imagePath="/src/assets/images/cover2.jpg"
+    altText="picture"
+    link="Fill out the form"
+    modalId={2}
+    cards={cardsForWidget}
+  />
+
+  <Vacancies title="Currently searching" data={vacancies} />
+
+  <Team title="HR team" cards={team} />
+
+  <section class="section">
+    <h2 class="title">Our values</h2>
+    <SimpleList list={list} />
+  </section>
+
+  <Cards cards={cards1} />
+</Layout>
+
+<Modal id={2}>
+  <Fragment slot="title">
+    Fill out the form <br /> and we will contact you <br /> within one business day
+  </Fragment>
+  <Fragment slot="content"><Form /></Fragment>
+</Modal>
+
+<Modal id={3}>
+  <Fragment slot="title">
+    Fill out the form <br /> and we will contact you <br /> within one business day
+  </Fragment>
+  <Fragment slot="content"><Form2 /></Fragment>
+</Modal>
