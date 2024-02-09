@@ -13,6 +13,9 @@ const textTitle = service.attributes.textTitle || "";
 const text = marked.parse(service.attributes.text || "");
 const result = marked.parse(service.attributes.result || "");
 
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
 const ui = {
   en: {
     "block.description": "Description of service",
@@ -26,17 +29,8 @@ const ui = {
   },
 } as const;
 
-import { getLangFromUrl } from "@i18n/utils";
-import { defaultLang } from "@i18n/ui";
-
-function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
-  };
-}
-
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations(lang, ui);
 ---
 
 <div class="page-content">
