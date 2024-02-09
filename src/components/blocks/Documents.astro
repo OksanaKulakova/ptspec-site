@@ -4,17 +4,36 @@ import List from "@components/List.astro";
 import doc1 from "@data/doc1.json";
 import doc2 from "@data/doc2.json";
 
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "title": "Documentation",
+    "tab1": "Company documents",
+    "tab2": "Occupational Safety and Health",
+  },
+  ru: {
+    "title": "Документация",
+    "tab1": "Документы компании",
+    "tab2": "Охрана труда",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
+
 type TabListItem = {
   title: string;
   href?: string;
 };
 
-const tab1: TabListItem[] = doc1;
+const tab1: TabListItem[] = doc1[lang];
 
-const tab2: TabListItem[] = doc2;
+const tab2: TabListItem[] = doc2[lang];
 ---
 
-<Tabs title="документация" tab1="Документы компании" tab2="охрана труда">
+<Tabs title={t("title")} tab1={t("tab1")} tab2={t("tab2")}>
   <Fragment slot="tabcontent-1"><List list={tab1} /></Fragment>
   <Fragment slot="tabcontent-2"><List list={tab2} /></Fragment>
 </Tabs>
