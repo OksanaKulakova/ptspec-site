@@ -13,6 +13,25 @@ type ListItem = {
 
 import List from "@components/List.astro";
 
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "text.p1": "If the vacancy you are interested in is not available, you can fill out a form and get into our specialist database.",
+    "text.p2": "We will contact you when suitable vacancies become available.",
+    "button.text": "Fill out the form",
+  },
+  ru: {
+    "text.p1": "Если интересующая вакансия отсутствует,вы можете заполнить анкету и попасть в нашу базу специалистов.",
+    "text.p2": "Мы свяжемся с вами, когда появятся подходящие вакансии.",
+    "button.text": "Заполнить анкету",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
+
 const { title, data } = Astro.props;
 ---
 
@@ -25,13 +44,10 @@ const { title, data } = Astro.props;
     <div class="promt-block">
       <div class="promt-text">
         <div class="text">
-          <p>
-            Если интересующая вакансия отсутствует,вы можете заполнить анкету и
-            попасть в нашу базу специалистов.
-          </p>
-          <p>Мы свяжемся с вами, когда появятся подходящие вакансии.</p>
+          <p>{t("text.p1")}</p>
+          <p>{t("text.p2")}</p>
         </div>
-        <a class="link show-modal" data-modal-id="3">Заполнить анкету</a>
+        <a class="link show-modal" data-modal-id="3">{t("button.text")}</a>
       </div>
     </div>
   </div>
