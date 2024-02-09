@@ -1,0 +1,73 @@
+---
+import type Service from "@interfaces/service";
+import { marked } from "marked";
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const description = marked.parse(service.attributes.description || "");
+const textTitle = service.attributes.textTitle || "";
+const text = marked.parse(service.attributes.text || "");
+const result = marked.parse(service.attributes.result || "");
+
+const ui = {
+  en: {
+    "block.description": "Description of service",
+    "block.result": "Result",
+    "button.text": "Leave a request for a service",
+  },
+  ru: {
+    "block.description": "Описание услуги",
+    "block.result": "Результат",
+    "button.text": "Оставить заявку на услугу",
+  },
+} as const;
+
+import { getLangFromUrl } from "@i18n/utils";
+import { defaultLang } from "@i18n/ui";
+
+function useTranslations(lang: keyof typeof ui) {
+  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
+    return ui[lang][key] || ui[defaultLang][key];
+  };
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="page-content">
+  <div class="page-blocks">
+    {
+      description && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.description")}</div>
+          <div class="page-block-text" set:html={description} />
+        </div>
+      )
+    }
+
+    {
+      text && (
+        <div class="page-block">
+          <div class="page-block-title">{textTitle}</div>
+          <div class="page-block-text" set:html={text} />
+        </div>
+      )
+    }
+
+    {
+      result && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.result")}</div>
+          <div class="page-block-text" set:html={result} />
+        </div>
+      )
+    }
+
+    <button class="btn show-modal">{t("button.text")}</button>
+  </div>
+</div>

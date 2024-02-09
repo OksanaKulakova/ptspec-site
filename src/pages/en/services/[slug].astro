@@ -9,12 +9,15 @@ import type Service from "@interfaces/service";
 
 import getServises from "@data/getServices";
 
-const pages = await getServises();
+const pages = await getServises("en");
 
 export async function getStaticPaths() {
   const services = await fetchApi<Service[]>({
     endpoint: "services",
     wrappedByKey: "data",
+    query: {
+      "locale": "en",
+    },
   });
 
   return services.map((service) => ({
@@ -37,12 +40,12 @@ type Crumb = {
 
 const breadcrumbs: Crumb[] = [
   {
-    title: "Главная",
-    href: "/",
+    title: "Home",
+    href: "/en/",
   },
   {
-    title: "Услуги",
-    href: "/services/",
+    title: "Services",
+    href: "/en/services/",
   },
   {
     title: title,
@@ -60,7 +63,7 @@ const breadcrumbs: Crumb[] = [
   </section>
 
   <section class="section">
-    <h2 class="title">Другие услуги</h2>
+    <h2 class="title">Other services</h2>
     <List list={otherServices} />
   </section>
 </Layout>
