@@ -1,0 +1,17 @@
+---
+import Layout from "@layouts/Layout.astro";
+import List from "@components/List.astro";
+import gratitudes from "@data/gratitudes.json";
+import ProjectList from "@components/blocks/Projects.astro";
+---
+
+<Layout title="PROJECTS">
+  <section class="section">
+    <ProjectList />
+  </section>
+
+  <section class="section">
+    <h2 class="title">Reviews and thanks</h2>
+    <List list={gratitudes} />
+  </section>
+</Layout>
