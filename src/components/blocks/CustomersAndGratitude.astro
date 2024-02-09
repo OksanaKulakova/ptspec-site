@@ -4,14 +4,8 @@ import List from "@components/List.astro";
 import customers from "@data/customers.json";
 import gratitudes from "@data/gratitudes.json";
 
-type TabListItem = {
-  title: string;
-  href?: string;
-};
-
-const tab1: TabListItem[] = customers;
-
-const tab2: TabListItem[] = gratitudes;
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
 
 const ui = {
   en: {
@@ -26,17 +20,17 @@ const ui = {
   },
 } as const;
 
-import { getLangFromUrl } from "../../i18n/utils";
-import { defaultLang } from "../../i18n/ui";
-
-function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
-  };
-}
-
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useTranslations(lang, ui);
+
+type TabListItem = {
+  title: string;
+  href?: string;
+};
+
+const tab1: TabListItem[] = customers[lang];
+
+const tab2: TabListItem[] = gratitudes[lang];
 ---
 
 <Tabs
