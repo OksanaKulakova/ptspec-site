@@ -4,6 +4,21 @@ interface Props {
 }
 
 const { id = 1 } = Astro.props;
+
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "button.text": "Close",
+  },
+  ru: {
+    "button.text": "Закрыть",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
 ---
 
 <script>
@@ -123,12 +138,12 @@ const { id = 1 } = Astro.props;
 </script>
 
 <astro-modal-small>
-  <div id={id} class="modal-small">
+  <div id={String(id)} class="modal-small">
     <div class="modal-small-overlay"></div>
     <div class="modal-small-content">
       <div class="modal-small-container">
         <div class="modal-small-header">
-          <a class="link modal-small-close">Закрыть</a>
+          <a class="link modal-small-close">{t("button.text")}</a>
         </div>
         <div class="modal-small-body">
           <slot />

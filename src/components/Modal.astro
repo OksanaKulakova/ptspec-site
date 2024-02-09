@@ -143,7 +143,7 @@ const t = useTranslations(lang, ui);
 </script>
 
 <astro-modal>
-  <div id={id} class="modal">
+  <div id={String(id)} class="modal">
     <div class="modal-overlay"></div>
     <div class="modal-content-wrapper">
       <div class="modal-container">
