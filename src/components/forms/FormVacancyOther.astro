@@ -3,6 +3,51 @@ import "./form.css";
 import InputText from "./InputText.astro";
 import InputPhone from "./InputPhone.astro";
 import Textarea from "./Textarea.astro";
+
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "text.success": "Great! <br> We have received the questionnaire and <br>will contact you soon",
+    "block1.title": "How to contact you",
+    "block1.input1": "Name",
+    "block1.input2": "Last Name",
+    "block2.title": "Vacancy of interest",
+    "block2.input1": "specify the job title",
+    "block3.title": "Summary",
+    "block3.input1": "Insert link to resume",
+    "block4.title": "Contacts",
+    "block4.input1": "Phone number",
+    "block4.input2": "Email",
+    "block5.title": "Comment",
+    "block5.input1": "Write something as needed",
+    "text.sign": "By submitting the form, you agree with",
+    "text.privacy": "privacy policy",
+    "text.button": "Submit request",
+  },
+  ru: {
+    "text.success": "Отлично! <br> Мы получили анкету и <br>скоро свяжемся с вами",
+    "block1.title": "Как к вам обращаться",
+    "block1.input1": "Имя",
+    "block1.input2": "Фамилия",
+    "block2.title": "Интересующая вакансия",
+    "block2.input1": "укажите название вакансии",
+    "block3.title": "Резюме",
+    "block3.input1": "Вставьте ссылку на резюме",
+    "block4.title": "Контакты",
+    "block4.input1": "Номер телефона",
+    "block4.input2": "Электронная почта",
+    "block5.title": "Комментарий",
+    "block5.input1": "Напишите что–то по необходимости",
+    "text.sign": "отправляя анкету, вы соглашаетесь с",
+    "text.privacy": "политикой конфиденциальности",
+    "text.button": "Отправить заявку",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
 ---
 
 <script src="./form.ts"></script>
@@ -11,58 +56,54 @@ import Textarea from "./Textarea.astro";
   <form
     class="form"
     action=`${import.meta.env.PUBLIC_STRAPI_URL}/api/order-vacancies`
-    data-text-sucсess="Отлично! <br> Мы получили анкету и <br>скоро свяжемся с вами"
+    data-text-sucсess={t("text.success")}
   >
     <div class="form-body">
       <div class="form-block">
-        <div class="form-blok-title">Как к вам обращаться</div>
+        <div class="form-blok-title">{t("block1.title")}</div>
         <div class="form-row">
-          <InputText type="text" name="name" placeholder="Имя" required />
-          <InputText type="text" name="lastname" placeholder="Фамилия" />
+          <InputText type="text" name="name" placeholder={t("block1.input1")} required />
+          <InputText type="text" name="lastname" placeholder={t("block1.input2")} />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">Интересующая вакансия</div>
+        <div class="form-blok-title">{t("block2.title")}</div>
         <div class="form-row">
           <Textarea
             name="vacancy"
-            placeholder="укажите название вакансии"
+            placeholder={t("block1.input1")}
             required
           />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">Резюме</div>
+        <div class="form-blok-title">{t("block3.title")}</div>
         <div class="form-row">
-          <Textarea name="resume" placeholder="вставьте ссылку на резюме" />
+          <Textarea name="resume" placeholder={t("block3.input1")} />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">Контакты</div>
+        <div class="form-blok-title">{t("block4.title")}</div>
         <div class="form-row">
-          <InputPhone name="name" placeholder="Номер телефона" required />
+          <InputPhone name="name" placeholder={t("block4.input1")} required />
           <InputText
             type="email"
             name="email"
-            placeholder="Электронная почта"
+            placeholder={t("block4.input2")}
           />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">Комментарий</div>
+        <div class="form-blok-title">{t("block5.title")}</div>
         <div class="form-row">
           <Textarea
             name="comment"
-            placeholder="Напишите что–то по необходимости"
+            placeholder={t("block4.input1")}
           />
         </div>
       </div>
-      <p>
-        отправляя заявку, вы соглашаетесь с <a class="form-link link" target="_blank" href="/pdf/ПТС%20(Политика%20кофиденциальности).pdf"
-          >политикой конфиденциальности</a
-        >
-      </p>
-      <button type="submit" class="btn form-submit">Отправить заявку</button>
+      <p>{t("text.sign")} <a class="form-link link" target="_blank" href="/pdf/ПТС%20(Политика%20кофиденциальности).pdf">{t("text.privacy")}</a></p>
+      <button type="submit" class="btn form-submit">{t("text.button")}</button>
     </div>
   </form>
 </astro-form>
