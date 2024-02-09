@@ -1,0 +1,150 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Widget from "@components/Widget.astro";
+import SimpleList from "@components/SimpleList.astro";
+import Team from "@components/Team.astro";
+import CustomersAndGratitude from "@components/blocks/CustomersAndGratitude.astro";
+import CardsWithMobileSlider from "@components/CardsWithMobileSlider.astro";
+import Documents from "@components/blocks/Documents.astro";
+
+type cardWidget = {
+  title: string;
+  text: string;
+};
+
+const cardsForWidget: cardWidget[] = [
+  {
+    title: "Top 20",
+    text: "We are among the Top 20 <br> engineering <br> companies in Russia",
+  },
+  {
+    title: "300+",
+    text: "More than 300 <br> specialists <br> on staff",
+  },
+  {
+    title: "9+",
+    text: "More than 9 <br> years of experience and expertise <br> in construction",
+  },
+];
+
+type ListItem = {
+  title: string;
+  text: string;
+};
+
+const list: ListItem[] = [
+  {
+    title: "We use our own <br> online service",
+    text: "The Cobalt online service simplifies the process of preparing as-built documentation, reduces work time and allows you to save on hiring additional specialists.",
+  },
+  {
+    title: "We work with the best <br> specialists",
+    text: "The company employs more than 300 people with relevant work experience who undergo continuous training and advanced training. Regardless of the construction stage, focusing on customer requests, we quickly form a project team to solve the required technical problems.",
+  },
+  {
+    title: "We guarantee the quality of the services provided",
+    text: "We control the preparation process and deadlines for completing the work. We define control sections and formats for reporting on the work done. In controversial situations, we provide support and share responsibility.",
+  },
+  {
+    title: "We have all the necessary resources <br> to carry out the work",
+    text: "Our company has a license from the Ministry of Culture and SRO for design, survey, and construction work. Also, having our own fleet of vehicles, geodetic equipment and office equipment allows us to provide high-quality services.",
+  },
+];
+
+type cardForTeam = {
+  name: string;
+  position: string;
+  imagePath: string;
+};
+
+const team: cardForTeam[] = [
+  {
+    name: "Mikhail Kharasov",
+    position: "Director",
+    imagePath: "/src/assets/team/1.jpg",
+  },
+  {
+    name: "Anton Pogudin",
+    position: "Deputy Director",
+    imagePath: "/src/assets/team/2.jpg",
+  },
+  {
+    name: "Dmitry Zakharov",
+    position: "Head of Quality Control Department",
+    imagePath: "/src/assets/team/3.jpg",
+  },
+  {
+    name: "Alexey Goncharuk",
+    position: "Head of production and technical department",
+    imagePath: "/src/assets/team/4.jpg",
+  },
+  {
+    name: "Vladimir Loginov",
+    position: "Deputy Director for Capital Construction",
+    imagePath: "/src/assets/team/5.jpg",
+  },
+  {
+    name: "Kristina Kamenskikh",
+    position: "Head of HSE Department",
+    imagePath: "/src/assets/team/6.jpg",
+  },
+  {
+    name: "Natalia Esipenko",
+    position: "Head of Development Department",
+    imagePath: "/src/assets/team/7.jpg",
+  },
+];
+
+type cardWMS = {
+  title: string;
+  caption: string;
+  imagePath: string;
+  altText: string;
+};
+
+const cardsWMS: cardWMS[] = [
+  {
+    title:
+      "We are an existing partner of the children's fund ROOS «Give Hope»",
+    caption:
+      "Every year we participate in organizing holidays, supporting schools and boarding schools from remote areas of the Perm Territory",
+    imagePath: "/src/assets/images/card1.jpg",
+    altText: "Photo",
+  },
+  {
+    title: "We promote the development of a healthy lifestyle and children's sports",
+    caption:
+      "Every year we take part in the «Green Marathon» and «Steel Character» races, and also provide all possible assistance to children's sports",
+    imagePath: "/src/assets/images/card2.jpg",
+    altText: "Photo",
+  },
+];
+---
+
+<Layout title="COMPANY">
+  <Widget
+    title="Company"
+    subtitle="We take a responsible approach <br> to solving problems <br> and have extensive experience <br> in implementing large projects"
+    imagePath="/src/assets/images/cover3.jpg"
+    altText="picture"
+    link="View the services"
+    href="/en/services/"
+    cards={cardsForWidget}
+  />
+
+  <section class="section">
+    <h2 class="title">advantages <br /> of our company</h2>
+    <SimpleList list={list} />
+  </section>
+
+  <Team title="Team <br> of professionals" cards={team} />
+
+  <CustomersAndGratitude />
+
+  <CardsWithMobileSlider
+    title="social <br> responsibility"
+    cards={cardsWMS}
+  />
+
+  <Documents />
+</Layout>
