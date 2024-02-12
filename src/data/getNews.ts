@@ -29,7 +29,7 @@ export default async function getNews(locale: lang = defaultLang) {
     title: replaceQuotes(item.attributes.title),
     href: `${path}${item.attributes.slug}/`,
     slug: item.attributes.slug,
-    sign: formatDate(item.attributes.date),
+    sign: formatDate(item.attributes.date, locale),
   }));
 
   return list;

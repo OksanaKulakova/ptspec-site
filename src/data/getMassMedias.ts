@@ -21,7 +21,7 @@ export default async function getMassMedias(locale: lang = defaultLang) {
     id: item.id,
     title: replaceQuotes(item.attributes.title),
     href: item.attributes.link,
-    sign: `${formatDate(item.attributes.date)}  • ${replaceQuotes(item.attributes.source)}`,
+    sign: `${formatDate(item.attributes.date, locale)}  • ${replaceQuotes(item.attributes.source)}`,
     blank: true,
   }));
 

@@ -5,6 +5,7 @@ import replaceQuotes from "@utils/replaceQuotes";
 import formatDate from "@utils/formatDate";
 import fetchApi from "@lib/strapi";
 import ButtonCopyLink from "@components/ButtonCopyLink.astro";
+import { getLangFromUrl } from "@i18n/utils";
 
 interface Props {
   newObject: New;
@@ -16,7 +17,8 @@ const id = newObject.id;
 const { introTitle, blocks } = newObject.attributes;
 
 const title = replaceQuotes(newObject.attributes.title);
-const date = formatDate(newObject.attributes.date);
+const lang = getLangFromUrl(Astro.url);
+const date = formatDate(newObject.attributes.date, lang);
 
 const introText = marked.parse(newObject.attributes.introText || "");
 
