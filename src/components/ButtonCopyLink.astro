@@ -1,3 +1,24 @@
+---
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "button.text": "copy link to material",
+    "button.text-succes": "link copied",
+    "button.text-error": "clipboard not available",
+  },
+  ru: {
+    "button.text": "скопировать ссылку на материал",
+    "button.text-succes": "ссылка скопирована",
+    "button.text-error": "буфер обмена не доступен",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
+---
+
 <script>
   class AstroBtnCopyLink extends HTMLElement {
     constructor() {
@@ -6,7 +27,7 @@
       const btn: HTMLElement | null = this.querySelector(".btn");
 
       const resetTextButton = (): void => {
-        btn.innerText = "скопировать ссылку на материал";
+        btn.innerText = btn.dataset.buttonText;
       };
 
       btn?.addEventListener("click", (event: Event): void => {
@@ -18,13 +39,13 @@
           navigator.clipboard
             .writeText(link)
             .then(() => {
-              btn.innerText = "ссылка скопирована";
+              btn.innerText = btn.dataset.buttonTextSucces;
             })
             .catch((err: Error) => {
               btn.innerText = err.message;
             });
         } else {
-          btn.innerText = "буфер обмена не доступен";
+          btn.innerText = btn.dataset.buttonTextError;
         }
 
         setTimeout(() => {
@@ -38,5 +59,7 @@
 </script>
 
 <astro-btn-copy-link>
-  <button class="btn">скопировать ссылку на материал</button>
+  <button class="btn" data-button-text={t("button.text")} data-button-text-succes={t("button.text-succes")} data-button-text-error={t("button.text-error")}>
+    {t("button.text")}
+  </button>
 </astro-btn-copy-link>
