@@ -8,7 +8,13 @@ const {pathname} = Astro.url;
 const path = pathname.split("/");
 
 const switchLang = lang === "ru" ? "en" : "ru";
-const href = lang === "ru" ? `/en/${path[1]}` : `/${path[2]}`;
+
+let href = lang === "ru" ? `/en${pathname}` : pathname.slice(3);
+
+if (path.length > 2) {
+  href = lang === "ru" ? `/en/${path[1]}` : `/${path[2]}`;
+}
+
 ---
 <a class="footer-link link" href={href}>{languages[switchLang]}</a>
 
