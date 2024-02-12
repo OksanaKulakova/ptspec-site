@@ -1,4 +1,5 @@
 import sendData from "./send";
+import sendEmail from "./sendEmail";
 
 class AstroForm extends HTMLElement {
   constructor() {
@@ -46,6 +47,7 @@ class AstroForm extends HTMLElement {
         const url: string = form.action;
         const textSucсess: string = form.dataset.textSucсess;
         sendData(data, url, textSucсess);
+        // sendEmail(data);
         form.reset();
       }
     });
