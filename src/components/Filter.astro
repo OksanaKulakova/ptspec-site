@@ -12,6 +12,23 @@ type Filter = {
 const { filters } = Astro.props;
 
 import ModalSmall from "./ModalSmall.astro";
+
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "button.text": "Filter by service",
+    "button-reset.text": "Reset filter",
+  },
+  ru: {
+    "button.text": "Фильтровать по услуге",
+    "button-reset.text": "Сбросить фильтр",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
 ---
 
 <script>
@@ -70,7 +87,7 @@ import ModalSmall from "./ModalSmall.astro";
       function resetFilter(): void {
         deleteActiveClass();
         btnOpen.classList.remove("filter-button--active");
-        btnOpen.childNodes[0].textContent = "Фильтровать по услуге";
+        btnOpen.childNodes[0].textContent = btnOpen.dataset.buttonText;
         btnOpen.dataset.filterId = "0";
 
         btnReset.forEach((btn: Element) => {
@@ -130,8 +147,9 @@ import ModalSmall from "./ModalSmall.astro";
             <button
               class="filter-button filter-button-open button-open-modal"
               data-filter-id="0"
+              data-button-text={t("button.text")}
             >
-              Фильтровать по услуге
+              {t("button.text")}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -145,7 +163,7 @@ import ModalSmall from "./ModalSmall.astro";
           </div>
           <div class="filter-block">
             <button disabled class="filter-button filter-button-reset">
-              Сбросить фильтр
+              {t("button-reset.text")}
             </button>
           </div>
         </div>
