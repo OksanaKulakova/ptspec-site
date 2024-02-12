@@ -18,7 +18,7 @@ export default async function getvacancys(locale: lang = defaultLang) {
   });
 
   const translatePath = useTranslatedPath(locale);
-  const path = translatePath("/vacancies/");
+  const path = translatePath("/career/");
 
   const list = vacancies.map((item) => ({
     id: item.id,
