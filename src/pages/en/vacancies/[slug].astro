@@ -14,12 +14,15 @@ import getVacancies from "@data/getVacancies";
 
 import replaceQuotes from "@utils/replaceQuotes";
 
-const pages = await getVacancies();
+const pages = await getVacancies("en");
 
 export async function getStaticPaths() {
   const vacancies = await fetchApi<Vacancy[]>({
     endpoint: "vacancies",
     wrappedByKey: "data",
+    query: {
+      "locale": "en",
+    },
   });
 
   return vacancies.map((vacancy) => ({
@@ -45,12 +48,12 @@ type Crumb = {
 
 const breadcrumbs: Crumb[] = [
   {
-    title: "Главная",
-    href: "/",
+    title: "Home",
+    href: "/en/",
   },
   {
-    title: "Карьера",
-    href: "/career/",
+    title: "Career",
+    href: "/en/career/",
   },
   {
     title: title,
@@ -66,19 +69,19 @@ const breadcrumbs: Crumb[] = [
       <VacancyLayout vacancy={vacancy} />
     </div>
 
-    <Vacancies title="другие вакансии" data={otherVacancies} />
+    <Vacancies title="Other vacancies" data={otherVacancies} />
   </section>
 
   <Modal id={2}>
     <Fragment slot="title">
-      Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+      Fill out the form <br /> and we will contact you <br /> within one business day
     </Fragment>
     <Fragment slot="content"><Form /></Fragment>
   </Modal>
 
   <Modal id={3}>
     <Fragment slot="title">
-      Заполните анкету <br /> и мы свяжемся с вами <br /> в течение рабочего дня
+      Fill out the form <br /> and we will contact you <br /> within one business day
     </Fragment>
     <Fragment slot="content"><Form2 /></Fragment>
   </Modal>

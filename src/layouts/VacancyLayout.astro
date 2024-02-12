@@ -1,0 +1,70 @@
+---
+import type Vacancy from "@interfaces/vacancy";
+import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
+
+interface Props {
+  vacancy: Vacancy;
+}
+
+const { vacancy } = Astro.props;
+
+const responsibilities = marked.parse(
+  vacancy.attributes.responsibilities || "",
+);
+const directionwork = marked.parse(vacancy.attributes.directionwork || "");
+const requirements = marked.parse(vacancy.attributes.requirements || "");
+
+import useTranslations from "@i18n/translation";
+import { getLangFromUrl } from "@i18n/utils";
+
+const ui = {
+  en: {
+    "block.responsibilities": "Responsibilities",
+    "block.directionwork": "Work direction",
+    "block.requirements": "Requirements",
+    "button.text": "Apply for a vacancy",
+  },
+  ru: {
+    "block.responsibilities": "Обязанности",
+    "block.directionwork": "Направление работ",
+    "block.requirements": "Требования",
+    "button.text": "Откликнуться на вакансию",
+  },
+} as const;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang, ui);
+---
+<div class="page-content">
+  <div class="page-blocks">
+    {
+      responsibilities && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.responsibilities")}</div>
+          <div class="page-block-text" set:html={responsibilities} />
+        </div>
+      )
+    }
+
+    {
+      directionwork && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.directionwork")}</div>
+          <div class="page-block-text" set:html={directionwork} />
+        </div>
+      )
+    }
+
+    {
+      requirements && (
+        <div class="page-block">
+          <div class="page-block-title">{t("block.requirements")}</div>
+          <div class="page-block-text" set:html={requirements} />
+        </div>
+      )
+    }
+
+    <button class="btn show-modal" data-modal-id="2">{t("button.text")}</button>
+  </div>
+</div>

@@ -10,7 +10,7 @@ import Form from "@components/forms/FormVacancy.astro";
 import Form2 from "@components/forms/FormVacancyOther.astro";
 
 import getVacancies from "@data/getVacancies";
-const vacancies = await getVacancies();
+const vacancies = await getVacancies("en");
 
 type cardWidget = {
   title: string;
