@@ -49,7 +49,7 @@ const ui = {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, ui);
-const vacancies = await getVacancies();
+const vacancies = await getVacancies(lang);
 ---
 
 <script src="./form.ts"></script>
