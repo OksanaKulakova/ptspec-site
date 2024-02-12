@@ -1,0 +1,91 @@
+---
+import type New from "@interfaces/new";
+import { marked } from "marked";
+import replaceQuotes from "@utils/replaceQuotes";
+import formatDate from "@utils/formatDate";
+import fetchApi from "@lib/strapi";
+import ButtonCopyLink from "@components/ButtonCopyLink.astro";
+
+interface Props {
+  newObject: New;
+}
+
+const { newObject } = Astro.props;
+
+const id = newObject.id;
+const { introTitle, blocks } = newObject.attributes;
+
+const title = replaceQuotes(newObject.attributes.title);
+const date = formatDate(newObject.attributes.date);
+
+const introText = marked.parse(newObject.attributes.introText || "");
+
+async function getPictureUrl(id: number) {
+  const item = await fetchApi<New>({
+    endpoint: `news/${id}`,
+    wrappedByKey: "data",
+    query: {
+      "populate[picture][fields][0]": "url",
+    },
+  });
+
+  const url = item.attributes.picture.data.attributes.url;
+
+  return url;
+}
+
+const pictureUrl = await getPictureUrl(id);
+
+import { getImage } from "astro:assets";
+
+const desktopImg = await getImage({
+  src: `${import.meta.env.PUBLIC_STRAPI_URL}${pictureUrl}`,
+  format: "jpeg, webp",
+  width: 920,
+  height: 560,
+});
+---
+
+<div class="page-content">
+  <div class="page-blocks">
+    {
+      date && (
+        <div class="page-block">
+          <div class="page-block-title">{date}</div>
+        </div>
+      )
+    }
+    {
+      introText && (
+        <div class="page-block">
+          <div class="page-block-title">{introTitle}</div>
+          <div class="page-block-text" set:html={introText} />
+        </div>
+      )
+    }
+
+    {
+      pictureUrl && (
+        <div class="page-block">
+          <div class="page-image">
+            <img src={desktopImg.src} alt={title} />
+          </div>
+        </div>
+      )
+    }
+
+    {
+      blocks.map((item) => (
+        <div class="page-block">
+          <div class="page-block-title">{item.title}</div>
+          <div
+            class="page-block-text"
+            set:html={marked.parse(item.text)}
+          />
+        </div>
+      ))
+    }
+
+    <ButtonCopyLink />
+  </div>
+</div>

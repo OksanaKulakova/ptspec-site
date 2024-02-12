@@ -17,6 +17,7 @@ export async function getStaticPaths() {
     wrappedByKey: "data",
     query: {
       "populate[0]": "blocks",
+      "locale": "en",
     },
   });
 
@@ -34,7 +35,7 @@ const { slug } = service.attributes;
 
 const title = replaceQuotes(service.attributes.title);
 
-const pages = await getNews();
+const pages = await getNews("en");
 const otherServices = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {
@@ -44,12 +45,12 @@ type Crumb = {
 
 const breadcrumbs: Crumb[] = [
   {
-    title: "Главная",
-    href: "/",
+    title: "Home",
+    href: "/en/",
   },
   {
-    title: "Журнал",
-    href: "/news/",
+    title: "Magazine",
+    href: "/en/news/",
   },
   {
     title: title,
@@ -68,7 +69,7 @@ const breadcrumbs: Crumb[] = [
   </section>
 
   <section class="section">
-    <h2 class="title">Другие новости</h2>
+    <h2 class="title">Other news</h2>
     <List list={otherServices} />
   </section>
 </Layout>
