@@ -45,7 +45,7 @@ export const ui = {
     "footer.city": "Пермь",
     "footer.srteet": "Мира 45а, Офис 201",
     "footer.order": "Заказать услугу",
-    "footer.order-sign": "Свяжемся с вами в течение рабочего дня",
+    "footer.order-sign": "Свяжемся с вами в течение <br> рабочего дня",
     "footer.company": "ООО «Пермьтехспец»",
 
     "list.button": "Показать еще",

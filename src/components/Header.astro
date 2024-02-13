@@ -188,7 +188,7 @@ const translatePath = useTranslatedPath(lang);
     display: none;
   }
 
-  @media screen and (min-width: 688px) {
+  @media screen and (min-width: 1025px) {
     .header-mobile {
       display: none;
     }
@@ -197,7 +197,7 @@ const translatePath = useTranslatedPath(lang);
       display: flex;
       gap: 16px;
       height: 56px;
-      padding: 0 16px;
+      padding: 0 32px;
     }
 
     .nav-item {
@@ -209,12 +209,6 @@ const translatePath = useTranslatedPath(lang);
 
     .nav-item:last-child {
       justify-content: space-between;
-    }
-  }
-
-  @media screen and (min-width: 1025px) {
-    .nav {
-      padding: 0 32px;
     }
   }
 </style>

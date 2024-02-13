@@ -44,7 +44,7 @@ const t = useTranslations(lang);
     <div class="footer-button">
       <button class="btn show-modal">{t("footer.order")}</button>
     </div>
-    <div class="footer-sign">{t("footer.order-sign")}</div>
+    <div class="footer-sign" set:html={t("footer.order-sign")}></div>
   </div>
   <div class="footer-block">
     <div class="footer-social">
@@ -96,6 +96,7 @@ const t = useTranslations(lang);
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    max-width: 480px;
     padding-bottom: 48px;
   }
 
@@ -139,7 +140,7 @@ const t = useTranslations(lang);
     text-decoration: none;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1025px) {
     .footer {
       padding: 96px 32px 32px 32px;
       gap: 192px;
