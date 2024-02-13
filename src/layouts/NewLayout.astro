@@ -53,14 +53,14 @@ const desktopImg = await getImage({
     {
       date && (
         <div class="page-block">
-          <div class="page-block-title">{date}</div>
+          <div class="page-block-title"><h3>{date}</h3></div>
         </div>
       )
     }
     {
       introText && (
         <div class="page-block">
-          <div class="page-block-title">{introTitle}</div>
+          <div class="page-block-title"><h3>{introTitle}</h3></div>
           <div class="page-block-text" set:html={introText} />
         </div>
       )
@@ -79,7 +79,7 @@ const desktopImg = await getImage({
     {
       blocks.map((item) => (
         <div class="page-block">
-          <div class="page-block-title">{item.title}</div>
+          <div class="page-block-title"><h3>{item.title}</h3></div>
           <div
             class="page-block-text"
             set:html={marked.parse(item.text)}

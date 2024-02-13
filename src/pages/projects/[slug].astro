@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import ProjectLayout from "@layouts/ProjectLayout.astro";
 import List from "@components/List.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 
@@ -8,7 +9,6 @@ import type Project from "@interfaces/project";
 
 import getProjects from "@data/getProjects";
 
-import { marked } from "marked";
 import replaceQuotes from "@utils/replaceQuotes";
 
 const pages = await getProjects();
@@ -34,11 +34,9 @@ export async function getStaticPaths() {
 type Props = Project;
 
 const project = Astro.props;
-const { slug, region, type, deadline, services } = project.attributes;
+const { slug } = project.attributes;
 
 const title = replaceQuotes(project.attributes.title);
-
-const customer = marked.parse(replaceQuotes(project.attributes.customer) || "");
 
 const otherProjects = pages.filter((page) => page.slug !== slug);
 
@@ -67,60 +65,7 @@ const breadcrumbs: Crumb[] = [
     <h2 class="title">{title}</h2>
     <div class="page">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div class="page-content">
-        <div class="page-blocks">
-          {
-            region && (
-              <div class="page-block">
-                <div class="page-block-title">Регион</div>
-                <div class="page-block-text">{region}</div>
-              </div>
-            )
-          }
-
-          {
-            type && (
-              <div class="page-block">
-                <div class="page-block-title">Тип объекта</div>
-                <div class="page-block-text">{type}</div>
-              </div>
-            )
-          }
-
-          {
-            deadline && (
-              <div class="page-block">
-                <div class="page-block-title">Срок выполнения работ</div>
-                <div class="page-block-text">{deadline}</div>
-              </div>
-            )
-          }
-
-          {
-            customer && (
-              <div class="page-block">
-                <div class="page-block-title">Заказчики</div>
-                <div class="page-block-text" set:html={customer} />
-              </div>
-            )
-          }
-
-          {
-            services && (
-              <div class="page-block">
-                <div class="page-block-title">Оказанные услуги</div>
-                <div class="page-block-text">
-                  <ul>
-                    {services.data.map((item) => (
-                      <li>{item.attributes.title}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )
-          }
-        </div>
-      </div>
+      <ProjectLayout project={project} />
     </div>
   </section>
 

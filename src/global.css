@@ -256,6 +256,7 @@ textarea:focus {
   position: relative;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -347,6 +348,25 @@ textarea:focus {
   }
 }
 
+@media screen and (min-width: 688px) {
+  .page-block {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .page-block-title {
+    flex: 1 1 0;
+    min-width: 360px;
+    padding-top: 16px;
+  }
+
+  .page-block-text {
+    flex: 1 1 0;
+    min-width: 360px;
+    padding-top: 16px;
+  }
+}
+
 @media screen and (min-width: 1025px) {
   .section {
     gap: 32px;
@@ -367,17 +387,10 @@ textarea:focus {
 
   .page-block {
     flex-direction: row;
-    gap: 16px;
-  }
-
-  .page-block-title {
-    width: calc(50% - 8px);
-    padding: 16px 0;
+    gap: 0;
   }
 
   .page-block-text {
-    width: calc(50% - 8px);
-    padding-top: 16px;
     font-size: 16px;
     line-height: 24px;
   }
