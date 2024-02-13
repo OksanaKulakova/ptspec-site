@@ -102,7 +102,28 @@ if (imagePath && !images[imagePath])
   }
 
   .widget-content-block:first-child {
+    position: relative;
     padding: 16px 0px 32px;
+  }
+
+  .widget-content-block:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
+  }
+
+  .widget-content-block:first-child::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #161619;
   }
 
   .widget-content-block:last-child {
@@ -187,18 +208,7 @@ if (imagePath && !images[imagePath])
     vertical-align: top;
   }
 
-  @media screen and (min-width: 1024px) {
-    .widget {
-      gap: 32px;
-      padding: 96px 32px;
-    }
-
-    .widget-title {
-      font-size: 96px;
-      line-height: 104px;
-      letter-spacing: -7.68px;
-    }
-
+  @media screen and (min-width: 688px) {
     .widget-content {
       display: flex;
       gap: 16px;
@@ -219,7 +229,6 @@ if (imagePath && !images[imagePath])
     }
 
     .widget-content-block:first-child {
-      position: relative;
       padding: 16px 16px 64px 0px;
     }
 
@@ -228,9 +237,27 @@ if (imagePath && !images[imagePath])
       position: absolute;
       top: 0;
       right: 0;
+      left: 100%;
       width: 1px;
       height: 100%;
       background-color: #161619;
+    }
+
+    .widget-content-block:first-child::after {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .widget {
+      gap: 32px;
+      padding: 96px 32px;
+    }
+
+    .widget-title {
+      font-size: 96px;
+      line-height: 104px;
+      letter-spacing: -7.68px;
     }
 
     .widget-subtitle {
