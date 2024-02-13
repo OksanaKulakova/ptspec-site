@@ -57,7 +57,14 @@
   display: block;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 688px) {
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
   .form-body {
     gap: 64px;
     width: calc(50% - 8px);
@@ -68,10 +75,5 @@
     font-size: 24px;
     line-height: 32px;
     letter-spacing: -1.44px;
-  }
-
-  .form-row {
-    display: flex;
-    gap: 16px;
   }
 }

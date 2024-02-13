@@ -118,7 +118,7 @@ const t = useTranslations(lang, ui);
           const target: HTMLElement = event.target as HTMLElement;
           const id = Number(target.dataset.modalId) || 1;
 
-          if (width < 1024) {
+          if (width < 688) {
             openModal(id);
             hideScroll();
           }
@@ -202,7 +202,7 @@ const t = useTranslations(lang, ui);
     padding: 0px 16px;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 688px) {
     .modal-small {
       display: none;
     }

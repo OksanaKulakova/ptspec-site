@@ -57,7 +57,7 @@ const t = useTranslations(lang, ui);
         }, 10);
       };
 
-      const fadeOut = (el: HTMLElement, timeout: number = 1000) => {
+      const fadeOut = (el: HTMLElement, timeout: number = 500) => {
         el.style.opacity = "1";
         el.style.transition = `opacity ${timeout}ms`;
         el.style.opacity = "0";
@@ -69,7 +69,7 @@ const t = useTranslations(lang, ui);
 
       const slideUp = (
         el: HTMLElement,
-        timeout: number = 1000,
+        timeout: number = 500,
         display: string = "block",
       ): void => {
         el.style.top = "100vh";
@@ -80,7 +80,7 @@ const t = useTranslations(lang, ui);
         }, 10);
       };
 
-      const slideDown = (el: HTMLElement, timeout: number = 1000) => {
+      const slideDown = (el: HTMLElement, timeout: number = 500) => {
         el.style.top = "0";
         el.style.transition = `top ${timeout}ms`;
         el.style.top = "100vh";
@@ -115,7 +115,7 @@ const t = useTranslations(lang, ui);
         setTimeout(() => {
           modal?.classList.remove("modal--open");
           resetModalContent();
-        }, 1000);
+        }, 500);
       };
 
       btnOpen?.forEach((btn: Element) => {
@@ -126,7 +126,7 @@ const t = useTranslations(lang, ui);
           const id = Number(target.dataset.modalId) || 1;
 
           openModal(id);
-          setTimeout(hideScroll, 1000);
+          setTimeout(hideScroll, 500);
         });
       });
 
@@ -231,7 +231,7 @@ const t = useTranslations(lang, ui);
     width: 100%;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1025px) {
     .modal-body {
       gap: 64px;
       padding: 96px 32px;

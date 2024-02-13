@@ -70,7 +70,7 @@ const t = useTranslations(lang, ui);
         event.preventDefault();
         const width: number = window.innerWidth;
 
-        if (width >= 1024) {
+        if (width > 687) {
           toggleOpenList();
         }
       });
@@ -328,9 +328,23 @@ const t = useTranslations(lang, ui);
     background-color: #faf8f8;
   }
 
-  @media screen and (min-width: 1024px) {
-    .filter-container--fixed {
-      width: calc(100% - 64px);
+  @media screen and (min-width: 687px) {
+    .filter-list {
+      display: none;
+      width: calc(50% - 8px);
+      height: 321px;
+      background-color: #faf8f8;
+      padding: 16px 0;
+      outline: 1px solid #161619;
+      outline-offset: -1px;
+      overflow-y: auto;
+    }
+
+    .filter-list--open {
+      display: block;
+      position: absolute;
+      top: 56px;
+      z-index: 10;
     }
 
     .filter {
@@ -338,8 +352,8 @@ const t = useTranslations(lang, ui);
     }
 
     .filter::after {
-      left: -32px;
-      width: calc(100% + 64px);
+      left: -16px;
+      width: calc(100% + 32px);
     }
 
     .filter-block:first-child {
@@ -361,27 +375,16 @@ const t = useTranslations(lang, ui);
       display: flex;
       width: calc(50% + 8px);
     }
+  }
 
-    .filter-list {
-      display: none;
-      width: calc(50% - 8px);
-      height: 321px;
-      background-color: #faf8f8;
-      padding: 16px 0;
-      outline: 1px solid #161619;
-      outline-offset: -1px;
-      overflow-y: auto;
+  @media screen and (min-width: 1025px) {
+    .filter-container--fixed {
+      width: calc(100% - 64px);
     }
 
-    .filter-list--open {
-      display: block;
-      position: absolute;
-      top: 56px;
-      z-index: 10;
-    }
-
-    .modal {
-      display: none;
+    .filter::after {
+      left: -32px;
+      width: calc(100% + 64px);
     }
   }
 </style>

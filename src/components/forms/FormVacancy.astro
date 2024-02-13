@@ -62,26 +62,26 @@ const vacancies = await getVacancies(lang);
   >
     <div class="form-body">
       <div class="form-block">
-        <div class="form-blok-title">{t("block1.title")}</div>
+        <div class="form-block-title">{t("block1.title")}</div>
         <div class="form-row">
           <InputText type="text" name="name" placeholder={t("block1.input1")} required />
           <InputText type="text" name="lastname" placeholder={t("block1.input2")} />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">{t("block2.title")}</div>
+        <div class="form-block-title">{t("block2.title")}</div>
         <div class="form-row">
           <Select id={3} name="vacancy" list={vacancies} />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">{t("block3.title")}</div>
+        <div class="form-block-title">{t("block3.title")}</div>
         <div class="form-row">
           <Textarea name="resume" placeholder={t("block3.input1")} />
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">{t("block4.title")}</div>
+        <div class="form-block-title">{t("block4.title")}</div>
         <div class="form-row">
           <InputPhone name="phone" placeholder={t("block4.input1")} required />
           <InputText
@@ -92,7 +92,7 @@ const vacancies = await getVacancies(lang);
         </div>
       </div>
       <div class="form-block">
-        <div class="form-blok-title">{t("block5.title")}</div>
+        <div class="form-block-title">{t("block5.title")}</div>
         <div class="form-row">
           <Textarea
             name="comment"
