@@ -15,15 +15,22 @@ const { name, placeholder, required } = Astro.props;
     constructor() {
       super();
 
-      const textarea = this.querySelector("input");
+      const textarea: HTMLInputElement = this.querySelector("input");
+
+      const changeValue = (target: HTMLTextAreaElement): void => {
+        const text: string = target.value;
+        const value: string = formatPhone(text);
+        target.value = value;
+      }
 
       textarea.addEventListener("input", (event: Event) => {
-        let target: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
-        const text = target.value;
+        const target: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
+        changeValue(target);
+      });
 
-        const value = formatPhone(text);
-
-        target.value = value;
+      textarea.addEventListener("focus", (event: Event) => {
+        const target: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
+        changeValue(target);
       });
     }
   }

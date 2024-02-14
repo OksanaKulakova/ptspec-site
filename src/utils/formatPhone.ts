@@ -1,5 +1,5 @@
 const formatPhone = (str) => {
-  let result = "";
+  let result = "+7 (";
 
   if (str) {
     let value = str.replace(/\D+/g, "");
