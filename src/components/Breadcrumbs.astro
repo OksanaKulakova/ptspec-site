@@ -16,12 +16,14 @@ const { breadcrumbs } = Astro.props;
     document.querySelector(".crumbs-container");
   const chr: HTMLElement | null = document.querySelector(".crumbs-hr");
 
+  const containerHeight:number = container.getBoundingClientRect().height;
+
   window.addEventListener("scroll", () => {
     const thr: number = chr.getBoundingClientRect().top;
 
-    if (thr <= 56) {
+    if (thr <= containerHeight) {
       container.classList.add("crumbs-container--fixed");
-      (chr as HTMLElement).style.marginBottom = "56px";
+      (chr as HTMLElement).style.marginBottom = `${containerHeight}px`;
     } else {
       container.classList.remove("crumbs-container--fixed");
       (chr as HTMLElement).style.marginBottom = "0";
@@ -139,6 +141,31 @@ const { breadcrumbs } = Astro.props;
   @media screen and (min-width: 1025px) {
     .crumbs-container {
       display: block;
+    }
+  }
+
+  @media screen and (min-width: 1921px) {
+    .crumbs-container {
+      height: 7vh;
+    }
+
+    .crumbs-container--fixed {
+      top: 7vh;
+      width: calc(100% - 8vw);
+    }
+
+    .crumbs::after {
+      left: -4vw;
+      width: calc(100% + 8vw);
+    }
+
+    .crumbs-item {
+      max-width: 56vw;
+    }
+
+    .crumbs-item-sign {
+      height: 7vh;
+      padding: 0 1vw;
     }
   }
 </style>

@@ -77,3 +77,24 @@
     letter-spacing: -1.44px;
   }
 }
+
+@media screen and (min-width: 1921px) {
+  .form {
+    padding-top: 2vh;
+  }
+
+  .form-body {
+    gap: 8vh;
+    width: calc(50% - 1vw);
+  }
+
+  .form-block-title {
+    font-size: 3vh;
+    line-height: 4vh;
+    letter-spacing: -0.075vw;
+  }
+
+  .form-row {
+    gap: 1vw;
+  }
+}

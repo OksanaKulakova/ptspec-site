@@ -356,4 +356,68 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       letter-spacing: -0.8px;
     }
   }
+
+  @media screen and (min-width: 1921px) {
+    .cards-wms-section {
+      padding: 12vh 0;
+    }
+
+    .cards-wms-title {
+      padding: 0 4vw;
+    }
+
+    .cards-wms {
+      padding: 0 4vw;
+    }
+
+    .cards-wms:before {
+      left: 4vw;
+      width: calc(100% - 8vw);
+    }
+
+    .cards-wms:after {
+      left: 4vw;
+      width: calc(100% - 8vw);
+    }
+
+    .card-wms {
+      width: 50%;
+      min-height: 70vh;
+      padding: 2vh;
+    }
+
+    .card-wms:first-child {
+      width: calc(50% - 1vw);
+      padding-left: 0;
+    }
+
+    .card-wms:last-child {
+      width: calc(50% + 1vw);
+      padding-right: 0;
+    }
+
+    .card-wms-text {
+      max-width: 30vw;
+    }
+
+    .card-wms-title {
+      font-size: 3vh;
+      line-height: 4vh;
+      letter-spacing: -0.075vw;
+    }
+
+    .card-wms-caption {
+      font-size: 2vh;
+      line-height: 3vh;
+      letter-spacing: -0.06vw;
+    }
+
+    .card-wms-img {
+      height: 30vh;
+    }
+
+    .card-wms-img img {
+      width: calc(50% - 2vw);
+    }
+  }
 </style>

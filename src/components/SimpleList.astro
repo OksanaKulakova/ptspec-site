@@ -259,4 +259,31 @@ const { list } = Astro.props;
       display: none;
     }
   }
+
+  @media screen and (min-width: 1921px) {
+    .simple-list {
+      gap: 8vh;
+    }
+
+    .simple-item {
+      gap: 2vw;
+    }
+
+    .simple-item-title {
+      max-width: 24vw;
+      font-size: 3vh;
+      line-height: 4vh;
+      letter-spacing: -0.075vw;
+    }
+
+    .simple-item-content {
+      max-width: 24vw;
+    }
+
+    .simple-item-text {
+      font-size: 2vh;
+      line-height: 3vh;
+      letter-spacing: -0.06vw;
+    }
+  }
 </style>

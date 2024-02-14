@@ -290,4 +290,52 @@ const t = useTranslations(lang);
       width: calc(100% + 64px);
     }
   }
+
+  @media screen and (min-width: 1921px) {
+    .list-item {
+      gap: 2vw;
+      padding: 2vh 0;
+    }
+
+    .list-item-content {
+      gap: 0.5vw;
+    }
+
+    .list-item-name {
+      max-width: 115vw;
+      font-size: 3vh;
+      line-height: 4vh;
+      letter-spacing: -0.075vw;
+    }
+
+    .list-item-sign {
+      max-width: 115vw;
+    }
+
+    .list-item-icon {
+      width: 4vh;
+      height: 4vh;
+    }
+
+    .list-item-clickable:hover::before {
+      left: -4vw;
+      width: calc(100% + 8vw);
+    }
+
+    .list-item:hover .list-item-icon {
+      rotate: -90deg;
+    }
+
+    .list-button-more {
+      padding: 2vh 0;
+      font-size: 3vh;
+      line-height: 4vh;
+      letter-spacing: -0.075vw;
+    }
+
+    .list-button-more:hover::before {
+      left: -4vw;
+      width: calc(100% + 8vw);
+    }
+  }
 </style>

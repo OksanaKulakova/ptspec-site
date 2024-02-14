@@ -390,6 +390,10 @@ textarea:focus {
     gap: 0;
   }
 
+  .page-block:first-child:before {
+    display: none;
+  }
+
   .page-block-text {
     font-size: 16px;
     line-height: 24px;
@@ -407,5 +411,94 @@ textarea:focus {
     font-size: 96px;
     line-height: 104px;
     letter-spacing: -0.08em;
+  }
+}
+
+
+@media screen and (min-width: 1921px) {
+  :root {
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
+  }
+
+  main {
+    padding-top: 7vh;
+  }
+  
+  .link {
+    height: 7vh;
+    padding: 2vh 0;
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
+  }
+
+  .section {
+    gap: 4vh;
+    padding: 12vh 4vw;
+  }
+
+  .title {
+    font-size: 8vh;
+    line-height: 9vh;
+    letter-spacing: -0.233vw;
+  }
+
+  .page-blocks {
+    gap: 8vh;
+  }
+
+  .page-block-title {
+    padding-top: 2vh;
+
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
+  }
+
+  .page-block-text {
+    padding-top: 2vh;
+
+    font-size: 2vh;
+    line-height: 3vh;
+  }
+
+  .page-block-text h4 {
+    margin-top: 3vh;
+  }
+
+  .page-image {
+    height: 70vh;
+  }
+
+  .order-text {
+    font-size: 12vh;
+    line-height: 12vh;
+  }
+
+  .btn {
+    padding: 3vh;
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
+  }
+
+  input,
+  textarea {
+    height: 7vh;
+    padding: 2vh 0 1.875vh;
+    border-bottom: 0.125vh solid #161619;
+
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 2vh;
+    line-height: 3vh;
+    letter-spacing: -0.06vw;
   }
 }

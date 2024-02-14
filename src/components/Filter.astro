@@ -40,10 +40,12 @@ const t = useTranslations(lang, ui);
         this.querySelector(".filter-container");
       const filter: HTMLElement | null = this.querySelector(".filter-main");
 
+      const containerHeight:number = container.getBoundingClientRect().height;
+
       window.addEventListener("scroll", () => {
         const top: number = filter.getBoundingClientRect().top;
 
-        if (top <= 56) {
+        if (top <= containerHeight) {
           container.classList.add("filter-container--fixed");
         } else {
           container.classList.remove("filter-container--fixed");
@@ -385,6 +387,57 @@ const t = useTranslations(lang, ui);
     .filter::after {
       left: -32px;
       width: calc(100% + 64px);
+    }
+  }
+
+  @media screen and (min-width: 1921px) {
+    .filter-main {
+      height: 7vh;
+    }
+    .filter-container {
+      height: 7vh;
+    }
+
+    .filter-container--fixed {
+      top: 7vh;
+      width: calc(100% - 8vw);
+    }
+
+    .filter::after {
+      left: -4vw;
+      width: calc(100% + 8vw);
+    }
+
+    .filter-block {
+      padding: 2vh 0;
+    }
+
+    .filter-block:first-child {
+      width: calc(50% - 1vw);
+    }
+
+    .filter-block:last-child {
+      width: calc(50% + 1vw);
+    }
+
+    .filter-button {
+      font-size: 2vh;
+      line-height: 3vh;
+      letter-spacing: -0.06vw;
+    }
+
+    .filter-list {
+      width: calc(50% - 1vw);
+      height: 40vh;
+      padding: 2vh 0;
+    }
+
+    .filter-list--open {
+      top: 7vh;
+    }
+
+    .filter-list-item {
+      padding: 2vh;
     }
   }
 </style>

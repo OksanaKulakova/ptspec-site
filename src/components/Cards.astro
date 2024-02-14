@@ -256,4 +256,58 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       height: 560px;
     }
   }
+
+  @media screen and (min-width: 1921px) {
+    .cards {
+      padding: 12vh 0;
+    }
+
+    .card {
+      min-height: 70vh;
+    }
+
+    .card-block {
+      min-height: 30vh;
+    }
+
+    .card--white {
+      width: calc(100% - 8vw);
+      margin-left: 4vw;
+      margin-right: 0;
+    }
+
+    .card:last-child.card--white {
+      width: calc(100% - 4vw);
+      margin-left: 0;
+      margin-right: 4vw;
+      padding-left: 2vw;
+    }
+
+    .card:first-child.card--image {
+      width: calc(100% - 8vw);
+      margin-left: 4vw;
+      margin-right: 0;
+    }
+
+    .card--black {
+      padding: 0 2vw;
+    }
+
+    .card-caption {
+      max-width: 56vw;
+      padding-top: 2vh;
+      font-size: 2vh;
+      line-height: 3vh;
+      letter-spacing: -0.06vw;
+    }
+
+    .card--image img {
+      height: 70vh;
+    }
+
+    .card-link-sign {
+      height: 7vh;
+      padding: 0 1vw;
+    }
+  }
 </style>
