@@ -22,6 +22,17 @@ import TeamCard from "@components/TeamCard.astro";
   class AstroSwiper extends HTMLElement {
     constructor() {
       super();
+
+      const swiperEl = this.querySelector('swiper-container');
+
+      const swiperParams = {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+      };
+
+      Object.assign(swiperEl, swiperParams);
+
+      swiperEl.initialize();
     }
   }
 
@@ -44,7 +55,7 @@ import TeamCard from "@components/TeamCard.astro";
   </div>
 
   <astro-swiper>
-    <swiper-container speed="500" space-between="16" slides-per-view="1.1">
+    <swiper-container init="false">
       {
         cards.map((card: Card) => (
           <swiper-slide>
@@ -81,7 +92,11 @@ import TeamCard from "@components/TeamCard.astro";
     margin-left: 16px;
   }
 
-  @media screen and (min-width: 1024px) {
+  swiper-slide {
+    width: 296px!important;
+  }
+
+  @media screen and (min-width: 1025px) {
     .team {
       gap: 32px;
       padding: 96px 32px;
