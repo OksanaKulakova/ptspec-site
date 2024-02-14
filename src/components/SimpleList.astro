@@ -82,7 +82,7 @@ const { list } = Astro.props;
 
       function reportWindowSize() {
         const width = window.innerWidth;
-        if (width < 1025) {
+        if (width < 1024) {
           hideContent();
         } else {
           showContent();
@@ -219,12 +219,12 @@ const { list } = Astro.props;
 
   @media screen and (min-width: 688px) {
     .simple-item-content {
-      width: calc(50% - 8px);
+      max-width: 452px;
       margin-left: auto;
     }
   }
 
-  @media screen and (min-width: 1025px) {
+  @media screen and (min-width: 1024px) {
     .simple-list {
       gap: 64px;
     }
