@@ -18,13 +18,13 @@ import { getLangFromUrl } from "@i18n/utils";
 
 const ui = {
   en: {
-    "text.p1": "If the vacancy you are interested in is not available, you can fill out a form and get into our specialist database.",
-    "text.p2": "We will contact you when suitable vacancies become available.",
+    "text.p1": "If the vacancy you are interested in is not available, <br> you can fill out a form and get <br> into our specialist database.",
+    "text.p2": "We will contact you when <br> suitable vacancies become available.",
     "button.text": "Fill out the form",
   },
   ru: {
-    "text.p1": "Если интересующая вакансия отсутствует,вы можете заполнить анкету и попасть в нашу базу специалистов.",
-    "text.p2": "Мы свяжемся с вами, когда появятся подходящие вакансии.",
+    "text.p1": "Если интересующая вакансия отсутствует, <br> вы можете заполнить анкету и попасть <br> в нашу базу специалистов.",
+    "text.p2": "Мы свяжемся с вами, когда <br> появятся подходящие вакансии.",
     "button.text": "Заполнить анкету",
   },
 } as const;
@@ -44,8 +44,8 @@ const { title, data } = Astro.props;
     <div class="promt-block">
       <div class="promt-text">
         <div class="text">
-          <p>{t("text.p1")}</p>
-          <p>{t("text.p2")}</p>
+          <p set:html={t("text.p1")}></p>
+          <p set:html={t("text.p2")}></p>
         </div>
         <a class="link show-modal" data-modal-id="3">{t("button.text")}</a>
       </div>
@@ -80,6 +80,10 @@ const { title, data } = Astro.props;
     background-color: #161619;
   }
 
+  .promt-text {
+    max-width: 452px;
+  }
+
   .promt-text p {
     font-family: "Roboto Mono";
     font-size: 14px;
@@ -99,7 +103,7 @@ const { title, data } = Astro.props;
     height: 40px;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1025px) {
     .vacancies {
       padding: 96px 32px;
     }
@@ -118,7 +122,7 @@ const { title, data } = Astro.props;
     }
 
     .promt-text {
-      width: 50%;
+      max-width: 452px;
     }
 
     .promt-text p {
