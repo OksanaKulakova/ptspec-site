@@ -15,31 +15,7 @@ const { title, cards } = Astro.props;
 import TeamCard from "@components/TeamCard.astro";
 ---
 
-<script>
-  import { register } from "swiper/element/bundle";
-  register();
-
-  class AstroSwiper extends HTMLElement {
-    constructor() {
-      super();
-
-      const swiperEl = this.querySelector('swiper-container');
-
-      const swiperParams = {
-        slidesPerView: 'auto',
-        spaceBetween: 16,
-      };
-
-      Object.assign(swiperEl, swiperParams);
-
-      swiperEl.initialize();
-    }
-  }
-
-  customElements.define("astro-swiper", AstroSwiper);
-</script>
-
-<section class="team">
+<section class="team section">
   <h2 set:html={title} class="team-title title" />
 
   <div class="team-cards">
@@ -53,77 +29,31 @@ import TeamCard from "@components/TeamCard.astro";
       ))
     }
   </div>
-
-  <astro-swiper>
-    <swiper-container init="false">
-      {
-        cards.map((card: Card) => (
-          <swiper-slide>
-            <TeamCard
-              imagePath={card.imagePath}
-              name={card.name}
-              position={card.position}
-            />
-          </swiper-slide>
-        ))
-      }
-    </swiper-container>
-  </astro-swiper>
 </section>
 
 <style>
-  .team {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 48px 0;
-  }
-
-  .team-title {
-    padding: 0 16px;
-  }
-
   .team-cards {
+    display: flex;
+    gap: 16px;
+    overflow-x: scroll;
+  }
+
+  .team-cards::-webkit-scrollbar {
     display: none;
   }
 
-  astro-swiper {
-    display: block;
-    margin-left: 16px;
-  }
-
-  swiper-slide {
-    width: 296px!important;
-  }
-
   @media screen and (min-width: 1025px) {
-    .team {
-      gap: 32px;
-      padding: 96px 32px;
-    }
-
-    .team-title {
-      padding: 0;
-    }
-
     .team-cards {
       display: flex;
       gap: 32px 16px;
       flex-flow: row wrap;
       align-items: flex-start;
-    }
-
-    astro-swiper {
-      display: none;
+      justify-content: space-between;
+      overflow-x: hidden;
     }
   }
 
   @media screen and (min-width: 1921px) {
-    .team {
-      gap: 4vh;
-      padding: 12vh 4vw;
-    }
-
     .team-cards {
       gap: 4vh 2vw;
     }
