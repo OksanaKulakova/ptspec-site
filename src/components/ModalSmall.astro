@@ -131,6 +131,23 @@ const t = useTranslations(lang, ui);
         closeModal();
         showScroll();
       });
+
+      const selectElements: NodeListOf<HTMLElement> = this.querySelectorAll(".select-list-item");
+      const filterElements: NodeListOf<HTMLElement> = this.querySelectorAll(".filter-list-item");
+
+      selectElements.forEach((el: HTMLElement) => {
+        el.addEventListener("click", () => {
+          closeModal();
+          showScroll();
+        });
+      });
+
+      filterElements.forEach((el: HTMLElement) => {
+        el.addEventListener("click", () => {
+          closeModal();
+          showScroll();
+        });
+      });
     }
   }
 
