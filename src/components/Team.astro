@@ -32,10 +32,19 @@ import TeamCard from "@components/TeamCard.astro";
 </section>
 
 <style>
+  .team {
+    padding: 48px 0;
+  }
+
+  .team-title {
+    padding: 0 16px;
+  }
+
   .team-cards {
     display: flex;
     gap: 16px;
     overflow-x: scroll;
+    padding: 0 16px;
   }
 
   .team-cards::-webkit-scrollbar {
@@ -43,19 +52,35 @@ import TeamCard from "@components/TeamCard.astro";
   }
 
   @media screen and (min-width: 1025px) {
+    .team {
+      padding: 96px 0;
+    }
+
+    .team-title {
+      padding: 0 32px;
+    }
+
     .team-cards {
       display: flex;
       gap: 32px 16px;
-      flex-flow: row wrap;
-      align-items: flex-start;
-      justify-content: space-between;
+      flex-wrap: wrap;
       overflow-x: hidden;
+      padding: 0 32px;
     }
   }
 
   @media screen and (min-width: 1921px) {
+    .team {
+      padding: 12vh 0;
+    }
+
+    .team-title {
+      padding: 0 4vw;
+    }
+
     .team-cards {
       gap: 4vh 2vw;
+      padding: 0 4vw;
     }
   }
 </style>

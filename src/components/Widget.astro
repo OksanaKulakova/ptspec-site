@@ -225,7 +225,7 @@ if (imagePath && !images[imagePath])
     }
 
     .widget-content-block {
-      flex: 1 0 0;
+      width: calc((100% - 16px) / 2);
     }
 
     .widget-content-block:first-child {
@@ -281,12 +281,12 @@ if (imagePath && !images[imagePath])
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      flex: 1 0 0;
+      width: calc((100% - 16px) / 4 - 8px);
       padding-top: 0;
     }
 
     .widget-card:first-child {
-      flex: 2 0 0;
+      width: calc((100% - 16px) / 2);
     }
 
     .widget-card::after {
@@ -353,12 +353,26 @@ if (imagePath && !images[imagePath])
       gap: 2vh;
     }
 
+    .widget-content-block {
+      width: calc((100% - 2vw) / 2);
+    }
+
     .widget-content-block:first-child {
       padding: 2vh 2vw 8vh 0;
     }
 
+    .widget-cards {
+      gap: 1vw;
+    }
+
     .widget-card {
       min-height: 40vh;
+      gap: 1vh;
+      width: calc((100% - 2vw) / 4 - 1vw);
+    }
+
+    .widget-card:first-child {
+      width: calc((100% - 2vw) / 2);
     }
 
     .widget-card-title {
