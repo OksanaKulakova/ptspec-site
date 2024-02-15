@@ -65,6 +65,15 @@ const t = useTranslations(lang, ui);
 <script>
   window.addEventListener("load", function () {
     var preloader = document.getElementById("preloader");
-    preloader.style.display = "none";
+
+    const body = document.querySelector('body');
+    body.style.opacity = "0";
+    body.style.transition = `opacity 600ms linear`;
+    
+    setTimeout(() => {
+      preloader.style.display = "none";
+      body.style.opacity = "1";
+
+    }, 500);
   });
 </script>
