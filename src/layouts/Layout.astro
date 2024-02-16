@@ -49,11 +49,14 @@ const t = useTranslations(lang, ui);
     <div id="preloader">
       <Image src={PreloaderImage} alt={t("preloader.text")} width="120" height="40" />
     </div>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+
+    <div id="container">
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
 
     <Modal>
       <Fragment slot="title" set:html={t("modal.title")}></Fragment>
@@ -65,15 +68,18 @@ const t = useTranslations(lang, ui);
 <script>
   window.addEventListener("load", function () {
     var preloader = document.getElementById("preloader");
+    var container = document.getElementById("container");
 
-    const body = document.querySelector('body');
-    body.style.opacity = "0";
-    body.style.transition = `opacity 600ms linear`;
-    
     setTimeout(() => {
       preloader.style.display = "none";
-      body.style.opacity = "1";
-
-    }, 500);
+      container.style.opacity = "1";
+    }, 1500);
   });
 </script>
+
+<style>
+  #container {
+    opacity: 0;
+    transition: opacity 600ms linear;
+  }
+</style>
