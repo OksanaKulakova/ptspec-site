@@ -12,6 +12,18 @@ class AstroForm extends HTMLElement {
       "input[required], textarea[required]",
     );
 
+    const phoneInputs: NodeListOf<HTMLInputElement> = form.querySelectorAll(
+      "input[type='tel']"
+    );
+
+    const checkPhoneInput = (input: HTMLInputElement): void => {
+      if (input.value && input.value.length && input.value.length === 18) {
+        input.classList.remove("input--invalid");
+      } else {
+        input.classList.add("input--invalid");
+      }
+    };
+
     const checkInput = (input: HTMLInputElement): void => {
       if (input.value && input.value.length) {
         input.classList.remove("input--invalid");
@@ -29,6 +41,10 @@ class AstroForm extends HTMLElement {
     const checkForm = (): number => {
       requiredInputs.forEach((input: HTMLInputElement) => {
         checkInput(input);
+      });
+
+      phoneInputs.forEach((input: HTMLInputElement) => {
+        checkPhoneInput(input);
       });
 
       const errorInputs: NodeListOf<HTMLInputElement> =
