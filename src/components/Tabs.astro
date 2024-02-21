@@ -1,11 +1,12 @@
 ---
 interface Props {
   title: string;
+  classList?: string;
   tab1: string;
   tab2: string;
 }
 
-const { title, tab1, tab2 } = Astro.props;
+const { title, tab1, tab2,  classList='title' } = Astro.props;
 ---
 
 <script>
@@ -65,7 +66,7 @@ const { title, tab1, tab2 } = Astro.props;
 </script>
 
 <section class="section">
-  <h2 set:html={title} class="title" />
+  <h2 set:html={title} class:list={[classList]} />
 
   <astro-tab>
     <div class="tab">
