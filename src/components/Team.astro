@@ -15,23 +15,60 @@ const { title, cards } = Astro.props;
 import TeamCard from "@components/TeamCard.astro";
 ---
 
+<script>
+  import ScrollBooster from 'scrollbooster';
+
+  new ScrollBooster({
+    viewport: document.querySelector('.viewport-mobile'),
+    content: document.querySelector('.team-cards'),
+    scrollMode: 'transform', // use CSS 'transform' property
+    direction: 'horizontal', // allow only horizontal scrolling
+  });
+</script>
+
 <section class="team section">
   <h2 set:html={title} class="team-title title" />
 
-  <div class="team-cards">
-    {
-      cards.map((card: Card) => (
-        <TeamCard
-          imagePath={card.imagePath}
-          name={card.name}
-          position={card.position}
-        />
-      ))
-    }
+  <div class="viewport-mobile">
+    <div class="team-cards">
+      {
+        cards.map((card: Card) => (
+          <TeamCard
+            imagePath={card.imagePath}
+            name={card.name}
+            position={card.position}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="viewport-desctop">
+    <div class="team-cards">
+      {
+        cards.map((card: Card) => (
+          <TeamCard
+            imagePath={card.imagePath}
+            name={card.name}
+            position={card.position}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
+  .viewport-mobile {
+    overflow: hidden;
+    border-right: 16px solid transparent;
+    cursor: grab;
+  }
+
+  .viewport-desctop {
+    display: none;
+  }
+
   .team {
     padding: 48px 0;
   }
@@ -43,15 +80,18 @@ import TeamCard from "@components/TeamCard.astro";
   .team-cards {
     display: flex;
     gap: 16px;
-    overflow-x: scroll;
     padding: 0 16px;
   }
 
-  .team-cards::-webkit-scrollbar {
-    display: none;
-  }
-
   @media screen and (min-width: 1025px) {
+    .viewport-mobile {
+      display: none;
+    }
+
+    .viewport-desctop {
+      display: block;
+    }
+
     .team {
       padding: 96px 0;
     }

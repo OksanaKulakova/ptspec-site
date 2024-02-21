@@ -20,34 +20,82 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
+<script>
+  import ScrollBooster from 'scrollbooster';
+
+  new ScrollBooster({
+    viewport: document.querySelector('.viewport2-mobile'),
+    content: document.querySelector('.cards-wms'),
+    scrollMode: 'transform', // use CSS 'transform' property
+    direction: 'horizontal', // allow only horizontal scrolling
+  });
+</script>
+
 <section class="cards-wms-section section">
   <h2 set:html={title} class="cards-wms-title title" />
 
-  <div class="cards-wms">
-    {
-      cards.map((card: Card) => (
-        <div class="card-wms">
-          <div class="card-wms-text">
-            <div class="card-wms-title">{card.title}</div>
-            <div class="card-wms-caption">{card.caption}</div>
-          </div>
-
-          {card.imagePath && (
-            <div class="card-wms-img">
-              <Picture
-                src={images[card.imagePath]()}
-                formats={["jpeg", "webp"]}
-                alt={card.altText}
-              />
+  <div class="viewport2-mobile">
+    <div class="cards-wms">
+      {
+        cards.map((card: Card) => (
+          <div class="card-wms">
+            <div class="card-wms-text">
+              <div class="card-wms-title">{card.title}</div>
+              <div class="card-wms-caption">{card.caption}</div>
             </div>
-          )}
-        </div>
-      ))
-    }
+  
+            {card.imagePath && (
+              <div class="card-wms-img">
+                <Picture
+                  src={images[card.imagePath]()}
+                  formats={["jpeg", "webp"]}
+                  alt={card.altText}
+                />
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="viewport2-desctop">
+    <div class="cards-wms">
+      {
+        cards.map((card: Card) => (
+          <div class="card-wms">
+            <div class="card-wms-text">
+              <div class="card-wms-title">{card.title}</div>
+              <div class="card-wms-caption">{card.caption}</div>
+            </div>
+  
+            {card.imagePath && (
+              <div class="card-wms-img">
+                <Picture
+                  src={images[card.imagePath]()}
+                  formats={["jpeg", "webp"]}
+                  alt={card.altText}
+                />
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
+  .viewport2-mobile {
+    overflow: hidden;
+    border-right: 16px solid transparent;
+    cursor: grab;
+  }
+
+  .viewport2-desctop {
+    display: none;
+  }
+
   .cards-wms-section {
     display: flex;
     padding: 48px 0;
@@ -61,12 +109,11 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     position: relative;
     display: flex;
     padding: 0 16px;
-    overflow-x: scroll;
   }
 
-  .cards-wms::-webkit-scrollbar {
+  /* .cards-wms::-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   .cards-wms:before {
     content: "";
@@ -153,6 +200,14 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   }
 
   @media screen and (min-width: 629px) {
+    .viewport2-mobile {
+      display: none;
+    }
+
+    .viewport2-desctop {
+      display: block;
+    }
+
     .card-wms:first-child {
       width: calc((100% - 16px) / 2);
     }
