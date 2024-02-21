@@ -28,10 +28,12 @@ const t = useTranslations(lang, ui);
 
       const hideScroll = (): void => {
         document.documentElement.style.setProperty("overflow-y", "hidden");
+        document.documentElement.addEventListener("touchmove", () => {}, { passive: false });
       };
 
       const showScroll = (): void => {
         document.documentElement.style.setProperty("overflow-y", "auto");
+        document.documentElement.addEventListener("touchmove", () => {}, { passive: true });
       };
 
       const modal: HTMLElement | null = this.querySelector(".modal-small");
