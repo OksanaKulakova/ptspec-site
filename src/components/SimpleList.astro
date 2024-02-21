@@ -17,7 +17,7 @@ const { list } = Astro.props;
       super();
 
       const box: NodeListOf<Element> = this.querySelectorAll(
-        ".simple-item-content",
+        ".simple-item-block--hidden",
       );
 
       const buttonOpen: NodeListOf<Element> =
@@ -25,20 +25,6 @@ const { list } = Astro.props;
       const buttonClose: NodeListOf<Element> = this.querySelectorAll(
         ".simple-item--close",
       );
-
-      function showContent(): void {
-        for (let i: number = 0; i < box.length; i++) {
-          (box[i] as HTMLElement).style.display = "block";
-        }
-
-        buttonClose.forEach((button: HTMLElement) => {
-          button.style.display = "none";
-        });
-
-        buttonOpen.forEach((button: HTMLElement) => {
-          button.style.display = "none";
-        });
-      }
 
       function hideContent(): void {
         for (let i: number = 0; i < box.length; i++) {
@@ -50,7 +36,7 @@ const { list } = Astro.props;
         });
 
         buttonOpen.forEach((button: HTMLElement) => {
-          button.style.display = "block";
+          button.style.display = "flex";
         });
       }
 
@@ -64,7 +50,7 @@ const { list } = Astro.props;
               if (target == buttonOpen[i]) {
                 hideContent();
                 (buttonOpen[i] as HTMLElement).style.display = "none";
-                (buttonClose[i] as HTMLElement).style.display = "block";
+                (buttonClose[i] as HTMLElement).style.display = "flex";
                 (box[i] as HTMLElement).style.display = "block";
                 break;
               }
@@ -79,17 +65,6 @@ const { list } = Astro.props;
           hideContent();
         });
       });
-
-      function reportWindowSize() {
-        const width = window.innerWidth;
-        if (width < 1024) {
-          hideContent();
-        } else {
-          showContent();
-        }
-      }
-
-      window.addEventListener("resize", reportWindowSize);
     }
   }
 
@@ -104,7 +79,8 @@ const { list } = Astro.props;
           <div class="simple-item-block">
             <div class="simple-item-title">
               <Fragment set:html={item.title} />
-              <button class="simple-item-button simple-item--open">
+            </div>
+            <button class="simple-item-button simple-item--open">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -118,25 +94,24 @@ const { list } = Astro.props;
                     stroke-width="1.4"
                   />
                 </svg>
-              </button>
-              <button class="simple-item-button simple-item--close">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M12 12L5 5M12 12L19 5M12 12L5 19M12 12L19 19"
-                    stroke="#161619"
-                    stroke-width="1.4"
-                  />
-                </svg>
-              </button>
-            </div>
+            </button>
+            <button class="simple-item-button simple-item--close">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 12L5 5M12 12L19 5M12 12L5 19M12 12L19 19"
+                  stroke="#161619"
+                  stroke-width="1.4"
+                />
+              </svg>
+            </button>
           </div>
-          <div class="simple-item-block">
+          <div class="simple-item-block simple-item-block--hidden">
             <div class="simple-item-content">
               <div class="simple-item-text">{item.text}</div>
             </div>
@@ -173,13 +148,16 @@ const { list } = Astro.props;
 
   .simple-item-block {
     width: 100%;
+    display: flex;
+  }
+
+  .simple-item-block--hidden {
+    display: none;
   }
 
   .simple-item-title {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     width: 100%;
+    max-width: 488px;
     
     font-size: 16px;
     line-height: 24px;
@@ -188,7 +166,6 @@ const { list } = Astro.props;
   }
 
   .simple-item-content {
-    display: none;
     width: 100%;
   }
 
@@ -198,10 +175,12 @@ const { list } = Astro.props;
     line-height: 22px;
     letter-spacing: -0.7px;
     text-transform: none;
+    max-width: 488px;
   }
 
   .simple-item-button {
     display: flex;
+    margin-left: auto;
     justify-content: center;
     align-items: center;
     width: 24px;
@@ -217,10 +196,21 @@ const { list } = Astro.props;
     display: none;
   }
 
-  @media screen and (min-width: 688px) {
+  @media screen and (min-width: 672px) {
+    .simple-item-title {
+      width: calc(50% - 8px);
+      max-width: 452px;
+    }
+
     .simple-item-content {
+      width: calc(50% - 8px);
       max-width: 452px;
       margin-left: auto;
+    }
+
+    .simple-item-text {
+      min-width: 328px;
+      max-width: 488px;
     }
   }
 
@@ -235,6 +225,7 @@ const { list } = Astro.props;
     }
 
     .simple-item-title {
+      width: 100%;
       max-width: 452px;
       font-size: 24px;
       line-height: 32px;
@@ -243,7 +234,6 @@ const { list } = Astro.props;
     }
 
     .simple-item-content {
-      display: block;
       width: 100%;
       max-width: 452px;
       margin-left: 0;
@@ -256,7 +246,11 @@ const { list } = Astro.props;
     }
 
     .simple-item-button {
-      display: none;
+      display: none!important;
+    }
+
+    .simple-item-block--hidden {
+      display: block!important;
     }
   }
 
