@@ -47,7 +47,7 @@ const t = useTranslations(lang, ui);
   </head>
   <body>
     <div id="preloader">
-      <Image src={PreloaderImage} alt={t("preloader.text")} width="120" height="40" />
+      <Image src={PreloaderImage} alt={t("preloader.text")} />
     </div>
 
     <div id="container">
@@ -81,5 +81,17 @@ const t = useTranslations(lang, ui);
   #container {
     opacity: 0;
     transition: opacity 600ms linear;
+  }
+
+  #preloader img {
+    width: 90px;
+    height: 30px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    #preloader img {
+      width: 120px;
+      height: 40px;
+    }
   }
 </style>
