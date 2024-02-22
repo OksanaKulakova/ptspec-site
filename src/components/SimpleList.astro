@@ -16,14 +16,18 @@ const { list } = Astro.props;
     constructor() {
       super();
 
+      const items: NodeListOf<Element> = this.querySelectorAll(
+        ".simple-item-block--header",
+      );
+
       const box: NodeListOf<Element> = this.querySelectorAll(
-        ".simple-item-block--hidden",
+        ".simple-item-block--content",
       );
 
       const buttonOpen: NodeListOf<Element> =
-        document.querySelectorAll(".simple-item--open");
+        document.querySelectorAll(".simple-item-button--open");
       const buttonClose: NodeListOf<Element> = this.querySelectorAll(
-        ".simple-item--close",
+        ".simple-item-button--close",
       );
 
       function hideContent(): void {
@@ -40,31 +44,49 @@ const { list } = Astro.props;
         });
       }
 
-      buttonOpen.forEach((button: Element) => {
-        button.addEventListener("click", (event) => {
+      items.forEach((item: Element) => {
+        item.addEventListener("click", (event: Event) => {
           event.preventDefault();
+
           let target: Element = event.target as Element;
 
-          if (target && target.classList.contains("simple-item--open")) {
-            for (let i: number = 0; i < buttonOpen.length; i++) {
-              if (target == buttonOpen[i]) {
-                hideContent();
-                (buttonOpen[i] as HTMLElement).style.display = "none";
-                (buttonClose[i] as HTMLElement).style.display = "flex";
-                (box[i] as HTMLElement).style.display = "block";
-                break;
+          if (target && target.classList.contains("simple-item-block--header")) {
+            hideContent();
+            const openItem: Element | null = this.querySelector(".simple-item--open");
+            const parent: Element | null = target.parentElement;
+            
+            if (parent) {
+              parent.classList.toggle("simple-item--open");
+            }
+
+            if (openItem && openItem !== parent) {
+              openItem.classList.remove("simple-item--open");
+            }
+
+            if (parent && parent.classList.contains("simple-item--open")) {
+              const box: HTMLElement | null = parent.querySelector(
+                ".simple-item-block--content",
+              );
+
+              const buttonOpen: HTMLElement | null =
+                parent.querySelector(".simple-item-button--open");
+              const buttonClose: HTMLElement | null = parent.querySelector(
+                ".simple-item-button--close",
+              );
+
+              if (buttonOpen) {
+                buttonOpen.style.display = "none";
+              }
+              if (buttonClose) {
+                buttonClose.style.display = "flex";
+              }
+              if (box) {
+                box.style.display = "block";
               }
             }
           }
         });
-      });
-
-      buttonClose.forEach((button: Element) => {
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          hideContent();
-        });
-      });
+      })
     }
   }
 
@@ -76,11 +98,11 @@ const { list } = Astro.props;
     {
       list.map((item: ListItem) => (
         <dv class="simple-item">
-          <div class="simple-item-block">
+          <div class="simple-item-block simple-item-block--header">
             <div class="simple-item-title">
               <Fragment set:html={item.title} />
             </div>
-            <button class="simple-item-button simple-item--open">
+            <button class="simple-item-button simple-item-button--open">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -95,7 +117,7 @@ const { list } = Astro.props;
                   />
                 </svg>
             </button>
-            <button class="simple-item-button simple-item--close">
+            <button class="simple-item-button simple-item-button--close">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -111,7 +133,7 @@ const { list } = Astro.props;
               </svg>
             </button>
           </div>
-          <div class="simple-item-block simple-item-block--hidden">
+          <div class="simple-item-block simple-item-block--content">
             <div class="simple-item-content">
               <div class="simple-item-text">{item.text}</div>
             </div>
@@ -134,7 +156,6 @@ const { list } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 8px; 
-    padding-top: 16px;
   }
 
   .simple-item::before {
@@ -151,7 +172,12 @@ const { list } = Astro.props;
     display: flex;
   }
 
-  .simple-item-block--hidden {
+  .simple-item-block--header {
+    padding-top: 16px;
+    cursor: pointer;
+  }
+
+  .simple-item-block--content {
     display: none;
   }
 
@@ -163,6 +189,8 @@ const { list } = Astro.props;
     line-height: 24px;
     letter-spacing: -0.48px;
     text-transform: uppercase;
+
+    pointer-events: none;
   }
 
   .simple-item-content {
@@ -186,13 +214,14 @@ const { list } = Astro.props;
     width: 24px;
     height: 24px;
     background-color: #faf8f8;
+    pointer-events: none;
   }
 
   .simple-item-button svg {
     pointer-events: none;
   }
 
-  .simple-item--close {
+  .simple-item-button--close {
     display: none;
   }
 
@@ -224,6 +253,10 @@ const { list } = Astro.props;
       gap: 16px;
     }
 
+    .simple-item-block--header {
+      cursor: default;
+    }
+
     .simple-item-title {
       width: 100%;
       max-width: 452px;
@@ -237,6 +270,7 @@ const { list } = Astro.props;
       width: 100%;
       max-width: 452px;
       margin-left: 0;
+      padding-top: 16px;
     }
 
     .simple-item-text {
@@ -249,7 +283,7 @@ const { list } = Astro.props;
       display: none!important;
     }
 
-    .simple-item-block--hidden {
+    .simple-item-block--content {
       display: block!important;
     }
   }
