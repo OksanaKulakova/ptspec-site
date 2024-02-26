@@ -473,7 +473,7 @@ textarea:focus {
   }
 
   .page-blocks {
-    width: calc((100% - 2vw) / 2);
+    width: calc(50% - 1vh);
     gap: 8vh;
   }
 
