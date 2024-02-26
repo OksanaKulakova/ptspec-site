@@ -484,7 +484,6 @@ textarea:focus {
   .page-block-title h3 {
     font-size: 2vh;
     line-height: 3vh;
-    letter-spacing: -0.06vh;
   }
 
   .page-block-text {
