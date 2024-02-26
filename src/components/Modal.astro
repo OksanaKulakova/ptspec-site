@@ -241,8 +241,21 @@ const t = useTranslations(lang, ui);
     .modal-title {
       font-size: 96px;
       line-height: 104px;
-      letter-spacing: -7.68px;
+      letter-spacing: -0.08em;
       max-width: 960px;
+    }
+  }
+
+  @media screen and (min-width: 1921px) {
+    .modal-body {
+      gap: 8vh;
+      padding: 12vh 32px;
+    }
+
+    .modal-title {
+      font-size: 12vh;
+      line-height: 13vh;
+      max-width: 70%;
     }
   }
 </style>

@@ -262,7 +262,7 @@ const { list } = Astro.props;
       max-width: 452px;
       font-size: 24px;
       line-height: 32px;
-      letter-spacing: -1.44px;
+      letter-spacing: -0.06em;
       text-transform: uppercase;
     }
 
@@ -294,24 +294,29 @@ const { list } = Astro.props;
     }
 
     .simple-item {
-      gap: 2vw;
+      gap: 2vh;
+    }
+
+    .simple-item-block--header {
+      padding-top: 2vh;
     }
 
     .simple-item-title {
-      max-width: 24vw;
+      max-width: calc(50% - 1vh);
       font-size: 3vh;
       line-height: 4vh;
-      letter-spacing: -0.075vw;
     }
 
     .simple-item-content {
-      max-width: 24vw;
+      max-width: calc(50% - 1vh);
+      padding-top: 2vh;
     }
 
     .simple-item-text {
+      max-width: 100%;
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
+      letter-spacing: -0.06vh;
     }
   }
 </style>

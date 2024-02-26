@@ -271,34 +271,32 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     }
 
     .card--white {
-      width: calc(100% - 8vw);
-      margin-left: 4vw;
+      width: calc(100% - 8vh + 32px);
       margin-right: 0;
     }
 
     .card:last-child.card--white {
-      width: calc(100% - 6vw);
+      width: calc(100% - 6vh);
       margin-left: 0;
-      margin-right: 4vw;
-      padding-left: 2vw;
+      margin-right: 4vh;
+      padding-left: 2vh;
     }
 
     .card:first-child.card--image {
-      width: calc(100% - 8vw);
-      margin-left: 4vw;
+      width: calc(100% - 8vh + 32px);
       margin-right: 0;
     }
 
     .card--black {
-      padding: 0 2vw;
+      padding: 0 2vh;
     }
 
     .card-caption {
-      max-width: 56vw;
+      max-width: 56vh;
       padding-top: 2vh;
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
+      letter-spacing: -0.06vh;
     }
 
     .card--image img {
@@ -307,7 +305,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
     .card-link-sign {
       height: 7vh;
-      padding: 0 1vw;
+      padding: 0 1vh;
     }
   }
 </style>

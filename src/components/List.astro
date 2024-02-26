@@ -257,7 +257,7 @@ const t = useTranslations(lang);
       max-width: 920px;
       font-size: 24px;
       line-height: 32px;
-      letter-spacing: -1.44px;
+      letter-spacing: -0.06em;
     }
 
     .list-item-sign {
@@ -282,7 +282,7 @@ const t = useTranslations(lang);
     .list-button-more {
       font-size: 24px;
       line-height: 32px;
-      letter-spacing: -1.44px;
+      letter-spacing: -0.06em;
     }
 
     .list-button-more:hover::before {
@@ -293,26 +293,24 @@ const t = useTranslations(lang);
 
   @media screen and (min-width: 1921px) {
     .list-item {
-      gap: 2vw;
+      gap: 2vh;
       padding: 2vh 0;
     }
 
     .list-item-content {
-      gap: 0.5vw;
+      gap: 0.5vh;
     }
 
     .list-item-name {
-      max-width: 50vw;
+      max-width: calc((100% - 2vh) / 2);
       font-size: 3vh;
       line-height: 4vh;
-      letter-spacing: -0.075vw;
     }
 
     .list-item-sign {
-      max-width: 50vw;
+      max-width: calc((100% - 2vh) / 2);
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
     }
 
     .list-item-icon {
@@ -320,25 +318,10 @@ const t = useTranslations(lang);
       height: 4vh;
     }
 
-    .list-item-clickable:hover::before {
-      left: -4vw;
-      width: calc(100% + 8vw);
-    }
-
-    .list-item:hover .list-item-icon {
-      rotate: -90deg;
-    }
-
     .list-button-more {
       padding: 2vh 0;
       font-size: 3vh;
       line-height: 4vh;
-      letter-spacing: -0.075vw;
-    }
-
-    .list-button-more:hover::before {
-      left: -4vw;
-      width: calc(100% + 8vw);
     }
   }
 </style>

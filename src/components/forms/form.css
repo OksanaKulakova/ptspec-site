@@ -74,7 +74,7 @@
   .form-block-title {
     font-size: 24px;
     line-height: 32px;
-    letter-spacing: -1.44px;
+    letter-spacing: -0.06em;
   }
 }
 
@@ -85,16 +85,15 @@
 
   .form-body {
     gap: 8vh;
-    width: calc(50% - 1vw);
+    width: calc(50% - 1vh);
   }
 
   .form-block-title {
     font-size: 3vh;
     line-height: 4vh;
-    letter-spacing: -0.075vw;
   }
 
   .form-row {
-    gap: 1vw;
+    gap: 2vh;
   }
 }

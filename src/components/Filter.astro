@@ -385,12 +385,12 @@ const t = useTranslations(lang, ui);
 
   @media screen and (min-width: 1025px) {
     .filter-container--fixed {
-      width: calc(100% - 64px);
+      width: calc(100% - 56px);
     }
 
     .filter::after {
       left: -32px;
-      width: calc(100% + 64px);
+      width: calc(100% + 56px);
     }
   }
 
@@ -404,12 +404,10 @@ const t = useTranslations(lang, ui);
 
     .filter-container--fixed {
       top: 7vh;
-      width: calc(100% - 8vw);
     }
 
     .filter::after {
-      left: -4vw;
-      width: calc(100% + 8vw);
+      left: -4vh;
     }
 
     .filter-block {
@@ -417,21 +415,21 @@ const t = useTranslations(lang, ui);
     }
 
     .filter-block:first-child {
-      width: calc(50% - 1vw);
+      width: calc(50% - 1vh);
     }
 
     .filter-block:last-child {
-      width: calc(50% + 1vw);
+      width: calc(50% + 1vh);
     }
 
     .filter-button {
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
+      letter-spacing: -0.06vh;
     }
 
     .filter-list {
-      width: calc(50% - 1vw);
+      width: calc(50% - 1vh);
       height: 40vh;
       padding: 2vh 0;
     }

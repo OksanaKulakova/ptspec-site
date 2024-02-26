@@ -257,7 +257,7 @@ if (imagePath && !images[imagePath])
     .widget-title {
       font-size: 96px;
       line-height: 104px;
-      letter-spacing: -7.68px;
+      letter-spacing: -0.08em;
     }
 
     .widget-subtitle {
@@ -329,19 +329,17 @@ if (imagePath && !images[imagePath])
   @media screen and (min-width: 1921px) {
     .widget {
       gap: 4vh;
-      padding: 12vh 4vw;
+      padding: 12vh 32px;
     }
 
     .widget-title {
       font-size: 12vh;
       line-height: 13vh;
-      letter-spacing: -0.4vw;
     }
 
     .widget-subtitle {
       font-size: 3vh;
       line-height: 4vh;
-      letter-spacing: -0.075vw;
     }
 
     .widget-link.link {
@@ -354,31 +352,31 @@ if (imagePath && !images[imagePath])
     }
 
     .widget-content-block {
-      width: calc((100% - 2vw) / 2);
+      width: calc((100% - 2vh) / 2);
     }
 
     .widget-content-block:first-child {
-      padding: 2vh 2vw 8vh 0;
+      padding: 2vh 2vh 8vh 0;
     }
 
     .widget-cards {
-      gap: 1vw;
+      gap: 2vh;
     }
 
     .widget-card {
       min-height: 40vh;
       gap: 1vh;
-      width: calc((100% - 2vw) / 4 - 1vw);
+      width: calc((100% - 2vh) / 4 - 1vh);
     }
 
     .widget-card:first-child {
-      width: calc((100% - 2vw) / 2);
+      width: calc((100% - 2vh) / 2);
     }
 
     .widget-card-title {
       font-size: 8vh;
       line-height: 9vh;
-      letter-spacing: -0.56vw;
+      letter-spacing: -0.56vh;
     }
 
     .widget-cover {
@@ -392,7 +390,7 @@ if (imagePath && !images[imagePath])
     .widget-card-text {
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
+      letter-spacing: -0.06vh;
     }
   }
 </style>

@@ -135,26 +135,37 @@ const { title, data } = Astro.props;
 
   @media screen and (min-width: 1921px) {
     .vacancies {
-      padding: 12vh 4vw;
+      padding: 12vh 32px;
     }
 
     .title {
       margin-bottom: 4vh;
     }
 
+    .promt {
+      padding-top: 2vh;
+    }
+
     .promt-block {
-      width: calc(50% - 1vw);
+      width: calc(50% - 1vh);
     }
 
     .promt-text {
+      max-width: 60%;
+    }
+
+    .promt-text .text {
       gap: 1vh;
-      max-width: 30vw;
     }
 
     .promt-text p {
       font-size: 2vh;
       line-height: 3vh;
-      letter-spacing: -0.06vw;
+      letter-spacing: -0.06vh;
+    }
+
+    .promt-text .link {
+      height: 5vh;
     }
   }
 </style>
