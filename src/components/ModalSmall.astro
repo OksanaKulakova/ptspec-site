@@ -26,14 +26,22 @@ const t = useTranslations(lang, ui);
     constructor() {
       super();
 
+      let scrollPosition: number = 0;
+
       const hideScroll = (): void => {
-        document.documentElement.style.setProperty("overflow-y", "hidden");
-        document.documentElement.addEventListener("touchmove", () => {}, { passive: false });
+        scrollPosition = window.scrollY;
+        const top: string = `-${scrollPosition}px`;
+
+        setTimeout(() => {
+          document.documentElement.style.setProperty("position", "fixed");
+          document.documentElement.style.setProperty("top", top);
+        }, 200);
       };
 
       const showScroll = (): void => {
-        document.documentElement.style.setProperty("overflow-y", "auto");
-        document.documentElement.addEventListener("touchmove", () => {}, { passive: true });
+        document.documentElement.style.setProperty("position", "static");
+        document.documentElement.style.setProperty("top", "0");
+        window.scrollTo(0, scrollPosition);
       };
 
       const modal: HTMLElement | null = this.querySelector(".modal-small");
