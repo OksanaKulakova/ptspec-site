@@ -4,6 +4,8 @@ import List from "@components/List.astro";
 import gratitudes from "@data/gratitudes.json";
 import getServises from "@data/getServices";
 
+export const prerender = false;
+
 const services = await getServises("en");
 
 const count = services.length;

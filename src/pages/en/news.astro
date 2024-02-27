@@ -6,6 +6,8 @@ import List from "@components/List.astro";
 import getNews from "@data/getNews";
 import getMassMedias from "@data/getMassMedias";
 
+export const prerender = false;
+
 const news = await getNews("en");
 const massMedias = await getMassMedias("en");
 
