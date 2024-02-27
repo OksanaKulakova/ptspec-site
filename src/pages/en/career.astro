@@ -9,9 +9,6 @@ import Modal from "@components/Modal.astro";
 import Form from "@components/forms/FormVacancy.astro";
 import Form2 from "@components/forms/FormVacancyOther.astro";
 
-import getVacancies from "@data/getVacancies";
-const vacancies = await getVacancies("en");
-
 type cardWidget = {
   title: string;
   text: string;
@@ -160,7 +157,7 @@ const cards1: card[] = [
     cards={cardsForWidget}
   />
 
-  <Vacancies title="Currently searching" data={vacancies} />
+  <Vacancies title="Currently searching" />
 
   <Team title="HR team" cards={team} />
 

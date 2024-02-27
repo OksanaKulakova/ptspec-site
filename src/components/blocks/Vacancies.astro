@@ -1,20 +1,16 @@
 ---
 interface Props {
   title: string;
-  data: Array<ListItem>;
 }
-
-type ListItem = {
-  id: number;
-  title: string;
-  href: string;
-  slug: string;
-};
 
 import List from "@components/List.astro";
 
 import useTranslations from "@i18n/translation";
 import { getLangFromUrl } from "@i18n/utils";
+
+import getVacancies from "@data/getVacancies";
+
+export const prerender = false;
 
 const ui = {
   en: {
@@ -32,7 +28,16 @@ const ui = {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, ui);
 
-const { title, data } = Astro.props;
+const { title } = Astro.props;
+
+const { slug } = Astro.params;
+
+let data = await getVacancies(lang);
+
+if (slug) {
+  data = data.filter((page) => page.slug !== slug);
+}
+
 ---
 
 <section class="vacancies">
