@@ -11,34 +11,63 @@ import getProjects from "@data/getProjects";
 
 import replaceQuotes from "@utils/replaceQuotes";
 
-const pages = await getProjects("en");
+// const pages = await getProjects("en");
 
-export async function getStaticPaths() {
-  const projects = await fetchApi<Project[]>({
-    endpoint: "projects",
-    wrappedByKey: "data",
+// export async function getStaticPaths() {
+//   const projects = await fetchApi<Project[]>({
+//     endpoint: "projects",
+//     wrappedByKey: "data",
+//     query: {
+//       "populate[services][fields][0]": "title",
+//       "populate[services][fields][1]": "slug",
+//       "pagination[start]": "0",
+//       "pagination[limit]": "100",
+//       "locale": "en",
+//     },
+//   });
+
+//   return projects.map((project) => ({
+//     params: { slug: project.attributes.slug },
+//     props: project,
+//   }));
+// }
+
+// type Props = Project;
+
+// const project = Astro.props;
+// const { slug } = project.attributes;
+
+// const title = replaceQuotes(project.attributes.title);
+
+// const otherProjects = pages.filter((page) => page.slug !== slug);
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+let project: Project;
+
+try {
+  project = await fetchApi<Project>({
+    endpoint: 'projects',
+    wrappedByKey: 'data',
+    wrappedByList: true,
     query: {
-      "populate[services][fields][0]": "title",
-      "populate[services][fields][1]": "slug",
-      "pagination[start]": "0",
-      "pagination[limit]": "100",
-      "locale": "en",
+      'locale': 'en',
+      'filters[slug][$eq]': slug || '',
+      'populate[services][fields][0]': 'title',
+      'populate[services][fields][1]': 'slug',
     },
   });
 
-  return projects.map((project) => ({
-    params: { slug: project.attributes.slug },
-    props: project,
-  }));
+} catch (error) {
+  return Astro.redirect('/404');
 }
 
-type Props = Project;
-
-const project = Astro.props;
-const { slug } = project.attributes;
+if (!project) return Astro.redirect('/en/404');
 
 const title = replaceQuotes(project.attributes.title);
 
+const pages = await getProjects('en');
 const otherProjects = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {

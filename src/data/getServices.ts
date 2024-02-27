@@ -4,6 +4,8 @@ import { defaultLang } from "@i18n/ui";
 import { useTranslatedPath } from "@i18n/utils";
 import type { lang } from "@i18n/ui";
 
+export const prerender = false;
+
 export default async function getServises(locale: lang = defaultLang) {
   const services = await fetchApi<Service[]>({
     endpoint: "services",

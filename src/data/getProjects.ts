@@ -5,6 +5,8 @@ import { defaultLang } from "@i18n/ui";
 import { useTranslatedPath } from "@i18n/utils";
 import type { lang } from "@i18n/ui";
 
+export const prerender = false;
+
 export default async function getProjects(locale: lang = defaultLang) {
   const projects = await fetchApi<Project[]>({
     endpoint: "projects",

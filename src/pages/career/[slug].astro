@@ -14,28 +14,28 @@ import getVacancies from "@data/getVacancies";
 
 import replaceQuotes from "@utils/replaceQuotes";
 
-const pages = await getVacancies();
+export const prerender = false;
 
-export async function getStaticPaths() {
-  const vacancies = await fetchApi<Vacancy[]>({
-    endpoint: "vacancies",
-    wrappedByKey: "data",
+const { slug } = Astro.params;
+
+let vacancy: Vacancy;
+
+try {
+  vacancy = await fetchApi<Vacancy>({
+    endpoint: 'vacancies',
+    wrappedByKey: 'data',
+    wrappedByList: true,
   });
 
-  return vacancies.map((vacancy) => ({
-    params: { slug: vacancy.attributes.slug },
-    props: vacancy,
-  }));
+} catch (error) {
+  return Astro.redirect('/404');
 }
 
-type Props = Vacancy;
-
-const vacancy = Astro.props;
-
-const { slug } = vacancy.attributes;
+if (!vacancy) return Astro.redirect('/404');
 
 const title = replaceQuotes(vacancy.attributes.title);
 
+const pages = await getVacancies();
 const otherVacancies = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {

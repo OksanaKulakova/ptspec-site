@@ -11,33 +11,33 @@ import getProjects from "@data/getProjects";
 
 import replaceQuotes from "@utils/replaceQuotes";
 
-const pages = await getProjects();
+export const prerender = false;
 
-export async function getStaticPaths() {
-  const projects = await fetchApi<Project[]>({
-    endpoint: "projects",
-    wrappedByKey: "data",
+const { slug } = Astro.params;
+
+let project: Project;
+
+try {
+  project = await fetchApi<Project>({
+    endpoint: 'projects',
+    wrappedByKey: 'data',
+    wrappedByList: true,
     query: {
-      "populate[services][fields][0]": "title",
-      "populate[services][fields][1]": "slug",
-      "pagination[start]": "0",
-      "pagination[limit]": "100",
+      'filters[slug][$eq]': slug || '',
+      'populate[services][fields][0]': 'title',
+      'populate[services][fields][1]': 'slug',
     },
   });
 
-  return projects.map((project) => ({
-    params: { slug: project.attributes.slug },
-    props: project,
-  }));
+} catch (error) {
+  return Astro.redirect('/404');
 }
 
-type Props = Project;
-
-const project = Astro.props;
-const { slug } = project.attributes;
+if (!project) return Astro.redirect('/404');
 
 const title = replaceQuotes(project.attributes.title);
 
+const pages = await getProjects();
 const otherProjects = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {

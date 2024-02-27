@@ -5,6 +5,8 @@ import formatDate from "@utils/formatDate";
 import { defaultLang } from "@i18n/ui";
 import type { lang } from "@i18n/ui";
 
+export const prerender = false;
+
 export default async function getMassMedias(locale: lang = defaultLang) {
   const news = await fetchApi<New[]>({
     endpoint: "mass-medias",
