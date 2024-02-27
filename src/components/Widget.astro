@@ -58,19 +58,19 @@ if (imagePath && !images[imagePath])
     </div>
   </div>
 
-  <div class="widget-cover">
-    {
-      imagePath && (
+  
+  {
+    imagePath && (
+      <div class="widget-cover">
         <Picture
           src={images[imagePath]()}
           formats={["jpeg", "webp"]}
           alt={altText}
         />
-      )
-    }
-
-    <slot />
-  </div>
+      </div>
+    )
+  }
+  
 
   <div class="widget-cards">
     {
@@ -83,6 +83,8 @@ if (imagePath && !images[imagePath])
         ))
     }
   </div>
+
+  <slot />
 </div>
 
 <style>
