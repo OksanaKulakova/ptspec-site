@@ -23,6 +23,7 @@ try {
     wrappedByKey: 'data',
     wrappedByList: true,
     query: {
+      'filters[slug][$eq]': slug || '',
       'populate[0]': 'blocks',
     },
   });

@@ -25,6 +25,9 @@ try {
     endpoint: 'vacancies',
     wrappedByKey: 'data',
     wrappedByList: true,
+    query: {
+      'filters[slug][$eq]': slug || '',
+    },
   });
 
 } catch (error) {

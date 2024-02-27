@@ -24,6 +24,7 @@ try {
     wrappedByList: true,
     query: {
       'locale': 'en',
+      'filters[slug][$eq]': slug || '',
       'populate[0]': 'blocks',
     },
   });
