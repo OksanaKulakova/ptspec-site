@@ -259,7 +259,6 @@ const t = useTranslations(lang, ui);
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 16px 0;
   }
 
   .filter-block:last-child {
@@ -270,7 +269,11 @@ const t = useTranslations(lang, ui);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
+
+    width: 100%;
+    height: 56px;
+    padding: 16px 0;
+
     color: #161619;
     font-size: 16px;
     line-height: 24px;
@@ -410,10 +413,6 @@ const t = useTranslations(lang, ui);
       left: -4vh;
     }
 
-    .filter-block {
-      padding: 2vh 0;
-    }
-
     .filter-block:first-child {
       width: calc(50% - 1vh);
     }
@@ -423,6 +422,9 @@ const t = useTranslations(lang, ui);
     }
 
     .filter-button {
+      height: 7vh;
+      padding: 2vh 0;
+
       font-size: 2vh;
       line-height: 3vh;
       letter-spacing: -0.06vh;
