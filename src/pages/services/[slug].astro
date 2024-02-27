@@ -6,28 +6,33 @@ import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 import fetchApi from "@lib/strapi";
 import type Service from "@interfaces/service";
-
 import getServises from "@data/getServices";
 
-const pages = await getServises();
+export const prerender = false;
 
-export async function getStaticPaths() {
-  const services = await fetchApi<Service[]>({
-    endpoint: "services",
-    wrappedByKey: "data",
+const { slug } = Astro.params;
+
+let service: Service;
+
+try {
+  service = await fetchApi<Service>({
+    endpoint: 'services',
+    wrappedByKey: 'data',
+    wrappedByList: true,
+    query: {
+      'filters[slug][$eq]': slug || '',
+    },
   });
 
-  return services.map((service) => ({
-    params: { slug: service.attributes.slug },
-    props: service,
-  }));
+} catch (error) {
+  return Astro.redirect('/404');
 }
 
-type Props = Service;
+if (!service) return Astro.redirect('/404');
 
-const service = Astro.props;
-const { title, slug } = service.attributes;
+const { title } = service.attributes;
 
+const pages = await getServises();
 const otherServices = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {
