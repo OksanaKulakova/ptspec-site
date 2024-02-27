@@ -50,6 +50,8 @@ const ui = {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang, ui);
 const vacancies = await getVacancies(lang);
+
+const { slug } = Astro.params;
 ---
 
 <script src="./form.ts"></script>
@@ -71,7 +73,7 @@ const vacancies = await getVacancies(lang);
       <div class="form-block">
         <div class="form-block-title">{t("block2.title")}</div>
         <div class="form-row">
-          <Select id={3} name="vacancy" list={vacancies} />
+          <Select id={3} name="vacancy" list={vacancies} selected={slug} />
         </div>
       </div>
       <div class="form-block">

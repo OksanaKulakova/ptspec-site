@@ -3,6 +3,7 @@ interface Props {
   id: number;
   name: string;
   list: Array<Option>;
+  selected?: string;
 }
 
 interface Option {
@@ -10,7 +11,7 @@ interface Option {
   slug: string;
 }
 
-const { id, name, list } = Astro.props;
+const { id, name, list, selected } = Astro.props;
 
 import ModalSmall from "@components/ModalSmall.astro";
 ---
@@ -21,11 +22,27 @@ import ModalSmall from "@components/ModalSmall.astro";
       super();
 
       const input: HTMLInputElement = this.querySelector(".input");
-      const items: NodeListOf<HTMLElement> =
+
+      const elements: NodeListOf<HTMLElement> =
         this.querySelectorAll(".select-list-item");
 
-      const text = items[0].innerText;
-      input.value = text;
+      const activeElement: HTMLElement = this.querySelector(".select-list-item--active");
+
+      let text: string = '';
+
+      if (activeElement) {
+        text = activeElement.innerText;
+      } else {
+        text = elements[0].innerText;
+
+        elements.forEach((el: HTMLElement) => {
+          if (el.innerText === text) {
+            el.classList.add("select-list-item--active");
+          }
+        });
+      }
+
+      input.value = text.toLowerCase();
 
       const list: HTMLElement | null = this.querySelector(".select-list");
 
@@ -45,15 +62,6 @@ import ModalSmall from "@components/ModalSmall.astro";
         }
       });
 
-      const elements: NodeListOf<HTMLElement> =
-        this.querySelectorAll(".select-list-item");
-
-      elements.forEach((el: HTMLElement) => {
-        if (el.innerText === text) {
-          el.classList.add("select-list-item--active");
-        }
-      });
-
       function deleteActiveClass(): void {
         elements.forEach((el: HTMLElement) => {
           el.classList.remove("select-list-item--active");
@@ -68,7 +76,7 @@ import ModalSmall from "@components/ModalSmall.astro";
           let target: HTMLElement = event.target as HTMLElement;
 
           const text = target.innerText;
-          input.value = text;
+          input.value = text.toLowerCase();
           btnOpen.childNodes[0].textContent = text;
 
           elements.forEach((el: HTMLElement) => {
@@ -107,7 +115,7 @@ import ModalSmall from "@components/ModalSmall.astro";
     <div class="select-list">
       {
         list.map((item: Option) => (
-          <div class="select-list-item">{item.title}</div>
+          <div class="select-list-item" class:list={[{ "select-list-item--active": item.slug === selected }]}>{item.title}</div>
         ))
       }
     </div>
@@ -118,7 +126,7 @@ import ModalSmall from "@components/ModalSmall.astro";
       <div class="select-list-mobile">
         {
           list.map((item: Option) => (
-            <div class="select-list-item">{item.title}</div>
+            <div class="select-list-item" class:list={[{ "select-list-item--active": item.slug === selected }]}>{item.title}</div>
           ))
         }
       </div>
