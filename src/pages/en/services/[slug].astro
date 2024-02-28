@@ -51,14 +51,14 @@ try {
   });
 
 } catch (error) {
-  return Astro.redirect('/404');
+  return Astro.redirect('/en/404');
 }
 
 if (!service) return Astro.redirect('/en/404');
 
 const { title } = service.attributes;
 
-const pages = await getServises();
+const pages = await getServises('en');
 const otherServices = pages.filter((page) => page.slug !== slug);
 
 type Crumb = {
