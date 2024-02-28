@@ -38,31 +38,31 @@ export default async function sendData(
   url: string,
   textSucсess: string = "Успешно отправлено",
 ): Promise<void> {
+  showPreloader();
+
   const data: object = Object.fromEntries(formData.entries());
   data['locale'] = lang;
 
-  const json: string = JSON.stringify({ data: data });
+  try {
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ data: data }), 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`,
+      },
+    })
+      .then((response) => {
+        hidePreloader();
 
-  showPreloader();
-
-  const XHR: XMLHttpRequest = new XMLHttpRequest();
-
-  XHR.open("POST", url);
-  XHR.setRequestHeader(
-    "Authorization",
-    `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`,
-  );
-  XHR.setRequestHeader("Content-type", "application/json; charset=utf-8");
-
-  XHR.send(json);
-
-  XHR.onload = function () {
-    if (XHR.status != 200) {
-      showTextModal(`Ошибка ${XHR.status}: ${XHR.statusText}`);
-    } else {
-      showTextModal(textSucсess);
-    }
-
+        if (response.ok) {
+          showTextModal(textSucсess);
+        } else {
+          showTextModal(`Ошибка ${response.status}: ${response.statusText}`);
+        }
+      });
+  } catch (error) {
     hidePreloader();
-  };
+    showTextModal(`Ошибка ${error}`);
+  }
 }
