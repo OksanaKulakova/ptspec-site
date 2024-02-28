@@ -15,20 +15,34 @@ if (path.length > 2) {
   href = lang === "ru" ? `/en/${path[1]}` : `/${path[2]}`;
 }
 
----
-<a class="footer-link link" href={href}>{languages[switchLang]}</a>
 
-<style>
+const { class: className } = Astro.props;
+---
+<a class="link" class:list={className} href={href}>{languages[switchLang]}</a>
+
+<!-- <style>
+  .link {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 24px;
+  }
+
+  .menu-link {
+    padding: 16px 0;
+    height: 56px;
+  }
+
   @media screen and (min-width: 1024px) {
-    .footer-link {
-      padding-top: 0;
+    .link {
+      padding-top: 16px;
       height: 40px;
     }
   }
 
   @media screen and (min-width: 1921px) {
-    .footer-link {
+    .link {
+      padding-top: 2vh;
       height: 5vh;
     }
   }
-</style>
+</style> -->
