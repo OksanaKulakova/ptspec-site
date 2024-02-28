@@ -44,23 +44,22 @@ export default async function sendData(
   data['locale'] = lang;
 
   try {
-    fetch(url, {
+    const response = await fetch(url, {
       method: "POST",
-      body: JSON.stringify({ data: data }), 
+      body: JSON.stringify({ data }),
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${import.meta.env.PUBLIC_STRAPI_TOKEN}`,
       },
-    })
-      .then((response) => {
-        hidePreloader();
+    });
 
-        if (response.ok) {
-          showTextModal(textSucсess);
-        } else {
-          showTextModal(`Ошибка ${response.status}: ${response.statusText}`);
-        }
-      });
+    hidePreloader();
+
+    if (response.ok) {
+      showTextModal(textSucсess);
+    } else {
+      showTextModal(`Ошибка ${response.status}: ${response.statusText}`);
+    }
   } catch (error) {
     hidePreloader();
     showTextModal(`Ошибка ${error}`);
