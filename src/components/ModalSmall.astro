@@ -26,28 +26,39 @@ const t = useTranslations(lang, ui);
     constructor() {
       super();
 
-      let scrollPosition: number = 0;
-
       const hideScroll = (): void => {
-        scrollPosition = window.scrollY;
-        const top: string = `-${scrollPosition}px`;
-
-        setTimeout(() => {
-          document.documentElement.style.setProperty("position", "fixed");
-          document.documentElement.style.setProperty("top", top);
-        }, 200);
+        const modalParent: HTMLElement | null = document.querySelector(".modal--open");
+        
+        if (modalParent) {
+          const modalContainer: HTMLElement | null = modalParent.querySelector(".modal-content-wrapper");
+          setTimeout(() => {
+            modalContainer.style.setProperty("overflow-y", "hidden");
+          }, 200);
+        } 
       };
 
       const showScroll = (): void => {
-        document.documentElement.style.setProperty("position", "static");
-        document.documentElement.style.setProperty("top", "0");
-        window.scrollTo(0, scrollPosition);
+        const modalParent: HTMLElement | null = document.querySelector(".modal--open");
+        
+        if (modalParent) {
+          const modalContainer: HTMLElement | null = modalParent.querySelector(".modal-content-wrapper");
+          modalContainer.style.setProperty("overflow-y", "auto");
+        }
       };
 
       const modal: HTMLElement | null = this.querySelector(".modal-small");
       const overlay: HTMLElement | null = this.querySelector(
         ".modal-small-overlay",
       );
+
+      overlay.addEventListener("click", (event: Event) => {
+        event.preventDefault();
+      });
+
+      overlay.addEventListener("touchstart", (event: Event) => {
+        event.preventDefault()
+      });
+
       const content: HTMLElement | null = this.querySelector(
         ".modal-small-content",
       );
@@ -187,8 +198,8 @@ const t = useTranslations(lang, ui);
     z-index: 30;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
   }
 
   .modal-small--open {
@@ -207,7 +218,7 @@ const t = useTranslations(lang, ui);
     position: absolute;
     left: 0;
     width: 100vw;
-    max-height: 560px;
+    height: 560px;
     background-color: #faf8f8;
     z-index: 20;
     overflow-y: auto;
