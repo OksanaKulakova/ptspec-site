@@ -26,6 +26,8 @@ const t = useTranslations(lang, ui);
     constructor() {
       super();
 
+      let scrollPosition: number = 0;
+
       const hideScroll = (): void => {
         const modalParent: HTMLElement | null = document.querySelector(".modal--open");
         
@@ -34,7 +36,15 @@ const t = useTranslations(lang, ui);
           setTimeout(() => {
             modalContainer.style.setProperty("overflow-y", "hidden");
           }, 200);
-        } 
+        } else {
+          scrollPosition = window.scrollY;
+          const top: string = `-${scrollPosition}px`;
+
+          setTimeout(() => {
+            document.documentElement.style.setProperty("position", "fixed");
+            document.documentElement.style.setProperty("top", top);
+          }, 200);
+        }
       };
 
       const showScroll = (): void => {
@@ -43,6 +53,10 @@ const t = useTranslations(lang, ui);
         if (modalParent) {
           const modalContainer: HTMLElement | null = modalParent.querySelector(".modal-content-wrapper");
           modalContainer.style.setProperty("overflow-y", "auto");
+        } else {
+          document.documentElement.style.setProperty("position", "static");
+          document.documentElement.style.setProperty("top", "0");
+          window.scrollTo(0, scrollPosition);
         }
       };
 
