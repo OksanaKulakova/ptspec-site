@@ -169,6 +169,7 @@ const t = useTranslations(lang, ui);
 
       const selectElements: NodeListOf<HTMLElement> = this.querySelectorAll(".select-list-item");
       const filterElements: NodeListOf<HTMLElement> = this.querySelectorAll(".filter-list-item");
+      const btnFilterReset: NodeListOf<Element> = this.querySelectorAll(".filter-button-reset");
 
       selectElements.forEach((el: HTMLElement) => {
         el.addEventListener("click", () => {
@@ -178,6 +179,13 @@ const t = useTranslations(lang, ui);
       });
 
       filterElements.forEach((el: HTMLElement) => {
+        el.addEventListener("click", () => {
+          closeModal();
+          showScroll();
+        });
+      });
+
+      btnFilterReset.forEach((el: HTMLElement) => {
         el.addEventListener("click", () => {
           closeModal();
           showScroll();
