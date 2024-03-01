@@ -62,13 +62,13 @@ import ModalSmall from "@components/ModalSmall.astro";
         }
       });
 
-      btnOpen?.addEventListener("touchstart", (event: Event) => {
-        const width: number = window.innerWidth;
+      // btnOpen?.addEventListener("touchstart", (event: Event) => {
+      //   const width: number = window.innerWidth;
 
-        if (width > 687) {
-          toggleOpenList();
-        }
-      })
+      //   if (width > 687) {
+      //     toggleOpenList();
+      //   }
+      // })
 
       function deleteActiveClass(): void {
         elements.forEach((el: HTMLElement) => {
