@@ -220,7 +220,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   @media screen and (min-width: 1025px) {
     .cards {
       flex-direction: row;
-      padding: 96px 0;
+      padding: 96px 32px;
     }
 
     .card {
@@ -229,25 +229,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
     .card-block {
       min-height: 244px;
-    }
-
-    .card--white {
-      width: calc(100% - 64px);
-      margin-left: 32px;
-      margin-right: 0;
-    }
-
-    .card:last-child.card--white {
-      width: calc(100% - 48px);
-      margin-left: 0;
-      margin-right: 32px;
-      padding-left: 16px;
-    }
-
-    .card:first-child.card--image {
-      width: calc(100% - 64px);
-      margin-left: 32px;
-      margin-right: 0;
     }
 
     .card-caption {
@@ -261,7 +242,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
   @media screen and (min-width: 1921px) {
     .cards {
-      padding: 12vh 0;
+      padding: 12vh 32px;
     }
 
     .card {
@@ -272,20 +253,16 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
       min-height: 30vh;
     }
 
-    .card--white {
-      width: calc(100% - 8vh + 32px);
-      margin-right: 0;
+    .card:first-child {
+      width: calc((100% - 2vh) / 2);
+    }
+
+    .card:last-child {
+      width: calc((100% - 2vh) / 2 + 2vh);
     }
 
     .card:last-child.card--white {
-      width: calc(100% - 6vh + 32px);
-      margin-left: 0;
       padding-left: 2vh;
-    }
-
-    .card:first-child.card--image {
-      width: calc(100% - 8vh + 32px);
-      margin-right: 0;
     }
 
     .card--image img {
